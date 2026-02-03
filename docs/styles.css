@@ -1,0 +1,330 @@
+/* Sketchy theme with Spacelab colors */
+
+/* ============================================
+   Hide auto-generated title on dataset pages only
+   ============================================ */
+body[class*="dataset"] #quarto-content > header,
+body[class*="datasets"] #quarto-content > header {
+  display: none;
+}
+
+/* ============================================
+   Sidebar section titles - bold (only directories)
+   ============================================ */
+.sidebar nav .sidebar-item.sidebar-item-section > .sidebar-item-container > .sidebar-item-toggle .sidebar-item-text {
+  font-weight: 700 !important;
+}
+
+/* Alternative selectors in case the above doesn't work */
+.sidebar-item-section .sidebar-item-text,
+.sidebar nav [role="button"] .sidebar-item-text {
+  font-weight: 700 !important;
+}
+
+/* Make sure regular links stay normal */
+.sidebar-item:not(.sidebar-item-section) .sidebar-item-text {
+  font-weight: 400 !important;
+}
+
+/* ============================================
+   Hero Banner - 3D Effect
+   ============================================ */
+.hero-banner {
+  padding: 2.5rem 2rem 2rem 2rem;
+  margin: -2rem -2rem 2.5rem -2rem;
+  background: linear-gradient(135deg, #5d8cc9 0%, #446e9b 50%, #3d5d82 100%);
+  border-radius: 0;
+  box-shadow: 
+    0 6px 16px rgba(0, 0, 0, 0.15),
+    0 3px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    transparent 40%,
+    rgba(0, 0, 0, 0.1) 100%);
+  pointer-events: none;
+}
+
+.hero-banner h1 {
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-banner p.lead {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   Feature Cards
+   ============================================ */
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.feature-card {
+  border: 1px solid #d0d7de;
+  border-left: 4px solid #446e9b;
+  border-radius: 8px;
+  padding: 1.75rem;
+  background: linear-gradient(135deg, #ffffff 0%, #fafbfc 50%, #f5f7fa 100%);
+  transition: all 0.25s ease;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  background: linear-gradient(to bottom right, 
+    rgba(255, 255, 255, 0.3) 0%, 
+    transparent 50%);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.feature-card:hover {
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.15),
+    0 6px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+  border-left-color: #3d96d2;
+  transform: translateY(-4px);
+}
+
+.feature-card h3 {
+  color: #446e9b;
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.feature-card .icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.8;
+}
+
+/* ============================================
+   Statistics Boxes
+   ============================================ */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  margin: 2.5rem 0;
+}
+
+.stat-box {
+  border: 1px solid #d0d7de;
+  border-top: 4px solid #446e9b;
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 50%, #f5f7fa 100%);
+  transition: all 0.25s ease;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+  position: relative;
+}
+
+.stat-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, rgba(68, 110, 155, 0.4) 50%, transparent 100%);
+  border-radius: 0 0 4px 4px;
+}
+
+.stat-box:hover {
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.15),
+    0 6px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+  border-top-color: #3d96d2;
+  transform: translateY(-4px) scale(1.02);
+}
+
+.stat-number {
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: #446e9b;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Info Boxes
+   ============================================ */
+.info-box {
+  border: 1px solid #d0d7de;
+  border-left: 5px solid #446e9b;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #fafbfc 100%);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    inset 3px 0 6px rgba(68, 110, 155, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  position: relative;
+}
+
+.info-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(68, 110, 155, 0.3) 50%, transparent 100%);
+  border-radius: 0 8px 0 0;
+}
+
+.info-box.success {
+  border-left-color: #28a745;
+  background: linear-gradient(135deg, #f0f9f4 0%, #ffffff 50%, #f6fef9 100%);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    inset 3px 0 6px rgba(40, 167, 69, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.info-box.success::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(40, 167, 69, 0.3) 50%, transparent 100%);
+}
+
+.info-box.warning {
+  border-left-color: #ffc107;
+  background: linear-gradient(135deg, #fffbf0 0%, #ffffff 50%, #fffef8 100%);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    inset 3px 0 6px rgba(255, 193, 7, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.info-box.warning::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 193, 7, 0.3) 50%, transparent 100%);
+}
+
+.info-box h4 {
+  margin-top: 0;
+  color: #333;
+}
+
+/* ============================================
+   Buttons with 3D Effect
+   ============================================ */
+.btn-primary-custom {
+  background: linear-gradient(to bottom, #5d8cc9 0%, #446e9b 100%);
+  color: white;
+  padding: 0.75rem 1.75rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 600;
+  transition: all 0.15s ease;
+  border: none;
+  font-size: 0.95rem;
+  position: relative;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary-custom:hover {
+  background: linear-gradient(to bottom, #6a99d6 0%, #4f7cad 100%);
+  color: white;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.15),
+    0 3px 6px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.btn-primary-custom:active {
+  transform: translateY(0px);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 2px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(to bottom, #446e9b 0%, #3d5d82 100%);
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+  .feature-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .hero-banner h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+}

@@ -29,10 +29,3 @@ The Human Phenotype Project employs cutting-edge omics technologies to profile p
 - **[Human Genetics](datasets/014-human_genetics.html)** - Whole genome sequencing and genotyping for genetic variation analysis
 - **[RNA-Seq](datasets/024-rna_seq.html)** - Whole transcriptome sequencing for gene expression profiling
 
-## Measurement Protocol
-
-Biological samples (blood, saliva, stool) are collected during clinical visits following standardized protocols. Samples are processed, aliquoted, and stored at appropriate temperatures (-80°C for most samples) until analysis. Omics profiling is performed using validated laboratory methods at certified facilities with rigorous quality control.
-
-## Data Processing
-
-Raw omics data undergoes quality control, normalization, and standardization using established bioinformatics pipelines. Processed data includes both raw measurements and derived features (e.g., pathway scores, diversity metrics, genetic risk scores). All data is annotated with relevant metadata and linked to clinical and phenotypic data.

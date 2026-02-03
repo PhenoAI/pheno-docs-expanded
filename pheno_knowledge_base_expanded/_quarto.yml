@@ -18,8 +18,6 @@ website:
     style: "docked"
     search: true
     contents:
-      - href: participant_journey.md
-        text: "Get to Know the HPP"
       - section: "Datasets"
         expanded: true
         contents:
@@ -30,7 +28,6 @@ website:
             contents:
               - datasets/000-population.ipynb
               - datasets/001-events.ipynb
-              - datasets/100-curated_phenotypes.ipynb
           - section: "Clinical Assessments"
             href: category_clinical_assessments.qmd
             expanded: true
@@ -90,6 +87,11 @@ website:
               - datasets/055-lifestyle_and_environment.ipynb
               - datasets/057-psychological_and_social_health.ipynb
               - datasets/058-health_and_medical_history.ipynb
+          - section: "Derived Phenotypes"
+            href: category_derived_phenotypes.qmd
+            expanded: true
+            contents:
+              - datasets/100-curated_phenotypes.ipynb
 format:
   html:
     theme:

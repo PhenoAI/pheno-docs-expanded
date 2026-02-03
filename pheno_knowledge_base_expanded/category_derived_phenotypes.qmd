@@ -1,0 +1,16 @@
+---
+title: "Derived Phenotypes"
+---
+
+## Description
+
+Derived phenotypes are algorithmically-defined health conditions and traits created by integrating multiple data sources from the Human Phenotype Project. These phenotypes combine clinical measurements, laboratory tests, imaging data, questionnaires, medical history, and other assessments to provide robust definitions of diseases and health states.
+
+## Introduction
+
+While the Human Phenotype Project collects raw data across many modalities, derived phenotypes represent the next level of analysis—transforming raw measurements into clinically meaningful health classifications. Each derived phenotype follows evidence-based criteria and clinical guidelines to ensure accurate classification of participants' health status. This approach enables researchers to study complex health conditions that require integration of multiple data types, and provides standardized definitions that can be used across different research projects.
+
+## Available Datasets
+
+- **[Curated Phenotypes](datasets/100-curated_phenotypes.html)** - Expert-curated health conditions and traits derived from integrated multi-modal data analysis
+

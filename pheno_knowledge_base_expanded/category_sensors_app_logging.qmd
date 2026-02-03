@@ -17,16 +17,3 @@ The Human Phenotype Project leverages consumer and medical-grade wearable techno
 - **[Wearables](datasets/033-google_fit_apple_health.html)** - Physical activity, heart rate, sleep, and health data from Google Fit and Apple HealthKit
 - **[Diet Logging](datasets/005-diet_logging.html)** - Self-reported food intake and nutritional information via mobile app
 
-## Measurement Protocol
-
-Participants receive wearable devices and/or app instructions during their clinical visits. For sleep monitoring and CGM, devices are worn for specified periods (e.g., 3 nights for sleep, 14 days for CGM) and then returned. For health apps, participants grant permission for data synchronization from their personal devices. All data is transmitted securely to the research database.
-
-## Data Processing
-
-Sensor data undergoes multiple levels of processing:
-
-1. **Raw data:** Time-series measurements from device sensors
-2. **Events:** Automated detection of specific events (e.g., sleep stages, glucose excursions)
-3. **Summary statistics:** Daily and overall summaries of key metrics
-
-Quality control procedures identify missing data, device failures, and physiologically implausible values.

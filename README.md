@@ -43,7 +43,7 @@ This script will:
 - Inject your API key into the chatbot widget
 - Build the Quarto site
 - Restore the placeholder (so the key isn't committed)
-- Output to `docs-expanded/`
+- Output to `docs/`
 
 ### Option 2: Manual Build
 
@@ -57,7 +57,7 @@ quarto render
 cd ..
 
 # 3. Preview locally
-cd docs-expanded
+cd docs
 python3 -m http.server 8000
 ```
 
@@ -66,11 +66,11 @@ python3 -m http.server 8000
 ## 📦 Deployment to GitHub Pages
 
 1. Build the site: `./deploy.sh`
-2. Configure GitHub Pages to serve from the `docs-expanded/` folder:
+2. Configure GitHub Pages to serve from the `docs/` folder:
    - Go to Settings → Pages
    - Source: Deploy from a branch
    - Branch: `main` (or your default branch)
-   - Folder: `/docs-expanded`
+   - Folder: `/docs`
 3. Push your changes (the API key is safely excluded via `.gitignore`)
 
 ## 🤖 AI Chatbot Features
@@ -90,17 +90,37 @@ pheno-docs-expanded/
 │   └── ...                         # Other content files
 ├── deploy.sh                       # Main deployment script
 ├── create-knowledge-base.sh        # Creates chatbot knowledge base
+├── convert_md_to_ipynb.py          # Converts markdown to Jupyter notebooks
 ├── env.example                     # API key template
 ├── requirements.txt                # Python dependencies
-└── docs-expanded/                  # Built site (generated, not in git)
+└── docs/                           # Built site (for GitHub Pages)
 ```
 
 ## 🔄 Updating Content
 
-1. Edit files in `pheno_knowledge_base_expanded/`
-2. Run `./deploy.sh` to rebuild
-3. Commit and push changes
-4. GitHub Pages will automatically serve the updated `docs-expanded/` folder
+### Source Content Location
+
+Dataset markdown files are maintained in a separate repository:
+- **Source**: `/home/ec2-user/workspace/pheno-docs/markdowns-expanded/`
+- **Converted to**: `pheno_knowledge_base_expanded/datasets/*.ipynb`
+
+### Update Workflow
+
+1. Edit markdown files in `/home/ec2-user/workspace/pheno-docs/markdowns-expanded/`
+2. Run `python3 convert_md_to_ipynb.py` to convert to notebooks
+3. Run `./deploy.sh` to rebuild the site
+4. Commit and push changes
+5. GitHub Pages will automatically serve the updated `docs/` folder
+
+### Recent Updates
+
+- Changed output directory from `docs-expanded/` to `docs/` for simpler deployment
+- Added new "Derived Phenotypes" category with Curated Phenotypes dataset
+- Fixed formatting issues (bullet points, titles, duplicate content)
+- Removed "Get to Know the HPP" from navigation
+- Integrated Vaginal Microbiome dataset
+- Updated "Health apps" to "Wearables"
+- Excluded Samples Inventory from website
 
 ## 💡 Tips
 

@@ -1,0 +1,4221 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.557">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Pheno.AI - CGM (Continuous Glucose Monitoring)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Pheno.AI</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../participant_journey.html"> 
+<span class="menu-text">Get to Know the HPP</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../datasets_description.html">Datasets</a></li><li class="breadcrumb-item"><a href="../category_sensors_app_logging.html">Sensors and App Logging</a></li><li class="breadcrumb-item"><a href="../datasets/017-cgm.html">CGM (Continuous Glucose Monitoring)</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Datasets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets_description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_study_core.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Study Core</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/000-population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/001-events.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Events</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_clinical_assessments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clinical Assessments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/002-anthropometrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anthropometrics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/006-hand_grip.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hand Grip Strength</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/007-blood_pressure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blood Pressure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/010-peripheral_vascular_health.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Peripheral Vascular Health</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/015-ecg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ECG (Electrocardiogram)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/019-cbc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Complete Blood Count (CBC)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/027-voice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Voice Recording</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/032-gait.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gait and Balance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_medical_imaging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medical Imaging</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/003-fundus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fundus Photography</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/004-liver_ultrasound.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Liver Ultrasound</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/011-body_composition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Body Composition</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/012-carotid_ultrasound.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Carotid Ultrasound</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/022-bone_density.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bone Density</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_multi_omics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multi-Omics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/008-serum_lipidomics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Serum Lipidomics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/013-gut_microbiome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gut Microbiome</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/014-human_genetics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Human Genetics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/024-rna_seq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RNA Sequencing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/028-olink_proteomics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Description</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/029-nightingale_metabolomics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nightingale Metabolomics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/030-vaginal_microbiome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Description</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/070-oral_microbiome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Oral Microbiome</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_sensors_app_logging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sensors and App Logging</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/005-diet_logging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diet Logging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/009-sleep.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sleep</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/017-cgm.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">CGM (Continuous Glucose Monitoring)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/033-google_fit_apple_health.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wearables</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_medical_records_surveys.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medical Records and Surveys</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/016-blood_tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blood Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/018-medications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/021-medical_conditions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medical Conditions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/043-covid.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">COVID-19</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/044-sex_specific_factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sex-Specific Factors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/045-participant_relation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Participant Relations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/049-medical_symptoms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medical Symptoms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/050-medical_procedures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medical Procedures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/051-children.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Children</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/052-family_history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Family History</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/053-sociodemographics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sociodemographics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/055-lifestyle_and_environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lifestyle and Environment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/057-psychological_and_social_health.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Psychological and Social Health</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/058-health_and_medical_history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Health and Medical History</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_derived_phenotypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Derived Phenotypes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/100-curated_phenotypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Description</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description">Description</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#measurement-protocol" id="toc-measurement-protocol" class="nav-link" data-scroll-target="#measurement-protocol">Measurement protocol</a></li>
+  <li><a href="#data-availability" id="toc-data-availability" class="nav-link" data-scroll-target="#data-availability">Data availability</a></li>
+  <li><a href="#summary-of-available-data" id="toc-summary-of-available-data" class="nav-link" data-scroll-target="#summary-of-available-data">Summary of available data</a></li>
+  <li><a href="#relevant-links" id="toc-relevant-links" class="nav-link" data-scroll-target="#relevant-links">Relevant links</a></li>
+  <li><a href="#data-dictionary" id="toc-data-dictionary" class="nav-link" data-scroll-target="#data-dictionary">Data dictionary</a></li>
+  <li><a href="#plot-histogram-and-ecdf-for-cgm_ea1c-at-baseline-visit" id="toc-plot-histogram-and-ecdf-for-cgm_ea1c-at-baseline-visit" class="nav-link" data-scroll-target="#plot-histogram-and-ecdf-for-cgm_ea1c-at-baseline-visit">Plot histogram and ecdf for cgm_ea1c at baseline visit</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../datasets_description.html">Datasets</a></li><li class="breadcrumb-item"><a href="../category_sensors_app_logging.html">Sensors and App Logging</a></li><li class="breadcrumb-item"><a href="../datasets/017-cgm.html">CGM (Continuous Glucose Monitoring)</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">CGM (Continuous Glucose Monitoring)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="description" class="level3">
+<h3 class="anchored" data-anchor-id="description">Description</h3>
+<p>Continuous Glucose Monitoring (CGM) measures glucose levels in a continuous manner. This measure provides information on blood glucose control and glucose variability and could be used to monitor patients with diabetes.</p>
+</section>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>In healthy individuals, insulin secretion from the pancreas is responsible for maintaining normal blood glucose levels. Insulin resistance, the main cause of type-2 diabetes and a key aspect in several other metabolic disorders, occurs when the sensitivity to insulin is impaired leading to reduced insulin mediated glucose disposal. Measuring insulin levels is complex and requires special laboratory tests, while glucose levels are measured by simple blood tests.</p>
+<p>Although measuring blood glucose levels using a blood test is simple and inexpensive, a single measure of blood glucose will not contain information on glucose variability, and might not be accurate in certain conditions.</p>
+<p>CGM provides continuous measures of the glucose levels in the interstitial fluid, through a tiny electrochemical sensor electrode inserted under the skin. The continuous measures obtained with CGM present a tool to overcome the limitations of a single measure of blood glucose through blood tests, by providing real time information of glucose levels, rate of change, variability and impending hypo- and hyper- glycemia events.</p>
+<p>Currently approved CGM devices use an enzymatic technology which reacts with glucose molecules in the interstitial fluid generating an electric current. This current is proportional to glucose concentration in the blood, thus providing information of blood glucose levels in a continuous manner.</p>
+<p>Coupled with nutritional and behavioral information, data collected from the CGM could be used in research to better understand mechanisms of glucose response and control, and how these changes in different individuals, lifestyle choices and phenotypes.</p>
+<p>The Human Phenotype Project (HPP) collects CGM data on each participant, to produce blood glucose measures every 15 minutes, for a total connection period of two weeks. Summary statistics are calculated for each CGM connection using the <a href="https://github.com/irinagain/iglu">iglu package</a> (<a href="https://doi.org/10.1371/journal.pone.0248560">Broll et al., 2021</a>), providing varying summary measures of glucose control and variability.</p>
+</section>
+<section id="measurement-protocol" class="level3">
+<h3 class="anchored" data-anchor-id="measurement-protocol">Measurement protocol</h3>
+<!-- long measurment protocol for the data browser -->
+<p>FreeStyle Libre ProIQ Flash device (see figure below) is used for continuous glucose monitoring for a 2-week period in the baseline visit only. During this time participants are also required to log information about food, medications, physical activity and sleep hours using the HPP application. During the baseline visit the sensor is placed on the participant’s upper arm back.</p>
+<p>The figure illustrates the connection procedure of the device. Once attached the device is also activated. It is explained to the participant that in case of MRI the sensor should be removed before the scan, and that it is not possible to dive with the device deeper than one meter. The participant is requested to remove the device independently at the end of the 2-week period and send it back to the clinic.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="cgm_device.jpeg" class="img-fluid figure-img"></p>
+<figcaption>CGM</figcaption>
+</figure>
+</div>
+</section>
+<section id="data-availability" class="level3">
+<h3 class="anchored" data-anchor-id="data-availability">Data availability</h3>
+<!-- for the example notebooks -->
+<p>The metadata and summary features are stored in 3 main statistics parquet files: <code>cgm.parquet</code>, <code>iglu.parquet</code>, <code>iglu_daily.parquet</code> (Computed using the iglu package).</p>
+</section>
+<section id="summary-of-available-data" class="level3">
+<h3 class="anchored" data-anchor-id="summary-of-available-data">Summary of available data</h3>
+<!-- for the data browser -->
+<ol type="1">
+<li>Temporal data: A data frame of temporal glucose measures, along with time of measurement.<br>
+</li>
+<li>Computed summary features: data frame containing, for each CGM connection, extracted features (computed using the iglu package) from the full CGM temporal data.</li>
+</ol>
+</section>
+<section id="relevant-links" class="level3">
+<h3 class="anchored" data-anchor-id="relevant-links">Relevant links</h3>
+<ul>
+<li><a href="https://knowledgebase.pheno.ai/datasets/017-cgm.html">Pheno Knowledgebase</a></li>
+<li><a href="https://pheno-demo-app.vercel.app/folder/17">Pheno Data Browser</a></li>
+</ul>
+<div id="3e08cb30" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-02T12:00:04.117393Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-02T12:00:04.116881Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-02T12:00:05.386448Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-02T12:00:05.385295Z&quot;}" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pheno_utils <span class="im">import</span> PhenoLoader</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f52d68d5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-02T12:00:05.389030Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-02T12:00:05.388590Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-02T12:00:06.560572Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-02T12:00:06.559725Z&quot;}" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pl <span class="op">=</span> PhenoLoader(<span class="st">'cgm'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>PhenoLoader for cgm with
+94 fields
+4 tables: ['cgm', 'iglu', 'iglu_daily', 'age_sex']</code></pre>
+</div>
+</div>
+</section>
+<section id="data-dictionary" class="level1">
+<h1>Data dictionary</h1>
+<div id="fdc4bb0f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-02T12:00:06.562774Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-02T12:00:06.562556Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-02T12:00:06.596157Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-02T12:00:06.595570Z&quot;}" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pl.<span class="bu">dict</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">field_string</th>
+<th data-quarto-table-cell-role="th">description_string</th>
+<th data-quarto-table-cell-role="th">folder_id</th>
+<th data-quarto-table-cell-role="th">feature_set</th>
+<th data-quarto-table-cell-role="th">field_type</th>
+<th data-quarto-table-cell-role="th">strata</th>
+<th data-quarto-table-cell-role="th">data_coding</th>
+<th data-quarto-table-cell-role="th">array</th>
+<th data-quarto-table-cell-role="th">pandas_dtype</th>
+<th data-quarto-table-cell-role="th">bulk_file_extension</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">sexed</th>
+<th data-quarto-table-cell-role="th">debut</th>
+<th data-quarto-table-cell-role="th">completed</th>
+<th data-quarto-table-cell-role="th">customer_field</th>
+<th data-quarto-table-cell-role="th">dependency</th>
+<th data-quarto-table-cell-role="th">old_data_loader</th>
+<th data-quarto-table-cell-role="th">old_lab_data_column_name</th>
+<th data-quarto-table-cell-role="th">min_plausible_value</th>
+<th data-quarto-table-cell-role="th">max_plausible_value</th>
+<th data-quarto-table-cell-role="th">parent_dataframe</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">tabular_field_name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_time_series</td>
+<td>CGM timeseries</td>
+<td>File containing the participants' CGM timeseries</td>
+<td>17</td>
+<td>timeseries</td>
+<td>Time series file (individual)</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>string</td>
+<td>.parquet</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-27</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">connection_id</td>
+<td>ConnectionID</td>
+<td>CGM device connection id</td>
+<td>17</td>
+<td>cgm</td>
+<td>Text</td>
+<td>Auxiliary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>int</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-28</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">collection_timestamp</td>
+<td>Collection timestamp</td>
+<td>CGM connection first data point timestamp</td>
+<td>17</td>
+<td>cgm</td>
+<td>Datetime</td>
+<td>Collection time</td>
+<td>NaN</td>
+<td>Single</td>
+<td>datetime64[ns, Asia/Jerusalem]</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-29</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_connection_first_date</td>
+<td>CGM first date</td>
+<td>CGM connection first date</td>
+<td>17</td>
+<td>cgm</td>
+<td>Date</td>
+<td>Collection time</td>
+<td>NaN</td>
+<td>Single</td>
+<td>datetime64[ns, Asia/Jerusalem]</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-30</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_connection_last_date</td>
+<td>CGM last date</td>
+<td>CGM connection last date</td>
+<td>17</td>
+<td>cgm</td>
+<td>Date</td>
+<td>Collection time</td>
+<td>NaN</td>
+<td>Single</td>
+<td>datetime64[ns, Asia/Jerusalem]</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-31</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_device_type</td>
+<td>CGM Device type</td>
+<td>CGM Device type</td>
+<td>17</td>
+<td>cgm</td>
+<td>Text</td>
+<td>Auxiliary</td>
+<td>017_01</td>
+<td>Single</td>
+<td>category</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-27</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">number_of_cgm_datapoints_lost_in_qc</td>
+<td>CGM datapoints lost in QC</td>
+<td>Number of CGM datapoints lost in QC</td>
+<td>17</td>
+<td>cgm</td>
+<td>Integer</td>
+<td>Auxiliary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>int</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-28</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">percentage_of_cgm_datapoints_lost_in_qc</td>
+<td>Percentage of CGM datapoints lost in QC</td>
+<td>NaN</td>
+<td>17</td>
+<td>cgm</td>
+<td>Continuous</td>
+<td>Auxiliary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-29</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">number_of_cgm_days_available_for_the_connection</td>
+<td>Number of CGM days available</td>
+<td>Number of CGM days available for the connection</td>
+<td>17</td>
+<td>cgm</td>
+<td>Integer</td>
+<td>Auxiliary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>int</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-30</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">number_of_cgm_datapoints_available_for_the_connection</td>
+<td>Number of CGM datapoints available</td>
+<td>Number of CGM datapoints available for the con...</td>
+<td>17</td>
+<td>cgm</td>
+<td>Integer</td>
+<td>Auxiliary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>int</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-31</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">timezone</td>
+<td>Timezone</td>
+<td>TImezone of measurement</td>
+<td>17</td>
+<td>cgm</td>
+<td>Text</td>
+<td>Collection time</td>
+<td>NaN</td>
+<td>Single</td>
+<td>category</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-01</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_1st_quartile</td>
+<td>1st quantile</td>
+<td>First quantile of all glucose values.</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-27</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_3rd_quartile</td>
+<td>3rd quantile</td>
+<td>Third quantile of all glucose values.</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-28</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_above_140</td>
+<td>% above 140</td>
+<td>Percent of glucose measures that were larger t...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-29</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_above_180</td>
+<td>% above 180</td>
+<td>Percent of glucose measures that were larger t...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-30</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_above_250</td>
+<td>% above 250</td>
+<td>Percent of glucose measures that were larger t...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-31</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_below_54</td>
+<td>% below 54</td>
+<td>Percent of glucose measures that were lower th...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-01</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_below_70</td>
+<td>% below 70</td>
+<td>Percent of glucose measures that were lower th...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-02</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_in_range_63_140</td>
+<td>% in range 63-140</td>
+<td>Percent of glucose measures that were in a spe...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-03</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_in_range_70_180</td>
+<td>% in range 70-180</td>
+<td>Percent of glucose measures that were in a spe...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-04</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_adrr</td>
+<td>ADRR</td>
+<td>Average daily risk range (ADRR) is a variabili...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-05</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_auc</td>
+<td>AUC</td>
+<td>Hourly average AUC. This measure integrates, t...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-06</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_cogi</td>
+<td>COGI</td>
+<td>Continuous Glucose Monitoring Index (COGI). CO...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-07</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_conga</td>
+<td>Conga</td>
+<td>Continuous Overall Net Glycemic Action (CONGA)...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-08</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_cv</td>
+<td>CV</td>
+<td>Coefficient of variation of all glucose values.</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-09</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_cv_measures_mean</td>
+<td>CVmean</td>
+<td>Mean of all daily CVs.</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-10</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_cv_measures_sd</td>
+<td>CVsd</td>
+<td>Standard deviations of all daily CVs.</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-11</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_ea1c</td>
+<td>eA1C</td>
+<td>A linear transformation of the mean glucose va...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-12</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_gmi</td>
+<td>GMI</td>
+<td>A linear transformation of the mean glucose va...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-13</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_grade</td>
+<td>GRADE</td>
+<td>Glycaemic Risk Assessment Diabetes Equation (G...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-14</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_grade_eugly</td>
+<td>GRADE eugly</td>
+<td>Percentage of the GRADE score that is attribut...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-15</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_grade_hyper</td>
+<td>GRADE hyper</td>
+<td>Percentage of the GRADE score that is attribut...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-16</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_grade_hypo</td>
+<td>GRADE hypo</td>
+<td>Percentage of the GRADE score that is attribut...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-17</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_gvp</td>
+<td>GVP</td>
+<td>Glucose Variability Percentage (GVP), which is...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-18</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_hbgi</td>
+<td>HBGI</td>
+<td>High Blood Glucose Index (HBGI)</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-19</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_hyper_index</td>
+<td>Hyper index</td>
+<td>This is a weighted average of hyperglycemic va...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-20</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_hypo_index</td>
+<td>Hypo index</td>
+<td>This is a weighted average of hypoglycemic val...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-21</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_igc</td>
+<td>IGC</td>
+<td>Index of Glycemic Control (IGC), a sum of the ...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-22</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_iqr</td>
+<td>IQR</td>
+<td>Interquartile range (IQR), calculated as the d...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-23</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_j_index</td>
+<td>J-index</td>
+<td>This index was designed to stress the importan...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-24</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_lbgi</td>
+<td>LBGI</td>
+<td>Low Blood Glucose Index (LBGI)</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-25</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_m_value</td>
+<td>M value</td>
+<td>The M-value is an index aimed to describe the ...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-26</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_mad</td>
+<td>MAD</td>
+<td>Median Absolute Deviation (MAD). This is a mea...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-27</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_mag</td>
+<td>MAG</td>
+<td>Mean Absolute Glucose (MAG). This is a measure...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-28</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_mage</td>
+<td>MAGE</td>
+<td>Mean Amplitude of Glycemic Excursions (MAGE), ...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-29</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_min_</td>
+<td>Min</td>
+<td>Minimum of all glucose values.</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-30</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_max_</td>
+<td>Max</td>
+<td>Maximum of all glucose values.</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-01-31</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_mean</td>
+<td>Mean</td>
+<td>Mean of all glucose values.</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-01</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_median</td>
+<td>Median</td>
+<td>Median of all glucose values.</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-02</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_modd</td>
+<td>MODD</td>
+<td>Mean difference between glucose values obtaine...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-03</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_range</td>
+<td>Range</td>
+<td>Difference between the maximum and minimum glu...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-04</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_sd</td>
+<td>SD</td>
+<td>Standard deviation of all glucose values.</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-05</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_sd_roc</td>
+<td>SD.Roc</td>
+<td>Standard deviation of all the rate of change (...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-06</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_sdb</td>
+<td>SDb</td>
+<td>SD between days, within time points. Mean valu...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-07</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_sdbdm</td>
+<td>SDbdm</td>
+<td>SD between days, within time points, corrected...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-08</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_sddm</td>
+<td>SDdm</td>
+<td>Horizontal SD. SD of the mean glucose values, ...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-09</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_sdhhmm</td>
+<td>SDhhmm</td>
+<td>SD between time points. Standard deviation of ...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-10</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_sdw</td>
+<td>SDw</td>
+<td>Vertical SD within days. Average value of the ...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-11</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_sdwsh</td>
+<td>SDwsh</td>
+<td>SD within series. Taking hour-long intervals t...</td>
+<td>17</td>
+<td>iglu</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Single</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-12</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">collection_date</td>
+<td>Date</td>
+<td>Date of the daily CGM data used to calculate t...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Date</td>
+<td>Collection time</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>datetime64[ns, Asia/Jerusalem]</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-14</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">connection_day</td>
+<td>Connection day</td>
+<td>Day of the CGM connection</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Integer</td>
+<td>Collection time</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>int</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-15</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_1st_quartile</td>
+<td>Daily 1st quartile</td>
+<td>First quantile of daily glucose values.</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-16</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_3rd_quartile</td>
+<td>Daily 3rd quartile</td>
+<td>Third quantile of daily glucose values.</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-17</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_above_140</td>
+<td>Daily % above 140</td>
+<td>Percent of daily glucose measures that were la...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-18</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_above_180</td>
+<td>Daily % above 180</td>
+<td>Percent of daily glucose measures that were la...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-19</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_above_250</td>
+<td>Daily % above 250</td>
+<td>Percent of daily glucose measures that were la...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-20</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_below_54</td>
+<td>Daily % below 54</td>
+<td>Percent of daily glucose measures that were lo...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-21</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_below_70</td>
+<td>Daily % below 70</td>
+<td>Percent of daily glucose measures that were lo...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-22</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_in_range_63_140</td>
+<td>Daily % in range 63-140</td>
+<td>Percent of daily glucose measures that were in...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-23</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_in_range_70_180</td>
+<td>Daily % in range 70-180</td>
+<td>Percent of daily glucose measures that were in...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-24</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_adrr</td>
+<td>Daily ADRR</td>
+<td>Average daily risk range (ADRR) is a variabili...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-25</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_auc</td>
+<td>Daily AUC</td>
+<td>Hourly average AUC. This measure integrates, t...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-26</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_cogi</td>
+<td>Daily COGI</td>
+<td>Continuous Glucose Monitoring Index (COGI). CO...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-27</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_cv</td>
+<td>Daily CV</td>
+<td>Coefficient of variation of daily glucose values.</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-02-28</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_ea1c</td>
+<td>Daily eA1C</td>
+<td>A linear transformation of the mean glucose va...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-01</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_gmi</td>
+<td>Daily GMI</td>
+<td>A linear transformation of the mean glucose va...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-02</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_grade</td>
+<td>Daily GRADE</td>
+<td>Glycaemic Risk Assessment Diabetes Equation (G...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-03</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_grade_eugly</td>
+<td>Daily GRADE_eugly</td>
+<td>Percentage of the GRADE score that is attribut...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-04</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_grade_hyper</td>
+<td>Daily GRADE_hyper</td>
+<td>Percentage of the GRADE score that is attribut...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-05</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_grade_hypo</td>
+<td>Daily GRADE_hypo</td>
+<td>Percentage of the GRADE score that is attribut...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-06</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_gvp</td>
+<td>Daily GVP</td>
+<td>Glucose Variability Percentage (GVP), which is...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-07</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_hbgi</td>
+<td>Daily HBGI</td>
+<td>High Blood Glucose Index (HBGI)</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-08</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_hyper_index</td>
+<td>Daily Hyper index</td>
+<td>This is a weighted average of hyperglycemic va...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-09</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_hypo_index</td>
+<td>Daily Hypo index</td>
+<td>This is a weighted average of hypoglycemic val...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-10</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_igc</td>
+<td>Daily IGC</td>
+<td>Index of Glycemic Control (IGC), a sum of the ...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-11</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_iqr</td>
+<td>Daily IQR</td>
+<td>Interquartile range (IQR), calculated as the d...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-12</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_j_index</td>
+<td>Daily J_index</td>
+<td>This index was designed to stress the importan...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-13</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_lbgi</td>
+<td>Daily LBGI</td>
+<td>Low Blood Glucose Index (LBGI)</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-14</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_m_value</td>
+<td>Daily M value</td>
+<td>The M-value is an index aimed to describe the ...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-15</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_mad</td>
+<td>Daily MAD</td>
+<td>Median Absolute Deviation (MAD). This is a mea...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-16</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_mag</td>
+<td>Daily MAG</td>
+<td>Mean Absolute Glucose (MAG). This is a measure...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-17</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_mage</td>
+<td>Daily MAGE</td>
+<td>Mean Amplitude of Glycemic Excursions (MAGE), ...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-18</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_min</td>
+<td>Daily Min</td>
+<td>Minimum of all glucose values.</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-19</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_max</td>
+<td>Daily Max</td>
+<td>Maximum of all glucose values.</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-20</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_mean</td>
+<td>Daily Mean</td>
+<td>Mean of all glucose values.</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-21</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_median</td>
+<td>Daily Median</td>
+<td>Median of all glucose values.</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-22</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_range</td>
+<td>Daily Range</td>
+<td>Difference between the maximum and minimum glu...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-23</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_sd</td>
+<td>Daily SD</td>
+<td>Standard deviation of all glucose values.</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-24</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_daily_sd_roc</td>
+<td>Daily SD.Roc</td>
+<td>Standard deviation of all the rate of change (...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-25</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">cgm_daily_sdwsh</td>
+<td>Daily SDwsh</td>
+<td>SD within series. Taking hour-long intervals t...</td>
+<td>17</td>
+<td>iglu_daily</td>
+<td>Continuous</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>Multiple</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2019-03-26</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">glucose</td>
+<td>glucose</td>
+<td>glucose measured via CGM</td>
+<td>17</td>
+<td>NaN</td>
+<td>column</td>
+<td>Primary</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>...</td>
+<td>Both sexes</td>
+<td>2018-12-27</td>
+<td>NaN</td>
+<td>ready</td>
+<td>NaN</td>
+<td>CGMLoader</td>
+<td>GlucoseValue</td>
+<td>40.0</td>
+<td>500.0</td>
+<td>cgm_time_series</td>
+</tr>
+</tbody>
+</table>
+
+<p>101 rows × 27 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-histogram-and-ecdf-for-cgm_ea1c-at-baseline-visit" class="level1">
+<h1>Plot histogram and ecdf for cgm_ea1c at baseline visit</h1>
+<div id="32508bf2" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-02T12:00:06.599390Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-02T12:00:06.598944Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-02T12:00:07.318677Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-02T12:00:07.318233Z&quot;}" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pheno_utils.basic_plots <span class="im">import</span> hist_ecdf_plots</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>col <span class="op">=</span> <span class="st">"cgm_ea1c"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl[[col] <span class="op">+</span> [<span class="st">"age"</span>, <span class="st">"sex"</span>, <span class="st">"collection_date"</span>]].loc[:,:,<span class="st">"00_00_visit"</span>,<span class="dv">0</span>,:]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot histogram and ecdf</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>hist_ecdf_plots(df.dropna(subset<span class="op">=</span>[col,<span class="st">"sex"</span>, <span class="st">"age"</span>]), col, gender_col<span class="op">=</span><span class="st">"sex"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># stats</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>display(df[col].describe().to_frame().T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="017-cgm_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">mean</th>
+<th data-quarto-table-cell-role="th">std</th>
+<th data-quarto-table-cell-role="th">min</th>
+<th data-quarto-table-cell-role="th">25%</th>
+<th data-quarto-table-cell-role="th">50%</th>
+<th data-quarto-table-cell-role="th">75%</th>
+<th data-quarto-table-cell-role="th">max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">cgm_ea1c</td>
+<td>9410.0</td>
+<td>4.956665</td>
+<td>0.438063</td>
+<td>3.634348</td>
+<td>4.675833</td>
+<td>4.921743</td>
+<td>5.196036</td>
+<td>11.796603</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<!-- Simple Chatbot Widget for GitHub Pages -->
+<!-- Add this to your _quarto.yml or include in your pages -->
+
+<style>
+    /* Chat button */
+    .pheno-chat-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        z-index: 9998;
+    }
+
+    .pheno-chat-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    /* Chat window */
+    .pheno-chat-window {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 400px;
+        height: 600px;
+        max-width: calc(100vw - 40px);
+        max-height: calc(100vh - 120px);
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 9999;
+        animation: slideUp 0.3s ease-out;
+    }
+
+    .pheno-chat-window.active {
+        display: flex;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .pheno-chat-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .pheno-chat-title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .pheno-chat-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background 0.2s;
+    }
+
+    .pheno-chat-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .pheno-chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        background: #f8f9fa;
+    }
+
+    .pheno-message {
+        margin-bottom: 12px;
+        display: flex;
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .pheno-message.user {
+        justify-content: flex-end;
+    }
+
+    .pheno-message-content {
+        max-width: 75%;
+        padding: 10px 14px;
+        border-radius: 16px;
+        word-wrap: break-word;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .pheno-message.user .pheno-message-content {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .pheno-message.assistant .pheno-message-content {
+        background: white;
+        color: #333;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .pheno-typing {
+        display: none;
+        padding: 10px 14px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: 60px;
+    }
+
+    .pheno-typing.active {
+        display: block;
+    }
+
+    .pheno-typing span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #667eea;
+        border-radius: 50%;
+        margin: 0 2px;
+        animation: typing 1.4s infinite;
+    }
+
+    .pheno-typing span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .pheno-typing span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+        0%, 60%, 100% {
+            transform: translateY(0);
+        }
+        30% {
+            transform: translateY(-8px);
+        }
+    }
+
+    .pheno-chat-input-container {
+        padding: 16px;
+        background: white;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .pheno-chat-input-wrapper {
+        display: flex;
+        gap: 8px;
+    }
+
+    .pheno-chat-input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 2px solid #e0e0e0;
+        border-radius: 20px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.3s;
+        font-family: inherit;
+    }
+
+    .pheno-chat-input:focus {
+        border-color: #667eea;
+    }
+
+    .pheno-send-button {
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .pheno-send-button:hover:not(:disabled) {
+        transform: translateY(-2px);
+    }
+
+    .pheno-send-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+        .pheno-chat-window {
+            bottom: 0;
+            right: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 0;
+        }
+
+        .pheno-chat-button {
+            bottom: 16px;
+            right: 16px;
+        }
+    }
+
+    /* Scrollbar */
+    .pheno-chat-messages::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .pheno-chat-messages::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .pheno-chat-messages::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+    }
+</style>
+
+<!-- Chat button -->
+<button class="pheno-chat-button" id="phenoChatButton" aria-label="Open chat">
+    💬
+</button>
+
+<!-- Chat window -->
+<div class="pheno-chat-window" id="phenoChatWindow">
+    <div class="pheno-chat-header">
+        <div class="pheno-chat-title">Pheno.AI Assistant</div>
+        <button class="pheno-chat-close" id="phenoChatClose" aria-label="Close chat">×</button>
+    </div>
+    <div class="pheno-chat-messages" id="phenoChatMessages">
+        <div class="pheno-message assistant">
+            <div class="pheno-message-content">
+                Hello! I can answer questions based on the Human Phenotype Project website content. Ask me anything about our datasets, methodology, or research!
+            </div>
+        </div>
+    </div>
+    <div class="pheno-chat-input-container">
+        <div class="pheno-chat-input-wrapper">
+            <input type="text" class="pheno-chat-input" id="phenoChatInput" placeholder="Type your message..." autocomplete="off">
+            <button class="pheno-send-button" id="phenoSendButton">Send</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    'use strict';
+
+    // Configuration
+    const CONFIG = {
+        OPENROUTER_API_KEY: '__OPENROUTER_API_KEY__',
+        OPENROUTER_MODEL: 'anthropic/claude-3.5-sonnet',
+        API_URL: 'https://openrouter.ai/api/v1/chat/completions'
+    };
+
+    // State
+    let conversationHistory = [];
+    let isProcessing = false;
+    let websiteContent = '';
+    let contentLoaded = false;
+
+    // DOM Elements
+    const chatButton = document.getElementById('phenoChatButton');
+    const chatWindow = document.getElementById('phenoChatWindow');
+    const chatClose = document.getElementById('phenoChatClose');
+    const chatMessages = document.getElementById('phenoChatMessages');
+    const chatInput = document.getElementById('phenoChatInput');
+    const sendButton = document.getElementById('phenoSendButton');
+
+    // Load website content
+    async function loadWebsiteContent() {
+        try {
+            // Use absolute path from site root
+            const response = await fetch('/knowledge-base-context.txt');
+            websiteContent = await response.text();
+            contentLoaded = true;
+            console.log('✅ Website content loaded:', websiteContent.length, 'characters');
+        } catch (error) {
+            console.error('❌ Failed to load website content:', error);
+            console.error('Error details:', error);
+            contentLoaded = false;
+        }
+    }
+
+    // Initialize
+    function init() {
+        loadWebsiteContent();
+        chatButton.addEventListener('click', toggleChat);
+        chatClose.addEventListener('click', toggleChat);
+        sendButton.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+            }
+        });
+    }
+
+    // Toggle chat window
+    function toggleChat() {
+        chatWindow.classList.toggle('active');
+        if (chatWindow.classList.contains('active')) {
+            chatInput.focus();
+        }
+    }
+
+    // Handle send message
+    async function handleSend() {
+        const message = chatInput.value.trim();
+        if (!message || isProcessing) return;
+
+        // Add user message
+        addMessage('user', message);
+        chatInput.value = '';
+        
+        // Show typing indicator
+        const typingIndicator = addTypingIndicator();
+        
+        // Disable input
+        isProcessing = true;
+        sendButton.disabled = true;
+        chatInput.disabled = true;
+
+        try {
+            // Get AI response
+            const response = await getAIResponse(message);
+            
+            // Remove typing indicator
+            typingIndicator.remove();
+            
+            // Add assistant message
+            addMessage('assistant', response);
+        } catch (error) {
+            console.error('Chatbot error:', error);
+            typingIndicator.remove();
+            addMessage('assistant', 'Sorry, I encountered an error. Please try again.');
+        } finally {
+            // Re-enable input
+            isProcessing = false;
+            sendButton.disabled = false;
+            chatInput.disabled = false;
+            chatInput.focus();
+        }
+    }
+
+    // Add message to chat
+    function addMessage(role, content) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `pheno-message ${role}`;
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'pheno-message-content';
+        contentDiv.textContent = content;
+        
+        messageDiv.appendChild(contentDiv);
+        chatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // Add to conversation history
+        conversationHistory.push({ role, content });
+    }
+
+    // Add typing indicator
+    function addTypingIndicator() {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'pheno-message assistant';
+        
+        const indicator = document.createElement('div');
+        indicator.className = 'pheno-typing active';
+        indicator.innerHTML = '<span></span><span></span><span></span>';
+        
+        messageDiv.appendChild(indicator);
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        return messageDiv;
+    }
+
+    // Get AI response from OpenRouter
+    async function getAIResponse(userMessage) {
+        const systemPrompt = contentLoaded 
+            ? `You are a helpful AI assistant for the Human Phenotype Project website.
+
+CRITICAL RULES:
+1. Answer ONLY based on the website content provided below
+2. If the answer is not in the content, say: "I don't find that information in the current documentation. Please check the website directly."
+3. NEVER make up or invent information
+4. Be concise and accurate
+5. If asked about something not related to this project, politely decline
+
+WEBSITE CONTENT:
+${websiteContent}
+
+Answer ONLY from the content above. Do not use external knowledge.`
+            : `You are a helpful AI assistant for the Human Phenotype Project. I'm still loading the website content. Please ask your question and I'll answer based on the documentation.`;
+
+        const messages = [
+            { role: 'system', content: systemPrompt },
+            ...conversationHistory.slice(-6),
+            { role: 'user', content: userMessage }
+        ];
+
+        const response = await fetch(CONFIG.API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${CONFIG.OPENROUTER_API_KEY}`,
+                'HTTP-Referer': window.location.href,
+                'X-Title': 'Pheno.AI Chatbot'
+            },
+            body: JSON.stringify({
+                model: CONFIG.OPENROUTER_MODEL,
+                messages: messages,
+                temperature: 0.3,
+                max_tokens: 1000
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            const errorMsg = errorData.error?.message || `API request failed with status ${response.status}`;
+            console.error('API Error:', errorMsg, errorData);
+            throw new Error(errorMsg);
+        }
+
+        const data = await response.json();
+        return data.choices[0].message.content;
+    }
+
+    // Start the app
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

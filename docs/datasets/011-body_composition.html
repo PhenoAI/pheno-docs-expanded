@@ -1,0 +1,5366 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.557">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Pheno.AI - Body Composition</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Pheno.AI</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../participant_journey.html"> 
+<span class="menu-text">Get to Know the HPP</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../datasets_description.html">Datasets</a></li><li class="breadcrumb-item"><a href="../category_medical_imaging.html">Medical Imaging</a></li><li class="breadcrumb-item"><a href="../datasets/011-body_composition.html">Body Composition</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Datasets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets_description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_study_core.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Study Core</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/000-population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/001-events.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Events</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_clinical_assessments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clinical Assessments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/002-anthropometrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anthropometrics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/006-hand_grip.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hand Grip Strength</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/007-blood_pressure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blood Pressure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/010-peripheral_vascular_health.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Peripheral Vascular Health</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/015-ecg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ECG (Electrocardiogram)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/019-cbc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Complete Blood Count (CBC)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/027-voice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Voice Recording</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/032-gait.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gait and Balance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_medical_imaging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medical Imaging</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/003-fundus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fundus Photography</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/004-liver_ultrasound.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Liver Ultrasound</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/011-body_composition.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Body Composition</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/012-carotid_ultrasound.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Carotid Ultrasound</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/022-bone_density.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bone Density</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_multi_omics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multi-Omics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/008-serum_lipidomics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Serum Lipidomics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/013-gut_microbiome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gut Microbiome</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/014-human_genetics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Human Genetics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/024-rna_seq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RNA Sequencing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/028-olink_proteomics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Description</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/029-nightingale_metabolomics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nightingale Metabolomics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/030-vaginal_microbiome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Description</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/070-oral_microbiome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Oral Microbiome</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_sensors_app_logging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sensors and App Logging</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/005-diet_logging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diet Logging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/009-sleep.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sleep</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/017-cgm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CGM (Continuous Glucose Monitoring)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/033-google_fit_apple_health.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wearables</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_medical_records_surveys.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medical Records and Surveys</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/016-blood_tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blood Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/018-medications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/021-medical_conditions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medical Conditions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/043-covid.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">COVID-19</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/044-sex_specific_factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sex-Specific Factors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/045-participant_relation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Participant Relations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/049-medical_symptoms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medical Symptoms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/050-medical_procedures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medical Procedures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/051-children.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Children</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/052-family_history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Family History</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/053-sociodemographics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sociodemographics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/055-lifestyle_and_environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lifestyle and Environment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/057-psychological_and_social_health.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Psychological and Social Health</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/058-health_and_medical_history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Health and Medical History</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../category_derived_phenotypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Derived Phenotypes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../datasets/100-curated_phenotypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Description</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description">Description</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#measurement-protocol" id="toc-measurement-protocol" class="nav-link" data-scroll-target="#measurement-protocol">Measurement protocol</a></li>
+  <li><a href="#data-availability" id="toc-data-availability" class="nav-link" data-scroll-target="#data-availability">Data availability</a></li>
+  <li><a href="#summary-of-available-data" id="toc-summary-of-available-data" class="nav-link" data-scroll-target="#summary-of-available-data">Summary of available data</a></li>
+  <li><a href="#relevant-links" id="toc-relevant-links" class="nav-link" data-scroll-target="#relevant-links">Relevant links</a></li>
+  <li><a href="#data-dictionary" id="toc-data-dictionary" class="nav-link" data-scroll-target="#data-dictionary">Data dictionary</a></li>
+  <li><a href="#plot-histogram-and-ecdf-for-total_scan_vat_volume-at-baseline-visit" id="toc-plot-histogram-and-ecdf-for-total_scan_vat_volume-at-baseline-visit" class="nav-link" data-scroll-target="#plot-histogram-and-ecdf-for-total_scan_vat_volume-at-baseline-visit">Plot histogram and ecdf for total_scan_vat_volume at baseline visit</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../datasets_description.html">Datasets</a></li><li class="breadcrumb-item"><a href="../category_medical_imaging.html">Medical Imaging</a></li><li class="breadcrumb-item"><a href="../datasets/011-body_composition.html">Body Composition</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Body Composition</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="description" class="level3">
+<h3 class="anchored" data-anchor-id="description">Description</h3>
+<p>Body composition was profiled based on DXA (dual-energy x-ray absorptiometry) imaging, and includes measurements of fat and lean mass for the legs, arms, trunk, gynoid, and android, as well as measurements of total scan visceral adipose tissue (VAT) and subcutaneous adipose tissue (SAT) area, mass and volume are included.</p>
+</section>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>DXA (dual-energy x-ray absorptiometry) is a medical imaging technique that is used to measure body composition, specifically the amounts of bone, fat, and lean muscle tissue in the body. A DXA scan uses a low dose of ionizing radiation to produce a detailed image of the body, which is then analyzed by a software to determine the body composition. This method is considered to be one of the most accurate methods for measuring body composition, as it is able to distinguish between different types of tissue and provide detailed information about the distribution of fat and muscle in the body. DXA imaging is commonly used for assessing bone density and for monitoring changes in body composition over time, such as during weight loss, muscle building programs or for assessment of sarcopenia.</p>
+</section>
+<section id="measurement-protocol" class="level3">
+<h3 class="anchored" data-anchor-id="measurement-protocol">Measurement protocol</h3>
+<!-- long measurment protocol for the data browser -->
+<p>Dual-energy X-ray Absorptiometry (DXA) was performed with the GE Lunar Prodigy Advance device (GE Healthcare, USA) and the GE CoreScan software application. Before the scan, participants were asked to remove all metal items, heavy clothing and shoes. Each participant performed a total body scan in a supine position to determine percent body fat, fat mass, lean body mass, and bone mineral density. The total body composition is calculated for various regions (arms, legs, trunk, android, gynoid and total). The CoreScan also estimates the Visceral Adipose Tissue (VAT) and Subcutaneous Adipose Tissue (SAT) content within the android region. Bone mineral density was measured from the Femur necks, bilaterally and from the spine vertebra L1-L4.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dxa_machine.jpeg" class="img-fluid figure-img"></p>
+<figcaption>DXA</figcaption>
+</figure>
+</div>
+</section>
+<section id="data-availability" class="level3">
+<h3 class="anchored" data-anchor-id="data-availability">Data availability</h3>
+<!-- for the example notebooks -->
+<p>The information is stored in 1 parquet file: <code>body_composition.parquet</code></p>
+</section>
+<section id="summary-of-available-data" class="level3">
+<h3 class="anchored" data-anchor-id="summary-of-available-data">Summary of available data</h3>
+<!-- for the data browser -->
+<ol type="1">
+<li><strong>Regional body composition measurements:</strong>
+<ul>
+<li>Fat and lean mass for legs, arms, trunk, gynoid region, and android region</li>
+<li>Total body fat percentage and total lean mass</li>
+</ul></li>
+<li><strong>Adipose tissue measurements:</strong>
+<ul>
+<li>Visceral adipose tissue (VAT) area, mass, and volume</li>
+<li>Subcutaneous adipose tissue (SAT) area, mass, and volume</li>
+<li>VAT/SAT ratios</li>
+</ul></li>
+<li><strong>Imaging files:</strong>
+<ul>
+<li>DXA image files (e.g., total body composition - %fat)</li>
+<li>DXA image DICOM files</li>
+</ul></li>
+</ol>
+</section>
+<section id="relevant-links" class="level3">
+<h3 class="anchored" data-anchor-id="relevant-links">Relevant links</h3>
+<ul>
+<li><a href="https://knowledgebase.pheno.ai/datasets/011-body_composition.html">Pheno Knowledgebase</a></li>
+<li><a href="https://pheno-demo-app.vercel.app/folder/11">Pheno Data Browser</a></li>
+</ul>
+<div id="3f66af58" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-02T11:59:11.975297Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-02T11:59:11.975060Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-02T11:59:13.204380Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-02T11:59:13.203659Z&quot;}" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pheno_utils <span class="im">import</span> PhenoLoader</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="5814e1a1" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-02T11:59:13.207253Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-02T11:59:13.206425Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-02T11:59:13.863716Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-02T11:59:13.863204Z&quot;}" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pl <span class="op">=</span> PhenoLoader(<span class="st">'body_composition'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>PhenoLoader for body_composition with
+157 fields
+2 tables: ['body_composition', 'age_sex']</code></pre>
+</div>
+</div>
+</section>
+<section id="data-dictionary" class="level1">
+<h1>Data dictionary</h1>
+<div id="82f1592b" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-02T11:59:13.867119Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-02T11:59:13.866143Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-02T11:59:13.905739Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-02T11:59:13.905231Z&quot;}" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pl.<span class="bu">dict</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">folder_id</th>
+<th data-quarto-table-cell-role="th">feature_set</th>
+<th data-quarto-table-cell-role="th">field_string</th>
+<th data-quarto-table-cell-role="th">relative_location</th>
+<th data-quarto-table-cell-role="th">field_type</th>
+<th data-quarto-table-cell-role="th">data_coding</th>
+<th data-quarto-table-cell-role="th">bulk_file_extension</th>
+<th data-quarto-table-cell-role="th">description_string</th>
+<th data-quarto-table-cell-role="th">stability</th>
+<th data-quarto-table-cell-role="th">units</th>
+<th data-quarto-table-cell-role="th">sampling_rate</th>
+<th data-quarto-table-cell-role="th">strata</th>
+<th data-quarto-table-cell-role="th">sexed</th>
+<th data-quarto-table-cell-role="th">array</th>
+<th data-quarto-table-cell-role="th">list_of_tags</th>
+<th data-quarto-table-cell-role="th">debut</th>
+<th data-quarto-table-cell-role="th">transformation</th>
+<th data-quarto-table-cell-role="th">pandas_dtype</th>
+<th data-quarto-table-cell-role="th">completed</th>
+<th data-quarto-table-cell-role="th">bulk_dictionary</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">tabular_field_name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">collection_date</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Collection date (YYYY-MM-DD)</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Date</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Collection date (YYYY-MM-DD)</td>
+<td>NaN</td>
+<td>Time</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>datetime64[ns]</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">timezone</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Timezone</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Categorical (single)</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Timezone</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>string</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">collection_timestamp</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Collection timestamp</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Date</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Collection timestamp</td>
+<td>Accruing</td>
+<td>Time</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>datetime64[ns, Asia/Jerusalem]</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_android_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition android bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition android bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_android_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition android fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition android fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_android_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition android fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition android fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_android_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition android lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition android lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_android_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition android region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition android region percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_android_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition android tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition android tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_android_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition android tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition android tissue percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_android_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition android total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition android total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arm_left_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm left bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left arm bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arm_left_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm left fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left arm fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arm_left_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm left fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left arm fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arm_left_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm left lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left arm lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arm_left_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm left region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left arm region percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arm_left_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm left tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left arm tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arm_left_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm left tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left arm tissue percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arm_left_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm left total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left arm total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arm_right_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm right bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right arm bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arm_right_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm right fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right arm fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arm_right_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm right fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right arm fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arm_right_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm right lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right arm lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arm_right_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm right region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right arm region percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arm_right_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm right tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right arm tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arm_right_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm right tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right arm tissue percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arm_right_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arm right total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right arm total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arms_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition arms bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arms_diff_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms diff bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition, the bone mass difference bet...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arms_diff_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms diff fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the fat free mass difference ...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arms_diff_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms diff fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the fat mass difference betwe...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arms_diff_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms diff lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the lean mass difference betw...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arms_diff_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms diff region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the region percent fat differ...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arms_diff_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms diff tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the tissue mass difference be...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arms_diff_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms diff tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the tissue percent fat differ...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arms_diff_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms diff total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the total mass difference bet...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arms_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition arms fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arms_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition arms fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arms_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition arms lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arms_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition arms region percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arms_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition arms tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_arms_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition arms tissue percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_arms_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition arms total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition arms total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_dose</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition dose</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Radiation exposure dose during body compositio...</td>
+<td>Accruing</td>
+<td>μGy</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_gynoid_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition gynoid bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition gynoid bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_gynoid_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition gynoid fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition gynoid fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_gynoid_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition gynoid fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition gynoid fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_gynoid_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition gynoid lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition gynoid lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_gynoid_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition gynoid region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition gynoid region percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_gynoid_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition gynoid tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition gynoid tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_gynoid_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition gynoid tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition gynoid tissue percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_gynoid_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition gynoid total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition gynoid total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_leg_left_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg left bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left leg bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_leg_left_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg left fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left leg fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_leg_left_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg left fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left leg fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_leg_left_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg left lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left leg lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_leg_left_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg left region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left leg region percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_leg_left_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg left tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left leg tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_leg_left_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg left tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left leg tissue percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_leg_left_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg left total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left leg total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_leg_right_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg right bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right leg bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_leg_right_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg right fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right leg fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_leg_right_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg right fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right leg fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_leg_right_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg right lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right leg lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_leg_right_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg right region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right leg region percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_leg_right_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg right tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right leg tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_leg_right_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg right tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right leg tissue percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_leg_right_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition leg right total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right leg total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_legs_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition legs bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_legs_diff_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs diff bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the bone mass difference betw...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_legs_diff_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs diff fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the fat free mass difference ...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_legs_diff_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs diff fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the fat mass difference betwe...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_legs_diff_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs diff lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the lean mass difference betw...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_legs_diff_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs diff region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the region percent fat differ...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_legs_diff_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs diff tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the tissue mass difference be...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_legs_diff_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs diff tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the tissue percent fat differ...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_legs_diff_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs diff total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the total mass difference bet...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_legs_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition legs fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_legs_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition legs fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_legs_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition legs lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_legs_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition legs region percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_legs_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition legs tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_legs_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition legs tissue percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_legs_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition legs total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition legs total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total body bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_diff_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total diff bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition bone mass difference between ...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_diff_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total diff fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total fat free mass differenc...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_diff_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total diff fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total fat mass difference bet...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_diff_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total diff lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total lean mass difference be...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_diff_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total diff region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total region percent fat diff...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_diff_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total diff tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total tissue mass difference ...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_diff_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total diff tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total tissue percent fat diff...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_diff_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total diff total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total mass difference between...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total body fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total body fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total body lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_left_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total left bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total bone mass of the body's...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_left_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total left fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total fat free mass of the bo...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_left_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total left fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total fat mass of the body's ...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_left_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total left lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total lean mass of the body's...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_left_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total left region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total region percent fat of t...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_left_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total left tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total tissue mass of the body...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_left_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total left tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total tissue percent fat of t...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_left_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total left total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total mass of the body's left...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total region percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_right_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total right bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total bone mass of the body's...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_right_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total right fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total fat free mass of the bo...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_right_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total right fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total fat mass of the body's ...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_right_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total right lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total lean mass of the body's...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_right_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total right region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total region percent fat of t...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_right_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total right tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total tissue mass of the body...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_right_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total right tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total tissue percent fat of t...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_right_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total right total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total total mass of the body'...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_total_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total tissue percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_total_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition total total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition trunk bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_diff_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk diff bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the difference in bone mass b...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_diff_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk diff fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the difference in fat free ma...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_diff_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk diff fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the difference in fat mass be...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_diff_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk diff lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the difference in lean mass b...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_diff_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk diff region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the difference in region perc...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_diff_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk diff tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the difference in tissue mass...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_diff_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk diff tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the difference in tissue perc...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_diff_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk diff total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition the difference in total mass ...</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition trunk fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition trunk fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition trunk lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_left_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk left bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left trunk side bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_left_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk left fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left trunk side fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_left_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk left fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left trunk side fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_left_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk left lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left trunk side lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_left_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk left region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left trunk side region percen...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_left_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk left tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left trunk side tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_left_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk left tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left trunk side tissue percen...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_left_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk left total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition left trunk side total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition trunk region percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_right_bone_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk right bone mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right trunk side bone mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_right_fat_free_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk right fat free mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right trunk side fat free mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_right_fat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk right fat mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right trunk side fat mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_right_lean_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk right lean mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right trunk side lean mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_right_region_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk right region percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right trunk side region perce...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_right_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk right tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right trunk side tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_right_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk right tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right trunk side tissue perce...</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_right_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk right total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition right trunk side total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_tissue_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition trunk tissue mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">body_comp_trunk_tissue_percent_fat</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk tissue percent fat</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition trunk tissue percent fat</td>
+<td>Accruing</td>
+<td>%</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">body_comp_trunk_total_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Body composition trunk total mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Body composition trunk total mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">total_scan_dose</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Total scan dose</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Radiation dose of the entire scan</td>
+<td>Accruing</td>
+<td>μGy</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">total_scan_sat_area</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Total scan subcutaneous adipose tissue area</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Total scan subcutaneous adipose tissue (SAT) area</td>
+<td>Accruing</td>
+<td>cm^2</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">total_scan_sat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Total scan subcutaneous adipose tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Total scan subcutaneous adipose tissue (SAT) mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">total_scan_sat_volume</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Total scan subcutaneous adipose tissue volume</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Total scan subcutaneous adipose tissue (SAT) v...</td>
+<td>Accruing</td>
+<td>cm^3</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">total_scan_vat_area</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Total scan visceral adipose tissue area</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Total scan visceral adipose tissue (VAT) area</td>
+<td>Accruing</td>
+<td>cm^2</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">total_scan_vat_mass</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Total scan visceral adipose tissue mass</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Total scan visceral adipose tissue (VAT) mass</td>
+<td>Accruing</td>
+<td>gram</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">total_scan_vat_volume</td>
+<td>11</td>
+<td>body_composition</td>
+<td>Total scan visceral adipose tissue volume</td>
+<td>body_composition/body_composition.parquet</td>
+<td>Continuous</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Total scan visceral adipose tissue (VAT) volume</td>
+<td>Accruing</td>
+<td>cm^3</td>
+<td>NaN</td>
+<td>Primary</td>
+<td>Both sexes</td>
+<td>Single</td>
+<td>NaN</td>
+<td>2020-06-09</td>
+<td>NaN</td>
+<td>float</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="plot-histogram-and-ecdf-for-total_scan_vat_volume-at-baseline-visit" class="level1">
+<h1>Plot histogram and ecdf for total_scan_vat_volume at baseline visit</h1>
+<div id="1c13b4e7" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-02T11:59:13.909234Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-02T11:59:13.908860Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-02T11:59:14.275933Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-02T11:59:14.275517Z&quot;}" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pheno_utils.basic_plots <span class="im">import</span> hist_ecdf_plots</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>col <span class="op">=</span> <span class="st">"total_scan_vat_volume"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl[[col] <span class="op">+</span> [<span class="st">"age"</span>, <span class="st">"sex"</span>, <span class="st">"collection_date"</span>]].loc[:,:,<span class="st">"00_00_visit"</span>,<span class="dv">0</span>,:]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot histogram and ecdf</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>hist_ecdf_plots(df.dropna(subset<span class="op">=</span>[col,<span class="st">"sex"</span>, <span class="st">"age"</span>]), col, gender_col<span class="op">=</span><span class="st">"sex"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># stats</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>display(df[col].describe().to_frame().T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="011-body_composition_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">mean</th>
+<th data-quarto-table-cell-role="th">std</th>
+<th data-quarto-table-cell-role="th">min</th>
+<th data-quarto-table-cell-role="th">25%</th>
+<th data-quarto-table-cell-role="th">50%</th>
+<th data-quarto-table-cell-role="th">75%</th>
+<th data-quarto-table-cell-role="th">max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">total_scan_vat_volume</td>
+<td>6513.0</td>
+<td>973.39828</td>
+<td>714.715803</td>
+<td>0.0</td>
+<td>424.852445</td>
+<td>823.605279</td>
+<td>1346.291129</td>
+<td>5490.022629</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<!-- Simple Chatbot Widget for GitHub Pages -->
+<!-- Add this to your _quarto.yml or include in your pages -->
+
+<style>
+    /* Chat button */
+    .pheno-chat-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        z-index: 9998;
+    }
+
+    .pheno-chat-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    /* Chat window */
+    .pheno-chat-window {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 400px;
+        height: 600px;
+        max-width: calc(100vw - 40px);
+        max-height: calc(100vh - 120px);
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 9999;
+        animation: slideUp 0.3s ease-out;
+    }
+
+    .pheno-chat-window.active {
+        display: flex;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .pheno-chat-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .pheno-chat-title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .pheno-chat-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background 0.2s;
+    }
+
+    .pheno-chat-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .pheno-chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        background: #f8f9fa;
+    }
+
+    .pheno-message {
+        margin-bottom: 12px;
+        display: flex;
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .pheno-message.user {
+        justify-content: flex-end;
+    }
+
+    .pheno-message-content {
+        max-width: 75%;
+        padding: 10px 14px;
+        border-radius: 16px;
+        word-wrap: break-word;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .pheno-message.user .pheno-message-content {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .pheno-message.assistant .pheno-message-content {
+        background: white;
+        color: #333;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .pheno-typing {
+        display: none;
+        padding: 10px 14px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: 60px;
+    }
+
+    .pheno-typing.active {
+        display: block;
+    }
+
+    .pheno-typing span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #667eea;
+        border-radius: 50%;
+        margin: 0 2px;
+        animation: typing 1.4s infinite;
+    }
+
+    .pheno-typing span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .pheno-typing span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+        0%, 60%, 100% {
+            transform: translateY(0);
+        }
+        30% {
+            transform: translateY(-8px);
+        }
+    }
+
+    .pheno-chat-input-container {
+        padding: 16px;
+        background: white;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .pheno-chat-input-wrapper {
+        display: flex;
+        gap: 8px;
+    }
+
+    .pheno-chat-input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 2px solid #e0e0e0;
+        border-radius: 20px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.3s;
+        font-family: inherit;
+    }
+
+    .pheno-chat-input:focus {
+        border-color: #667eea;
+    }
+
+    .pheno-send-button {
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .pheno-send-button:hover:not(:disabled) {
+        transform: translateY(-2px);
+    }
+
+    .pheno-send-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+        .pheno-chat-window {
+            bottom: 0;
+            right: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 0;
+        }
+
+        .pheno-chat-button {
+            bottom: 16px;
+            right: 16px;
+        }
+    }
+
+    /* Scrollbar */
+    .pheno-chat-messages::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .pheno-chat-messages::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .pheno-chat-messages::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+    }
+</style>
+
+<!-- Chat button -->
+<button class="pheno-chat-button" id="phenoChatButton" aria-label="Open chat">
+    💬
+</button>
+
+<!-- Chat window -->
+<div class="pheno-chat-window" id="phenoChatWindow">
+    <div class="pheno-chat-header">
+        <div class="pheno-chat-title">Pheno.AI Assistant</div>
+        <button class="pheno-chat-close" id="phenoChatClose" aria-label="Close chat">×</button>
+    </div>
+    <div class="pheno-chat-messages" id="phenoChatMessages">
+        <div class="pheno-message assistant">
+            <div class="pheno-message-content">
+                Hello! I can answer questions based on the Human Phenotype Project website content. Ask me anything about our datasets, methodology, or research!
+            </div>
+        </div>
+    </div>
+    <div class="pheno-chat-input-container">
+        <div class="pheno-chat-input-wrapper">
+            <input type="text" class="pheno-chat-input" id="phenoChatInput" placeholder="Type your message..." autocomplete="off">
+            <button class="pheno-send-button" id="phenoSendButton">Send</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    'use strict';
+
+    // Configuration
+    const CONFIG = {
+        OPENROUTER_API_KEY: '__OPENROUTER_API_KEY__',
+        OPENROUTER_MODEL: 'anthropic/claude-3.5-sonnet',
+        API_URL: 'https://openrouter.ai/api/v1/chat/completions'
+    };
+
+    // State
+    let conversationHistory = [];
+    let isProcessing = false;
+    let websiteContent = '';
+    let contentLoaded = false;
+
+    // DOM Elements
+    const chatButton = document.getElementById('phenoChatButton');
+    const chatWindow = document.getElementById('phenoChatWindow');
+    const chatClose = document.getElementById('phenoChatClose');
+    const chatMessages = document.getElementById('phenoChatMessages');
+    const chatInput = document.getElementById('phenoChatInput');
+    const sendButton = document.getElementById('phenoSendButton');
+
+    // Load website content
+    async function loadWebsiteContent() {
+        try {
+            // Use absolute path from site root
+            const response = await fetch('/knowledge-base-context.txt');
+            websiteContent = await response.text();
+            contentLoaded = true;
+            console.log('✅ Website content loaded:', websiteContent.length, 'characters');
+        } catch (error) {
+            console.error('❌ Failed to load website content:', error);
+            console.error('Error details:', error);
+            contentLoaded = false;
+        }
+    }
+
+    // Initialize
+    function init() {
+        loadWebsiteContent();
+        chatButton.addEventListener('click', toggleChat);
+        chatClose.addEventListener('click', toggleChat);
+        sendButton.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+            }
+        });
+    }
+
+    // Toggle chat window
+    function toggleChat() {
+        chatWindow.classList.toggle('active');
+        if (chatWindow.classList.contains('active')) {
+            chatInput.focus();
+        }
+    }
+
+    // Handle send message
+    async function handleSend() {
+        const message = chatInput.value.trim();
+        if (!message || isProcessing) return;
+
+        // Add user message
+        addMessage('user', message);
+        chatInput.value = '';
+        
+        // Show typing indicator
+        const typingIndicator = addTypingIndicator();
+        
+        // Disable input
+        isProcessing = true;
+        sendButton.disabled = true;
+        chatInput.disabled = true;
+
+        try {
+            // Get AI response
+            const response = await getAIResponse(message);
+            
+            // Remove typing indicator
+            typingIndicator.remove();
+            
+            // Add assistant message
+            addMessage('assistant', response);
+        } catch (error) {
+            console.error('Chatbot error:', error);
+            typingIndicator.remove();
+            addMessage('assistant', 'Sorry, I encountered an error. Please try again.');
+        } finally {
+            // Re-enable input
+            isProcessing = false;
+            sendButton.disabled = false;
+            chatInput.disabled = false;
+            chatInput.focus();
+        }
+    }
+
+    // Add message to chat
+    function addMessage(role, content) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `pheno-message ${role}`;
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'pheno-message-content';
+        contentDiv.textContent = content;
+        
+        messageDiv.appendChild(contentDiv);
+        chatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // Add to conversation history
+        conversationHistory.push({ role, content });
+    }
+
+    // Add typing indicator
+    function addTypingIndicator() {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'pheno-message assistant';
+        
+        const indicator = document.createElement('div');
+        indicator.className = 'pheno-typing active';
+        indicator.innerHTML = '<span></span><span></span><span></span>';
+        
+        messageDiv.appendChild(indicator);
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        return messageDiv;
+    }
+
+    // Get AI response from OpenRouter
+    async function getAIResponse(userMessage) {
+        const systemPrompt = contentLoaded 
+            ? `You are a helpful AI assistant for the Human Phenotype Project website.
+
+CRITICAL RULES:
+1. Answer ONLY based on the website content provided below
+2. If the answer is not in the content, say: "I don't find that information in the current documentation. Please check the website directly."
+3. NEVER make up or invent information
+4. Be concise and accurate
+5. If asked about something not related to this project, politely decline
+
+WEBSITE CONTENT:
+${websiteContent}
+
+Answer ONLY from the content above. Do not use external knowledge.`
+            : `You are a helpful AI assistant for the Human Phenotype Project. I'm still loading the website content. Please ask your question and I'll answer based on the documentation.`;
+
+        const messages = [
+            { role: 'system', content: systemPrompt },
+            ...conversationHistory.slice(-6),
+            { role: 'user', content: userMessage }
+        ];
+
+        const response = await fetch(CONFIG.API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${CONFIG.OPENROUTER_API_KEY}`,
+                'HTTP-Referer': window.location.href,
+                'X-Title': 'Pheno.AI Chatbot'
+            },
+            body: JSON.stringify({
+                model: CONFIG.OPENROUTER_MODEL,
+                messages: messages,
+                temperature: 0.3,
+                max_tokens: 1000
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            const errorMsg = errorData.error?.message || `API request failed with status ${response.status}`;
+            console.error('API Error:', errorMsg, errorData);
+            throw new Error(errorMsg);
+        }
+
+        const data = await response.json();
+        return data.choices[0].message.content;
+    }
+
+    // Start the app
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
