@@ -73,12 +73,40 @@ python3 -m http.server 8000
    - Folder: `/docs`
 3. Push your changes (the API key is safely excluded via `.gitignore`)
 
-## 🤖 AI Chatbot Features
+## 🤖 AI Chatbot (Currently Disabled)
 
+The chatbot feature is currently **disabled** for security reasons. All implementation files are preserved for future use.
+
+### To Re-enable the Chatbot:
+
+1. **Set up your API key**:
+   ```bash
+   cp env.example .env
+   # Edit .env and add your OpenRouter API key from https://openrouter.ai/keys
+   ```
+
+2. **Enable the chatbot in the configuration**:
+   - Edit `pheno_knowledge_base_expanded/_quarto.yml`
+   - Find line ~102-103 with the commented chatbot include
+   - Uncomment this line:
+     ```yaml
+     include-after-body: chatbot-widget-simple.html
+     ```
+
+3. **Deploy with the chatbot**:
+   ```bash
+   ./deploy.sh
+   ```
+
+### Chatbot Features (When Enabled):
 - **Purple button** in bottom-right corner on all pages
 - Answers questions **only from website documentation**
 - No backend server required (works on GitHub Pages)
-- Powered by OpenRouter API
+- Powered by OpenRouter API (Claude 3.5 Sonnet)
+- Implementation files:
+  - `chatbot-widget-simple.html` - Main widget
+  - `create-knowledge-base.sh` - Extracts website content
+  - `CHATBOT_DEPLOY.md` - Detailed documentation
 
 ## 📝 Repository Structure
 
