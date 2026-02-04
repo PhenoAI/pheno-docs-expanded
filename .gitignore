@@ -3,7 +3,7 @@
 
 # Build outputs
 docs-expanded/
-docs/
+# docs/ - removed from gitignore to track for GitHub Pages deployment
 
 # Quarto files
 .quarto/
