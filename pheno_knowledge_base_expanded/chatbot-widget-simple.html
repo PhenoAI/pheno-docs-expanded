@@ -303,16 +303,12 @@
 
     // Configuration
     const CONFIG = {
-        OPENROUTER_API_KEY: '__OPENROUTER_API_KEY__',
-        OPENROUTER_MODEL: 'anthropic/claude-3.5-sonnet',
-        API_URL: 'https://openrouter.ai/api/v1/chat/completions'
+        BACKEND_URL: '__BACKEND_URL__'  // Will be injected during build
     };
 
     // State
     let conversationHistory = [];
     let isProcessing = false;
-    let websiteContent = '';
-    let contentLoaded = false;
 
     // DOM Elements
     const chatButton = document.getElementById('phenoChatButton');
@@ -322,24 +318,8 @@
     const chatInput = document.getElementById('phenoChatInput');
     const sendButton = document.getElementById('phenoSendButton');
 
-    // Load website content
-    async function loadWebsiteContent() {
-        try {
-            // Use absolute path from site root
-            const response = await fetch('/knowledge-base-context.txt');
-            websiteContent = await response.text();
-            contentLoaded = true;
-            console.log('✅ Website content loaded:', websiteContent.length, 'characters');
-        } catch (error) {
-            console.error('❌ Failed to load website content:', error);
-            console.error('Error details:', error);
-            contentLoaded = false;
-        }
-    }
-
     // Initialize
     function init() {
-        loadWebsiteContent();
         chatButton.addEventListener('click', toggleChat);
         chatClose.addEventListener('click', toggleChat);
         sendButton.addEventListener('click', handleSend);
@@ -433,55 +413,28 @@
         return messageDiv;
     }
 
-    // Get AI response from OpenRouter
+    // Get AI response from backend
     async function getAIResponse(userMessage) {
-        const systemPrompt = contentLoaded 
-            ? `You are a helpful AI assistant for the Human Phenotype Project website.
-
-CRITICAL RULES:
-1. Answer ONLY based on the website content provided below
-2. If the answer is not in the content, say: "I don't find that information in the current documentation. Please check the website directly."
-3. NEVER make up or invent information
-4. Be concise and accurate
-5. If asked about something not related to this project, politely decline
-
-WEBSITE CONTENT:
-${websiteContent}
-
-Answer ONLY from the content above. Do not use external knowledge.`
-            : `You are a helpful AI assistant for the Human Phenotype Project. I'm still loading the website content. Please ask your question and I'll answer based on the documentation.`;
-
-        const messages = [
-            { role: 'system', content: systemPrompt },
-            ...conversationHistory.slice(-6),
-            { role: 'user', content: userMessage }
-        ];
-
-        const response = await fetch(CONFIG.API_URL, {
+        const response = await fetch(CONFIG.BACKEND_URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${CONFIG.OPENROUTER_API_KEY}`,
-                'HTTP-Referer': window.location.href,
-                'X-Title': 'Pheno.AI Chatbot'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: CONFIG.OPENROUTER_MODEL,
-                messages: messages,
-                temperature: 0.3,
-                max_tokens: 1000
+                question: userMessage,
+                conversation_history: conversationHistory.slice(-6)
             })
         });
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            const errorMsg = errorData.error?.message || `API request failed with status ${response.status}`;
-            console.error('API Error:', errorMsg, errorData);
-            throw new Error(errorMsg);
+            const errorMsg = errorData.error || `Backend request failed with status ${response.status}`;
+            console.error('Backend Error:', errorMsg);
+            throw new Error(typeof errorMsg === 'string' ? errorMsg : 'Failed to get response from server');
         }
 
         const data = await response.json();
-        return data.choices[0].message.content;
+        return data.answer;
     }
 
     // Start the app

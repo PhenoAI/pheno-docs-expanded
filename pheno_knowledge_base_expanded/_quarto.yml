@@ -100,7 +100,7 @@ format:
     css: styles.css
     toc: true
     # Chatbot disabled for security - to re-enable, uncomment the line below and run ./deploy.sh
-    # include-after-body: chatbot-widget-simple.html
+    include-after-body: chatbot-widget-simple.html
 
 execute:
   freeze: auto
