@@ -20,3 +20,8 @@ Clinical assessments in the Human Phenotype Project are performed by trained med
 - **[CBC](datasets/019-cbc.html)** - Complete blood count from non-invasive lip vein imaging device
 - **[Voice](datasets/027-voice.html)** - Voice recordings and acoustic analysis for speech patterns
 - **[Gait and Balance](datasets/032-gait.html)** - Comprehensive gait, balance, and movement assessments using motion capture technology
+
+## Measurement Protocol
+
+All clinical assessments are conducted during participant visits to the clinical testing center. Assessments follow standardized protocols to ensure consistency and reproducibility. Trained staff members perform measurements using calibrated, medical-grade equipment. Data is recorded electronically and quality-checked before being added to the research database.
+

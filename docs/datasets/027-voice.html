@@ -501,15 +501,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#measurement-protocol" id="toc-measurement-protocol" class="nav-link" data-scroll-target="#measurement-protocol">Measurement protocol</a></li>
   <li><a href="#data-availability" id="toc-data-availability" class="nav-link" data-scroll-target="#data-availability">Data availability</a></li>
   <li><a href="#summary-of-available-data" id="toc-summary-of-available-data" class="nav-link" data-scroll-target="#summary-of-available-data">Summary of available data</a></li>
-  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1">Introduction</a></li>
-  <li><a href="#measurement-protocol-1" id="toc-measurement-protocol-1" class="nav-link" data-scroll-target="#measurement-protocol-1">Measurement protocol</a></li>
-  <li><a href="#data-availability-1" id="toc-data-availability-1" class="nav-link" data-scroll-target="#data-availability-1">Data availability</a></li>
-  <li><a href="#summary-of-available-data-1" id="toc-summary-of-available-data-1" class="nav-link" data-scroll-target="#summary-of-available-data-1">Summary of available data</a></li>
-  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a></li>
-  <li><a href="#data-quality-and-sanitation" id="toc-data-quality-and-sanitation" class="nav-link" data-scroll-target="#data-quality-and-sanitation">Data Quality and Sanitation</a></li>
-  <li><a href="#association-with-clinical-factors" id="toc-association-with-clinical-factors" class="nav-link" data-scroll-target="#association-with-clinical-factors">Association with Clinical Factors</a></li>
-  <li><a href="#relevant-links" id="toc-relevant-links" class="nav-link" data-scroll-target="#relevant-links">Relevant links</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -537,385 +528,43 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="description" class="level3">
 <h3 class="anchored" data-anchor-id="description">Description</h3>
-<p>This dataset consists of high-quality voice recordings collected from participants in a controlled clinical research setting. Each participant provided a ~30-second sustained counting sample (in Hebrew, with a subset in Japanese), recorded using a cardioid dynamic USB/XLR microphone and Audacity software. Recordings are stored in lossless <code>.flac</code> format to preserve full audio fidelity, accompanied by participant metadata (Participant ID, sex, date of birth) in a structured <code>.csv</code> file.</p>
+<p>Voice recordings of participants counting to thirty, captured in lossless audio format to enable vocal biomarker analysis.</p>
 </section>
 <section id="introduction" class="level3">
 <h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
-<p>Voice data is increasingly being used in clinical research and personalized medicine. Key trends include using vocal biomarkers for disease diagnosis (e.g., Parkinson’s, Alzheimer’s), mental health assessment, and monitoring respiratory conditions. Additionally, voice-based technologies are being developed for treatment adherence, remote monitoring, and personalized voice assistants in healthcare. Voice data is also explored for emotion recognition and speech therapy applications. Overall, voice data has the potential to transform healthcare by providing non-invasive, cost-effective, and convenient diagnostic and treatment methods.</p>
-<p>In the context of voice, a <strong>vocal biomarker</strong> is a signature, a feature, or a combination of features from the audio signal of the voice that is associated with a clinical outcome and can be used to monitor patients, diagnose a condition, or grade the severity or the stages of a disease or for drug development.</p>
-<p>Work on vocal biomarkers has mainly been performed in the field of neurodegenerative disorders, particularly Parkinson’s disease, where voice disorders are very frequent (as high as 70-80%) and where voice changes are expected to be utilized as an early diagnostic biomarker. Other areas of research include mental health and monitoring emotions, multiple sclerosis and rheumatoid arthritis, Alzheimer’s disease and mild cognitive impairment, cardiometabolic and cardiovascular diseases, and COVID-19 and other conditions with lung and respiratory symptoms.</p>
+<!-- shortened introduction with clinical context -->
+<p>Voice data is increasingly being used in clinical research and personalized medicine. Vocal biomarkers can be used for disease diagnosis (e.g., Parkinson’s, Alzheimer’s), mental health assessment, and monitoring respiratory conditions. Voice features such as pitch, tone, and speech patterns can provide non-invasive, cost-effective insights into a person’s health status and disease progression.</p>
+<p>A <strong>vocal biomarker</strong> is a signature or feature from the audio signal of the voice that is associated with a clinical outcome and can be used to monitor patients, diagnose conditions, or assess disease severity. Work on vocal biomarkers has mainly been performed in neurodegenerative disorders (particularly Parkinson’s disease, where voice disorders occur in 70-80% of cases), mental health conditions, multiple sclerosis, Alzheimer’s disease and mild cognitive impairment, cardiometabolic diseases, and respiratory conditions including COVID-19.</p>
+<p>Voice features extracted from audio recordings include:</p>
+<ul>
+<li><strong>Fundamental frequency (F0)</strong>: Captures pitch and vocal fold vibration patterns</li>
+<li><strong>Formants (F1-F3)</strong>: Reflects vocal tract configuration and articulation precision</li>
+<li><strong>Harmonics-to-Noise Ratio (HNR)</strong>: Quantifies voice quality, breathiness, and roughness</li>
+<li><strong>Jitter and Shimmer</strong>: Measures cycle-to-cycle variation in pitch and amplitude</li>
+<li><strong>MFCCs</strong>: Compact spectral descriptors aligned with human auditory perception</li>
+<li><strong>Prosody features</strong>: Speech rate, intensity, and intonation patterns</li>
+</ul>
 </section>
 <section id="measurement-protocol" class="level3">
 <h3 class="anchored" data-anchor-id="measurement-protocol">Measurement protocol</h3>
 <!-- long measurment protocol for the data browser -->
-<p>The participant’s voice is audio-recorded for around thirty (30) seconds by counting to thirty (30) in their native language (primarily Hebrew, with a subset in Japanese).</p>
-<section id="device-and-software" class="level4">
-<h4 class="anchored" data-anchor-id="device-and-software">Device and Software</h4>
-<p><strong>Device type:</strong> Cardioid dynamic USB/XLR microphone<br>
-<strong>Software:</strong> Audacity (open-source audio recording/editing software)<br>
-<strong>Recording format:</strong> Lossless <code>.flac</code> (primary), <code>.wav</code> supported<br>
-<strong>Recording duration:</strong> ~30 seconds (counting 1–30)<br>
-<strong>Recording environment:</strong> Quiet, controlled clinical setting</p>
-</section>
-<section id="device-specifications" class="level4">
-<h4 class="anchored" data-anchor-id="device-specifications">Device Specifications</h4>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 42%">
-<col style="width: 57%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Specification</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Device type</td>
-<td>Cardioid dynamic USB/XLR microphone</td>
-</tr>
-<tr class="even">
-<td>Polar pattern</td>
-<td>Cardioid (unidirectional)</td>
-</tr>
-<tr class="odd">
-<td>Connection type</td>
-<td>USB-C / XLR</td>
-</tr>
-<tr class="even">
-<td>Sampling rate</td>
-<td>44.1 kHz (default), supports up to 48 kHz</td>
-</tr>
-<tr class="odd">
-<td>Bit depth</td>
-<td>16-bit / 24-bit</td>
-</tr>
-<tr class="even">
-<td>Frequency response</td>
-<td>50 Hz – 15 kHz</td>
-</tr>
-<tr class="odd">
-<td>Microphone sensitivity</td>
-<td>-55 dBV/Pa (at 1 kHz)</td>
-</tr>
-<tr class="even">
-<td>Recording environment</td>
-<td>Quiet, controlled clinical setting</td>
-</tr>
-<tr class="odd">
-<td>Contraindications / limitations</td>
-<td>Avoid high background noise; maintain fixed mic distance (15–30 cm) from mouth</td>
-</tr>
-<tr class="even">
-<td>Accessories used</td>
-<td>Desktop mic stand, pop filter</td>
-</tr>
-</tbody>
-</table>
-</section>
+<p>Participants provide a 30-second voice recording by counting to thirty in their native language (primarily Hebrew, with a subset in Japanese). Recordings are captured in a quiet, controlled clinical setting.</p>
+<p><strong>Recording setup:</strong> - <strong>Device</strong>: Cardioid dynamic USB/XLR microphone - <strong>Software</strong>: Audacity (open-source audio recording/editing software) - <strong>Format</strong>: Lossless <code>.flac</code> format (preserves full audio fidelity) - <strong>Duration</strong>: ~30 seconds (counting 1-30) - <strong>Environment</strong>: Quiet, controlled clinical setting - <strong>Distance</strong>: Microphone positioned 15-30 cm from participant’s mouth - <strong>Accessories</strong>: Desktop mic stand, pop filter</p>
+<p><strong>Technical specifications:</strong> - Sampling rate: 44.1 kHz (default), supports up to 48 kHz - Bit depth: 16-bit / 24-bit - Frequency response: 50 Hz – 15 kHz - Polar pattern: Cardioid (unidirectional)</p>
 </section>
 <section id="data-availability" class="level3">
 <h3 class="anchored" data-anchor-id="data-availability">Data availability</h3>
 <!-- for the example notebooks -->
-<p>The information is stored as individual audio files in <code>.flac</code> format (lossless compression), with associated metadata in <code>.csv</code> files. Each recording is approximately 30 seconds in duration.</p>
+<p>The information is stored as individual audio files in <code>.flac</code> format (lossless compression), with associated participant metadata in <code>.csv</code> files. Each recording is approximately 30 seconds in duration.</p>
 </section>
 <section id="summary-of-available-data" class="level3">
 <h3 class="anchored" data-anchor-id="summary-of-available-data">Summary of available data</h3>
 <!-- for the data browser -->
-<p><strong>Voice recordings:</strong> High-dimensional time-series data captured as audio recordings (<code>.flac</code> format), obtained by participants counting to thirty (30) in Hebrew (with a subset in Japanese). The <code>.flac</code> format retains full audio quality (lossless) and is preferred for clinical signal fidelity.</p>
-<p>The dataset includes: - Audio recordings in lossless <code>.flac</code> format - Participant metadata (ID, sex, date of birth) - Recording metadata (date, duration, language)</p>
-<p>As of the current release, the dataset contains 9,246 Hebrew-speaking participants with an ongoing subset of Japanese-language recordings.</p>
-</section>
-<section id="introduction-1" class="level3">
-<h3 class="anchored" data-anchor-id="introduction-1">Introduction</h3>
-<p>Voice data is increasingly being used in clinical research and personalized medicine. Key trends include using vocal biomarkers for disease diagnosis (e.g., Parkinson’s, Alzheimer’s), mental health assessment, and monitoring respiratory conditions. Additionally, voice-based technologies are being developed for treatment adherence, remote monitoring, and personalized voice assistants in healthcare. Voice data is also explored for emotion recognition and speech therapy applications. Overall, voice data has the potential to transform healthcare by providing non-invasive, cost-effective, and convenient diagnostic and treatment methods.</p>
-<p>In the context of voice, a <strong>vocal biomarker</strong> is a signature, a feature, or a combination of features from the audio signal of the voice that is associated with a clinical outcome and can be used to monitor patients, diagnose a condition, or grade the severity or the stages of a disease or for drug development.</p>
-<p>Work on vocal biomarkers has mainly been performed in the field of neurodegenerative disorders, particularly Parkinson’s disease, where voice disorders are very frequent (as high as 70-80%) and where voice changes are expected to be utilized as an early diagnostic biomarker.</p>
-<section id="areas-of-research" class="level4">
-<h4 class="anchored" data-anchor-id="areas-of-research">Areas of research</h4>
-<ul>
-<li>Mental Health and Monitoring Emotions</li>
-<li>Multiple Sclerosis and Rheumatoid Arthritis</li>
-<li>Alzheimer’s Disease and Mild Cognitive Impairment</li>
-<li>Cardiometabolic and Cardiovascular Diseases</li>
-<li>COVID-19 and Other Conditions with Lung and Respiratory Symptoms</li>
-</ul>
-</section>
-</section>
-<section id="measurement-protocol-1" class="level3">
-<h3 class="anchored" data-anchor-id="measurement-protocol-1">Measurement protocol</h3>
-<p>The participant’s voice is audio-recorded for around thirty (30) seconds by counting to thirty (30) in their native language (primarily Hebrew, with a subset in Japanese).</p>
-<section id="device-and-software-1" class="level4">
-<h4 class="anchored" data-anchor-id="device-and-software-1">Device and Software</h4>
-<p><strong>Device type:</strong> Cardioid dynamic USB/XLR microphone<br>
-<strong>Software:</strong> Audacity (open-source audio recording/editing software)<br>
-<strong>Recording format:</strong> Lossless <code>.flac</code> (primary), <code>.wav</code> supported<br>
-<strong>Recording duration:</strong> ~30 seconds (counting 1–30)<br>
-<strong>Recording environment:</strong> Quiet, controlled clinical setting</p>
-</section>
-<section id="device-specifications-1" class="level4">
-<h4 class="anchored" data-anchor-id="device-specifications-1">Device Specifications</h4>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 42%">
-<col style="width: 57%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Specification</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Device type</td>
-<td>Cardioid dynamic USB/XLR microphone</td>
-</tr>
-<tr class="even">
-<td>Polar pattern</td>
-<td>Cardioid (unidirectional)</td>
-</tr>
-<tr class="odd">
-<td>Connection type</td>
-<td>USB-C / XLR</td>
-</tr>
-<tr class="even">
-<td>Sampling rate</td>
-<td>44.1 kHz (default), supports up to 48 kHz</td>
-</tr>
-<tr class="odd">
-<td>Bit depth</td>
-<td>16-bit / 24-bit</td>
-</tr>
-<tr class="even">
-<td>Frequency response</td>
-<td>50 Hz – 15 kHz</td>
-</tr>
-<tr class="odd">
-<td>Microphone sensitivity</td>
-<td>-55 dBV/Pa (at 1 kHz)</td>
-</tr>
-<tr class="even">
-<td>Recording environment</td>
-<td>Quiet, controlled clinical setting</td>
-</tr>
-<tr class="odd">
-<td>Contraindications / limitations</td>
-<td>Avoid high background noise; maintain fixed mic distance (15–30 cm) from mouth</td>
-</tr>
-<tr class="even">
-<td>Accessories used</td>
-<td>Desktop mic stand, pop filter</td>
-</tr>
-</tbody>
-</table>
-</section>
-</section>
-<section id="data-availability-1" class="level3">
-<h3 class="anchored" data-anchor-id="data-availability-1">Data availability</h3>
-<p>The data comprises two levels of processing:</p>
+<p>The data comprises of multiple levels:</p>
 <ol type="1">
-<li><p><strong>Voice recordings:</strong> High-dimensional time-series data captured as audio recordings (<code>.flac</code> format), obtained by participants counting to thirty (30) in Hebrew. The <code>.flac</code> format retains full audio quality (lossless) and is preferred for clinical signal fidelity.</p></li>
-<li><p><strong>Associated metadata:</strong> A structured <code>.csv</code> file containing participant-level information, including Participant ID, Sex, and Date of Birth (DOB).</p></li>
+<li><p><strong>Raw audio files</strong>: Lossless <code>.flac</code> audio recordings of participants counting to thirty in their native language</p></li>
+<li><p><strong>Extracted features</strong>: Traditional signal processing features (F0, formants, jitter, shimmer, MFCCs) and deep learning-based embeddings for vocal biomarker research</p></li>
 </ol>
-<p><strong>Total participants:</strong> 9,246 (including a few Japanese-speaking participants)</p>
-</section>
-<section id="summary-of-available-data-1" class="level3">
-<h3 class="anchored" data-anchor-id="summary-of-available-data-1">Summary of available data</h3>
-<section id="raw-data" class="level4">
-<h4 class="anchored" data-anchor-id="raw-data">Raw Data</h4>
-<ul>
-<li><strong>Voice recordings:</strong> Lossless <code>.flac</code> audio files containing ~30 seconds of counting</li>
-<li><strong>Metadata:</strong> CSV file with participant ID, sex, and date of birth</li>
-</ul>
-</section>
-<section id="info-on-our-raw-data" class="level4">
-<h4 class="anchored" data-anchor-id="info-on-our-raw-data">Info on our raw data</h4>
-<p>A <code>.flac</code> or <code>.wav</code> file stores audio data using lossless compression, retaining all original information. When loaded using Librosa with the <code>sr</code> (sampling-rate) parameter set to <code>None</code>, it decompresses the audio data and converts it into a NumPy array without resampling. This array represents the waveform, where each element is the amplitude of the audio signal at a specific point in time.</p>
-<p>Digital audio data is processed using specialized libraries like Librosa, Praat, OpenSmile (Traditional medical and signal-based features - current version V1.0), and Wav2Vec (deep learning based features - next version V2.0) for feature extraction, signal processing, and visualization.</p>
-</section>
-<section id="useful-python-packages" class="level4">
-<h4 class="anchored" data-anchor-id="useful-python-packages">Useful Python Packages</h4>
-<ul>
-<li><strong>Librosa:</strong> Traditional signal processing and feature extraction tool</li>
-<li><strong>Praat:</strong> Clinical linguistic feature extraction tool</li>
-<li><strong>OpenSmile:</strong> Audio feature extraction</li>
-<li><strong>BlaBla:</strong> Clinical linguistic feature extraction tool</li>
-<li><strong>Wav2Vec2:</strong> Deep learning network for feature extraction (V2.0)</li>
-</ul>
-</section>
-</section>
-<section id="features" class="level3">
-<h3 class="anchored" data-anchor-id="features">Features</h3>
-<section id="traditional-signal-processingbased-features-clinical-relevant-v1.0" class="level4">
-<h4 class="anchored" data-anchor-id="traditional-signal-processingbased-features-clinical-relevant-v1.0">1. Traditional Signal Processing–Based Features (Clinical Relevant): V1.0</h4>
-<p>Acoustic features offer an objective way to quantify speech patterns that may be altered in clinical populations. Below are the key features extracted:</p>
-<section id="fundamental-frequency-f0" class="level5">
-<h5 class="anchored" data-anchor-id="fundamental-frequency-f0">Fundamental Frequency (F0)</h5>
-<ul>
-<li>Captures the basic pitch (lowest frequency) of vocal fold vibration</li>
-<li>Reflects both physiological voice-production characteristics and prosodic patterns</li>
-<li>In schizophrenia, there’s consistently reduced pitch variability and monotonous prosody, tied to blunted affect</li>
-<li>F0 is increasingly considered a candidate vocal biomarker for schizophrenia</li>
-</ul>
-</section>
-<section id="formants-f1-f3" class="level5">
-<h5 class="anchored" data-anchor-id="formants-f1-f3">Formants (F1 – F3)</h5>
-<ul>
-<li>Formants are resonant frequencies shaped by vocal tract and articulator positions, notably tongue and jaw</li>
-<li>Altered formant patterns suggest imprecise articulation, motor planning deficits, and cognitive planning issues in schizophrenia</li>
-<li>Clinical relevance lies in the ratios and distances between F1, F2, and F3, which reflect vocal tract configuration and motor function</li>
-</ul>
-</section>
-<section id="harmonics-to-noise-ratio-hnr" class="level5">
-<h5 class="anchored" data-anchor-id="harmonics-to-noise-ratio-hnr">Harmonics-to-Noise Ratio (HNR)</h5>
-<ul>
-<li>Quantifies the ratio of periodic (harmonic) vs.&nbsp;aperiodic (noise) components in voice</li>
-<li>Lower HNR indicates breathiness, roughness, or dysphonia—commonly seen in schizophrenia</li>
-<li>Objective measures like HNR help reduce subjectivity in clinical voice evaluation</li>
-</ul>
-</section>
-<section id="jitter" class="level5">
-<h5 class="anchored" data-anchor-id="jitter">Jitter</h5>
-<ul>
-<li>Reflects cycle-to-cycle variation in pitch (frequency perturbation)</li>
-<li>Elevated jitter indicates irregular laryngeal control and reduced neuromotor precision</li>
-<li>Normative range: &lt;0.5% for adults</li>
-</ul>
-</section>
-<section id="shimmer" class="level5">
-<h5 class="anchored" data-anchor-id="shimmer">Shimmer</h5>
-<ul>
-<li>Captures cycle-to-cycle variation in amplitude (amplitude perturbation)</li>
-<li>Higher shimmer signals reduced fine motor control in vocal folds</li>
-<li>Clinically associated with changes in glottal resistance and vocal roughness</li>
-</ul>
-</section>
-<section id="amplitude-intensity" class="level5">
-<h5 class="anchored" data-anchor-id="amplitude-intensity">Amplitude (Intensity)</h5>
-<ul>
-<li>Represents loudness dynamics—driven by respiratory support and communicative intent</li>
-<li>Reduced amplitude modulation often manifests in conditions like schizophrenia, congruent with negative symptoms like flat affect</li>
-</ul>
-</section>
-<section id="mel-frequency-cepstral-coefficients-mfccs" class="level5">
-<h5 class="anchored" data-anchor-id="mel-frequency-cepstral-coefficients-mfccs">Mel-Frequency Cepstral Coefficients (MFCCs)</h5>
-<ul>
-<li>Compact spectral descriptors aligned with human auditory perception</li>
-<li>Encode both low-frequency spectral envelope and higher-frequency details</li>
-<li>In schizophrenia studies:
-<ul>
-<li>Support discrimination from healthy controls (accuracy ~82%)</li>
-<li>Achieve very high diagnostic performance (accuracy 91.7%, ROC‑AUC ≈ 0.963) when combined with mel‑spectrograms</li>
-<li>In multimodal approaches (speech + video), combining MFCCs with vocal tract features boosted detection by ~18%</li>
-</ul></li>
-</ul>
-</section>
-<section id="spectrogram" class="level5">
-<h5 class="anchored" data-anchor-id="spectrogram">Spectrogram</h5>
-<ul>
-<li>Time-frequency representation of the audio signal</li>
-<li>Log-mel spectrograms, often used in deep learning pipelines, enhance differentiation of schizophrenia in speech</li>
-<li>Can serve as input “images” to vision-based models (e.g., convolutional neural networks)</li>
-</ul>
-<p><strong>Tools/Models:</strong> OpenSMILE, Praat, Librosa<br>
-<strong>Clinical Use:</strong> Jitter, shimmer, HNR; mood and fatigue disorders often alter pitch dynamics, shimmer, and jitter</p>
-</section>
-</section>
-<section id="additional-non-clinical-signal-features-time-and-frequency-domain-v1.0" class="level4">
-<h4 class="anchored" data-anchor-id="additional-non-clinical-signal-features-time-and-frequency-domain-v1.0">2. Additional Non-Clinical Signal Features (Time and Frequency Domain): V1.0</h4>
-<ul>
-<li><strong>Duration:</strong> Total length of the audio signal (seconds)</li>
-<li><strong>Sample Rate:</strong> Number of audio samples captured per second (Hz)</li>
-<li><strong>Number of Samples:</strong> Total count of individual audio samples in the signal</li>
-<li><strong>Number of Channels:</strong> Distinct audio channels (e.g., mono, stereo)</li>
-<li><strong>Bit Depth:</strong> Bits used to represent each audio sample (affects resolution)</li>
-<li><strong>Number of Frames:</strong> Total frames, each containing one sample per channel</li>
-<li><strong>Spectral Centroid:</strong> “Center of mass” of the spectrum (brightness)</li>
-<li><strong>Spectral Rolloff:</strong> Frequency below which a set percentage of spectral energy is contained</li>
-<li><strong>Spectral Bandwidth:</strong> Width of the frequency band with most energy</li>
-<li><strong>Spectral Contrast:</strong> Difference in energy between peaks and valleys of the spectrum</li>
-<li><strong>Spectral Flatness:</strong> How noise-like (flat) or tone-like (peaky) the spectrum is</li>
-<li><strong>Zero Crossing Rate:</strong> Rate at which the signal changes sign (related to noisiness)</li>
-<li><strong>RMS Energy:</strong> Root mean square energy (perceived loudness)</li>
-<li><strong>Tempo:</strong> Estimated beats per minute (BPM)</li>
-<li><strong>Chroma:</strong> Distribution of energy across the 12 pitch classes of the octave
-<ul>
-<li>Chroma Mean: Average chroma values over time</li>
-<li>Chroma Std: Standard deviation of chroma values (variability)</li>
-</ul></li>
-<li><strong>Tonnetz:</strong> Tonal relationships in music based on harmonic intervals
-<ul>
-<li>Tonnetz Mean: Average tonal relationship values over time</li>
-<li>Tonnetz Std: Standard deviation of tonal relationship values</li>
-</ul></li>
-</ul>
-</section>
-<section id="foundational-model-deep-learningbased-features-further-research-required-v2.0" class="level4">
-<h4 class="anchored" data-anchor-id="foundational-model-deep-learningbased-features-further-research-required-v2.0">3. Foundational Model / Deep Learning–Based Features (Further Research Required): V2.0</h4>
-<section id="model-based-ssl-embeddings" class="level5">
-<h5 class="anchored" data-anchor-id="model-based-ssl-embeddings">Model-Based SSL Embeddings</h5>
-<ul>
-<li><strong>Models:</strong> wav2vec 2.0, WavLM, XLS-R, HuBERT</li>
-<li><strong>Clinical Use:</strong> Encode broad vocal-tract information (generic)</li>
-</ul>
-</section>
-<section id="speaker-diarisation-vectors" class="level5">
-<h5 class="anchored" data-anchor-id="speaker-diarisation-vectors">Speaker &amp; Diarisation Vectors</h5>
-<ul>
-<li><strong>Models:</strong> x-vector</li>
-<li><strong>Clinical Use:</strong> Capture subtle vocal-tract/breathing habits; shown best performance for male sleep apnoea in research</li>
-</ul>
-</section>
-<section id="affect-prosody-models" class="level5">
-<h5 class="anchored" data-anchor-id="affect-prosody-models">Affect / Prosody Models</h5>
-<ul>
-<li><strong>Models:</strong> wav2vec2-SER, WavLM-SED</li>
-<li><strong>Clinical Use:</strong> Mood and fatigue disorders often alter pitch dynamics and shimmer</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="data-quality-and-sanitation" class="level3">
-<h3 class="anchored" data-anchor-id="data-quality-and-sanitation">Data Quality and Sanitation</h3>
-<p>Quality control for voice data focuses on ensuring clean, analyzable recordings with minimal artifacts. All incoming audio undergoes automated checks to identify and flag recordings with:</p>
-<ul>
-<li>Silence or low-signal segments exceeding a defined threshold (e.g., &gt;30% of duration)</li>
-<li>Excessive background noise based on spectral flatness, zero-crossing rate, and SNR measures (V2.0)</li>
-<li>Clipping or distortion caused by over-amplification</li>
-<li>Out-of-bounds acoustic values (e.g., pitch range outside human norms)</li>
-</ul>
-<p>QC status is stored in metadata, and failed recordings are reviewed for possible re-recording or exclusion from downstream analysis.</p>
-<p><strong>Note:</strong> There aren’t any set QC protocols for voice signal processing. We are developing signal quality and status measurements with the help of existing features, including methods to find silence in audio signals, out-of-bounds values, extreme noise, etc.</p>
-</section>
-<section id="association-with-clinical-factors" class="level3">
-<h3 class="anchored" data-anchor-id="association-with-clinical-factors">Association with Clinical Factors</h3>
-<p>Current research in voice recordings related to health has shown associations between voice features and various health conditions:</p>
-<ul>
-<li><p><strong>Aging:</strong> Voice features, such as fundamental frequency, formants, and jitter, have been found to change with age, reflecting physiological changes in the vocal tract and larynx.</p></li>
-<li><p><strong>Emotional state:</strong> Voice features, such as pitch, intensity, and speech rate, can be used to detect and differentiate various emotional states (e.g., happiness, sadness, anger, fear).</p></li>
-<li><p><strong>Neurological disorders:</strong> Voice features, such as pitch variability, irregular phonation, and speech rate, have been used to detect and monitor neurological disorders like Parkinson’s disease, Alzheimer’s disease, and multiple sclerosis.</p></li>
-<li><p><strong>Psychiatric disorders:</strong> Voice features have been used to detect and monitor psychiatric disorders such as depression, anxiety, bipolar disorder, and schizophrenia. This may include changes in prosody, speech rate, or other acoustic features.</p></li>
-<li><p><strong>Vocal fatigue:</strong> Voice features, such as jitter, shimmer, and harmonics-to-noise ratio, can be used to assess vocal fatigue and monitor the vocal health of professional voice users like singers, actors, and teachers.</p></li>
-<li><p><strong>Respiratory disorders:</strong> Voice features, such as breathiness, pitch variability, and speech rate, have been used to detect and monitor respiratory disorders like asthma, chronic obstructive pulmonary disease (COPD), and laryngeal disorders.</p></li>
-<li><p><strong>Speech disorders:</strong> Voice features, such as formants, pitch, and speech rate, have been used to detect and monitor speech disorders like stuttering, cluttering, and speech sound disorders.</p></li>
-<li><p><strong>Language identification:</strong> Voice features, such as MFCCs, formants, and pitch, have been used to identify the language spoken by an individual or to detect accents and dialects.</p></li>
-</ul>
-</section>
-<section id="relevant-links" class="level3">
-<h3 class="anchored" data-anchor-id="relevant-links">Relevant links</h3>
-<ul>
-<li><a href="https://knowledgebase.pheno.ai/">Pheno Knowledgebase</a></li>
-<li><a href="https://pheno-demo-app.vercel.app/">Pheno Data Browser</a></li>
-</ul>
-</section>
-<section id="references" class="level3">
-<h3 class="anchored" data-anchor-id="references">References</h3>
-<ul>
-<li>Survey On Biomarkers In Human Vocalizations - arXiv</li>
-<li>Neurological Voice Disorders: A Review, Tiffany V Wang, Phillip C Song</li>
-</ul>
 
 
 </section>
