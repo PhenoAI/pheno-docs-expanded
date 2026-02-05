@@ -1351,6 +1351,448 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 
 </main> <!-- /main -->
+<!-- Simple Chatbot Widget for GitHub Pages -->
+<!-- Add this to your _quarto.yml or include in your pages -->
+
+<style>
+    /* Chat button */
+    .pheno-chat-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        z-index: 9998;
+    }
+
+    .pheno-chat-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    /* Chat window */
+    .pheno-chat-window {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 400px;
+        height: 600px;
+        max-width: calc(100vw - 40px);
+        max-height: calc(100vh - 120px);
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 9999;
+        animation: slideUp 0.3s ease-out;
+    }
+
+    .pheno-chat-window.active {
+        display: flex;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .pheno-chat-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .pheno-chat-title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .pheno-chat-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background 0.2s;
+    }
+
+    .pheno-chat-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .pheno-chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        background: #f8f9fa;
+    }
+
+    .pheno-message {
+        margin-bottom: 12px;
+        display: flex;
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .pheno-message.user {
+        justify-content: flex-end;
+    }
+
+    .pheno-message-content {
+        max-width: 75%;
+        padding: 10px 14px;
+        border-radius: 16px;
+        word-wrap: break-word;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .pheno-message.user .pheno-message-content {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .pheno-message.assistant .pheno-message-content {
+        background: white;
+        color: #333;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .pheno-typing {
+        display: none;
+        padding: 10px 14px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: 60px;
+    }
+
+    .pheno-typing.active {
+        display: block;
+    }
+
+    .pheno-typing span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #667eea;
+        border-radius: 50%;
+        margin: 0 2px;
+        animation: typing 1.4s infinite;
+    }
+
+    .pheno-typing span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .pheno-typing span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+        0%, 60%, 100% {
+            transform: translateY(0);
+        }
+        30% {
+            transform: translateY(-8px);
+        }
+    }
+
+    .pheno-chat-input-container {
+        padding: 16px;
+        background: white;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .pheno-chat-input-wrapper {
+        display: flex;
+        gap: 8px;
+    }
+
+    .pheno-chat-input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 2px solid #e0e0e0;
+        border-radius: 20px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.3s;
+        font-family: inherit;
+    }
+
+    .pheno-chat-input:focus {
+        border-color: #667eea;
+    }
+
+    .pheno-send-button {
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .pheno-send-button:hover:not(:disabled) {
+        transform: translateY(-2px);
+    }
+
+    .pheno-send-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+        .pheno-chat-window {
+            bottom: 0;
+            right: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 0;
+        }
+
+        .pheno-chat-button {
+            bottom: 16px;
+            right: 16px;
+        }
+    }
+
+    /* Scrollbar */
+    .pheno-chat-messages::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .pheno-chat-messages::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .pheno-chat-messages::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+    }
+</style>
+
+<!-- Chat button -->
+<button class="pheno-chat-button" id="phenoChatButton" aria-label="Open chat">
+    💬
+</button>
+
+<!-- Chat window -->
+<div class="pheno-chat-window" id="phenoChatWindow">
+    <div class="pheno-chat-header">
+        <div class="pheno-chat-title">Pheno.AI Assistant</div>
+        <button class="pheno-chat-close" id="phenoChatClose" aria-label="Close chat">×</button>
+    </div>
+    <div class="pheno-chat-messages" id="phenoChatMessages">
+        <div class="pheno-message assistant">
+            <div class="pheno-message-content">
+                Hello! I can answer questions based on the Human Phenotype Project website content. Ask me anything about our datasets, methodology, or research!
+            </div>
+        </div>
+    </div>
+    <div class="pheno-chat-input-container">
+        <div class="pheno-chat-input-wrapper">
+            <input type="text" class="pheno-chat-input" id="phenoChatInput" placeholder="Type your message..." autocomplete="off">
+            <button class="pheno-send-button" id="phenoSendButton">Send</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    'use strict';
+
+    // Configuration
+    const CONFIG = {
+        BACKEND_URL: 'https://y365pk3iuvzvmudftiamclgqiu0oofmj.lambda-url.eu-west-1.on.aws/'  // Will be injected during build
+    };
+
+    // State
+    let conversationHistory = [];
+    let isProcessing = false;
+
+    // DOM Elements
+    const chatButton = document.getElementById('phenoChatButton');
+    const chatWindow = document.getElementById('phenoChatWindow');
+    const chatClose = document.getElementById('phenoChatClose');
+    const chatMessages = document.getElementById('phenoChatMessages');
+    const chatInput = document.getElementById('phenoChatInput');
+    const sendButton = document.getElementById('phenoSendButton');
+
+    // Initialize
+    function init() {
+        chatButton.addEventListener('click', toggleChat);
+        chatClose.addEventListener('click', toggleChat);
+        sendButton.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+            }
+        });
+    }
+
+    // Toggle chat window
+    function toggleChat() {
+        chatWindow.classList.toggle('active');
+        if (chatWindow.classList.contains('active')) {
+            chatInput.focus();
+        }
+    }
+
+    // Handle send message
+    async function handleSend() {
+        const message = chatInput.value.trim();
+        if (!message || isProcessing) return;
+
+        // Add user message
+        addMessage('user', message);
+        chatInput.value = '';
+        
+        // Show typing indicator
+        const typingIndicator = addTypingIndicator();
+        
+        // Disable input
+        isProcessing = true;
+        sendButton.disabled = true;
+        chatInput.disabled = true;
+
+        try {
+            // Get AI response
+            const response = await getAIResponse(message);
+            
+            // Remove typing indicator
+            typingIndicator.remove();
+            
+            // Add assistant message
+            addMessage('assistant', response);
+        } catch (error) {
+            console.error('Chatbot error:', error);
+            typingIndicator.remove();
+            addMessage('assistant', 'Sorry, I encountered an error. Please try again.');
+        } finally {
+            // Re-enable input
+            isProcessing = false;
+            sendButton.disabled = false;
+            chatInput.disabled = false;
+            chatInput.focus();
+        }
+    }
+
+    // Add message to chat
+    function addMessage(role, content) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `pheno-message ${role}`;
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'pheno-message-content';
+        contentDiv.textContent = content;
+        
+        messageDiv.appendChild(contentDiv);
+        chatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // Add to conversation history
+        conversationHistory.push({ role, content });
+    }
+
+    // Add typing indicator
+    function addTypingIndicator() {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'pheno-message assistant';
+        
+        const indicator = document.createElement('div');
+        indicator.className = 'pheno-typing active';
+        indicator.innerHTML = '<span></span><span></span><span></span>';
+        
+        messageDiv.appendChild(indicator);
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        return messageDiv;
+    }
+
+    // Get AI response from backend
+    async function getAIResponse(userMessage) {
+        const response = await fetch(CONFIG.BACKEND_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                question: userMessage,
+                conversation_history: conversationHistory.slice(-6)
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            const errorMsg = errorData.error || `Backend request failed with status ${response.status}`;
+            console.error('Backend Error:', errorMsg);
+            throw new Error(typeof errorMsg === 'string' ? errorMsg : 'Failed to get response from server');
+        }
+
+        const data = await response.json();
+        return data.answer;
+    }
+
+    // Start the app
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
