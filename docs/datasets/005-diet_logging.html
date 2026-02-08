@@ -2036,6 +2036,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         color: #764ba2;
     }
 
+    .pheno-message-content p {
+        margin: 0.5em 0;
+        line-height: 1.5;
+    }
+
+    .pheno-message-content p:first-child {
+        margin-top: 0;
+    }
+
+    .pheno-message-content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .pheno-message-content ul {
+        margin: 0.5em 0;
+        padding-left: 1.5em;
+        line-height: 1.6;
+    }
+
+    .pheno-message-content li {
+        margin: 0.3em 0;
+    }
+
     .pheno-chat-input-container {
         padding: 16px;
         background: white;
@@ -2229,10 +2252,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         }
     }
 
-    // Convert markdown links to HTML
+    // Convert markdown and format text to HTML
     function renderMarkdown(content) {
-        // Convert markdown links [text](url) to HTML <a> tags
-        return content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+        let html = content;
+        
+        // First, convert markdown links [text](url) to HTML <a> tags
+        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+        
+        // Convert double line breaks to paragraphs
+        // Split by double newlines first
+        const paragraphs = html.split(/\n\n+/);
+        
+        // Process each paragraph
+        html = paragraphs.map(para => {
+            para = para.trim();
+            if (!para) return '';
+            
+            // Check if it's a list (starts with - or • or numbered)
+            const lines = para.split('\n');
+            const isList = lines.some(line => /^[\s]*[-•]\s/.test(line.trim()) || /^[\s]*\d+\.\s/.test(line.trim()));
+            
+            if (isList) {
+                // Format as list
+                const listItems = lines
+                    .map(line => line.trim())
+                    .filter(line => line.length > 0)
+                    .map(line => {
+                        // Remove list markers and wrap in <li>
+                        line = line.replace(/^[\s]*[-•]\s+/, '');
+                        line = line.replace(/^[\s]*\d+\.\s+/, '');
+                        return `<li>${line}</li>`;
+                    })
+                    .join('');
+                return `<ul>${listItems}</ul>`;
+            } else {
+                // Regular paragraph
+                // Replace single newlines with <br> for line breaks within paragraph
+                para = para.replace(/\n/g, '<br>');
+                return `<p>${para}</p>`;
+            }
+        }).filter(p => p.length > 0).join('');
+        
+        return html;
     }
 
     // Add message to chat

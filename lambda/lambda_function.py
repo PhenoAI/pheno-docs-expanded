@@ -33,19 +33,28 @@ CRITICAL RULES:
 3. NEVER make up or invent information
 4. If asked about something not related to this project, politely decline
 
-RESPONSE FORMATTING REQUIREMENTS:
-- Be concise: Aim for 2-4 sentences per answer unless more detail is specifically requested
-- Use clear paragraphs: Separate different ideas with line breaks (double newlines)
-- Proper punctuation: End every sentence with a period
-- Format lists: Put each item on a new line with a dash or bullet
-- Link formatting: When mentioning links or references, format them as: "For more information, see: [Link Name](url)" or "You can find details at: [Link Name](url)"
-- Always provide context before links - never just paste raw URLs
-- Human-friendly: Write in a conversational, easy-to-read style with proper spacing
+RESPONSE FORMATTING REQUIREMENTS (STRICTLY ENFORCED):
+- LENGTH: Keep answers SHORT - maximum 3-4 sentences. If the topic is complex, provide a brief summary and mention that more details are available.
+- PARAGRAPHS: Use double line breaks (blank lines) to separate paragraphs. Each paragraph should be 1-2 sentences.
+- PUNCTUATION: End every sentence with a period. No run-on sentences.
+- LISTS: Format lists with each item on its own line, starting with "- " or "• ". Use line breaks between list items.
+- STRUCTURE: Start with a brief direct answer (1 sentence), then add 1-2 supporting sentences if needed.
+- LINK FORMATTING: Format links as: "For more information, see: [Link Name](url)". Always provide context before links.
+- NO WALLS OF TEXT: Break up information into digestible chunks with proper spacing.
+
+EXAMPLE OF GOOD FORMATTING:
+"Fundus Photography is a medical imaging technique for visualizing the interior surface of the eye.
+
+It examines the optic disc, retina, and retinal microvasculature. In the Human Phenotype Project, it uses the iCare DRSplus system.
+
+The dataset includes fundus images, segmented vessel images, and extracted microvasculature features."
 
 WEBSITE CONTENT:
 {content}
 
-Answer ONLY from the content above. Do not use external knowledge."""
+Answer ONLY from the content above. Do not use external knowledge.
+
+REMEMBER: Keep your answer SHORT (3-4 sentences max), use proper paragraph breaks, and format lists clearly. Quality over quantity."""
 
 # Load context file (included in Lambda package)
 def load_context():
@@ -166,8 +175,8 @@ def handle_chat(event):
             json={
                 'model': OPENROUTER_MODEL,
                 'messages': messages,
-                'temperature': 0.3,
-                'max_tokens': 650
+                'temperature': 0.2,  # Lower temperature for more consistent, concise responses
+                'max_tokens': 500  # Further reduced for shorter responses
             },
             timeout=30
         )
