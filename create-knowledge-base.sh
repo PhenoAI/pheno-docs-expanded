@@ -16,11 +16,11 @@ add_file_to_context() {
     local file="$1"
     local relative_path="${file#$SOURCE_DIR/}"
     
-    echo "" >> "$OUTPUT"
+echo "" >> "$OUTPUT"
     echo "## FILE: $relative_path" >> "$OUTPUT"
-    echo "" >> "$OUTPUT"
+echo "" >> "$OUTPUT"
     cat "$file" 2>/dev/null >> "$OUTPUT"
-    echo "" >> "$OUTPUT"
+echo "" >> "$OUTPUT"
 }
 
 # Function to extract first 2 cells from notebook
@@ -28,10 +28,10 @@ add_notebook_to_context() {
     local file="$1"
     local relative_path="${file#$SOURCE_DIR/}"
     
-    echo "" >> "$OUTPUT"
+echo "" >> "$OUTPUT"
     echo "## FILE: $relative_path" >> "$OUTPUT"
-    echo "" >> "$OUTPUT"
-    
+echo "" >> "$OUTPUT"
+
     # Extract first 2 cells from notebook using jq
     if command -v jq &> /dev/null; then
         jq -r '.cells[:2] | .[] | .source | if type == "array" then join("") else . end' "$file" 2>/dev/null >> "$OUTPUT"
@@ -54,7 +54,7 @@ except Exception as e:
 " >> "$OUTPUT"
     fi
     
-    echo "" >> "$OUTPUT"
+echo "" >> "$OUTPUT"
 }
 
 # Counter for progress
