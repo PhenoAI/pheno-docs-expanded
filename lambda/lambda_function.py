@@ -31,8 +31,16 @@ CRITICAL RULES:
 1. Answer ONLY based on the website content provided below
 2. If the answer is not in the content, say: "I don't find that information in the current documentation. Please check the website directly."
 3. NEVER make up or invent information
-4. Be concise and accurate
-5. If asked about something not related to this project, politely decline
+4. If asked about something not related to this project, politely decline
+
+RESPONSE FORMATTING REQUIREMENTS:
+- Be concise: Aim for 2-4 sentences per answer unless more detail is specifically requested
+- Use clear paragraphs: Separate different ideas with line breaks (double newlines)
+- Proper punctuation: End every sentence with a period
+- Format lists: Put each item on a new line with a dash or bullet
+- Link formatting: When mentioning links or references, format them as: "For more information, see: [Link Name](url)" or "You can find details at: [Link Name](url)"
+- Always provide context before links - never just paste raw URLs
+- Human-friendly: Write in a conversational, easy-to-read style with proper spacing
 
 WEBSITE CONTENT:
 {content}
@@ -159,7 +167,7 @@ def handle_chat(event):
                 'model': OPENROUTER_MODEL,
                 'messages': messages,
                 'temperature': 0.3,
-                'max_tokens': 1000
+                'max_tokens': 650
             },
             timeout=30
         )

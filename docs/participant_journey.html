@@ -843,38 +843,21 @@ ul.task-list li input[type="checkbox"] {
         background: white;
         border-radius: 16px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        width: 60px;
+        color: #666;
+        font-style: italic;
     }
 
     .pheno-typing.active {
         display: block;
     }
 
-    .pheno-typing span {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        background: #667eea;
-        border-radius: 50%;
-        margin: 0 2px;
-        animation: typing 1.4s infinite;
+    .pheno-message-content a {
+        color: #667eea;
+        text-decoration: underline;
     }
 
-    .pheno-typing span:nth-child(2) {
-        animation-delay: 0.2s;
-    }
-
-    .pheno-typing span:nth-child(3) {
-        animation-delay: 0.4s;
-    }
-
-    @keyframes typing {
-        0%, 60%, 100% {
-            transform: translateY(0);
-        }
-        30% {
-            transform: translateY(-8px);
-        }
+    .pheno-message-content a:hover {
+        color: #764ba2;
     }
 
     .pheno-chat-input-container {
@@ -996,6 +979,8 @@ ul.task-list li input[type="checkbox"] {
     // State
     let conversationHistory = [];
     let isProcessing = false;
+    const STORAGE_KEY = 'pheno_chatbot_history';
+    const MAX_STORED_MESSAGES = 20;
 
     // DOM Elements
     const chatButton = document.getElementById('phenoChatButton');
@@ -1016,6 +1001,9 @@ ul.task-list li input[type="checkbox"] {
                 handleSend();
             }
         });
+        
+        // Load conversation history from localStorage
+        loadConversationHistory();
     }
 
     // Toggle chat window
@@ -1065,6 +1053,12 @@ ul.task-list li input[type="checkbox"] {
         }
     }
 
+    // Convert markdown links to HTML
+    function renderMarkdown(content) {
+        // Convert markdown links [text](url) to HTML <a> tags
+        return content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+    }
+
     // Add message to chat
     function addMessage(role, content) {
         const messageDiv = document.createElement('div');
@@ -1072,7 +1066,9 @@ ul.task-list li input[type="checkbox"] {
         
         const contentDiv = document.createElement('div');
         contentDiv.className = 'pheno-message-content';
-        contentDiv.textContent = content;
+        
+        // Render markdown links as HTML
+        contentDiv.innerHTML = renderMarkdown(content);
         
         messageDiv.appendChild(contentDiv);
         chatMessages.appendChild(messageDiv);
@@ -1082,6 +1078,9 @@ ul.task-list li input[type="checkbox"] {
         
         // Add to conversation history
         conversationHistory.push({ role, content });
+        
+        // Save to localStorage
+        saveConversationHistory();
     }
 
     // Add typing indicator
@@ -1091,13 +1090,61 @@ ul.task-list li input[type="checkbox"] {
         
         const indicator = document.createElement('div');
         indicator.className = 'pheno-typing active';
-        indicator.innerHTML = '<span></span><span></span><span></span>';
+        indicator.textContent = 'Thinking...';
         
         messageDiv.appendChild(indicator);
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
         
         return messageDiv;
+    }
+
+    // Save conversation history to localStorage
+    function saveConversationHistory() {
+        try {
+            // Keep only last MAX_STORED_MESSAGES messages
+            const historyToSave = conversationHistory.slice(-MAX_STORED_MESSAGES);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(historyToSave));
+        } catch (e) {
+            console.warn('Failed to save conversation history:', e);
+        }
+    }
+
+    // Load conversation history from localStorage
+    function loadConversationHistory() {
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const history = JSON.parse(saved);
+                conversationHistory = history;
+                
+                // Restore messages to UI (skip the initial greeting)
+                const initialGreeting = chatMessages.querySelector('.pheno-message.assistant');
+                if (initialGreeting) {
+                    chatMessages.innerHTML = '';
+                    chatMessages.appendChild(initialGreeting);
+                }
+                
+                // Add restored messages
+                history.forEach(msg => {
+                    if (msg.role !== 'system') {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = `pheno-message ${msg.role}`;
+                        
+                        const contentDiv = document.createElement('div');
+                        contentDiv.className = 'pheno-message-content';
+                        contentDiv.innerHTML = renderMarkdown(msg.content);
+                        
+                        messageDiv.appendChild(contentDiv);
+                        chatMessages.appendChild(messageDiv);
+                    }
+                });
+                
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        } catch (e) {
+            console.warn('Failed to load conversation history:', e);
+        }
     }
 
     // Get AI response from backend

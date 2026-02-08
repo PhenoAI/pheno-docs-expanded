@@ -37,10 +37,19 @@ echo "✅ Step 1: Backend URL loaded from .env"
 echo "   Backend URL: $BACKEND_URL"
 echo ""
 
-# Create knowledge base context
-echo "📚 Step 2: Creating knowledge base context..."
-./create-knowledge-base.sh
-echo ""
+# Create knowledge base context (only if it doesn't exist or if manually created)
+CONTEXT_FILE="pheno_knowledge_base_expanded/knowledge-base-context.txt"
+if [ ! -f "$CONTEXT_FILE" ]; then
+    echo "📚 Step 2: Creating knowledge base context (file doesn't exist)..."
+    ./create-knowledge-base.sh
+    echo ""
+else
+    echo "📚 Step 2: Using existing knowledge base context (skipping regeneration)"
+    echo "   File: $CONTEXT_FILE"
+    echo "   Size: $(du -h "$CONTEXT_FILE" | cut -f1)"
+    echo "   (To regenerate, delete the file and run deploy again)"
+    echo ""
+fi
 
 # Inject backend URL into widget
 echo "🔗 Step 3: Injecting backend URL into chatbot widget..."

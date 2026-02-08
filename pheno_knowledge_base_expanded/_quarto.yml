@@ -101,7 +101,7 @@ format:
     css: styles.css
     toc: true
     # Chatbot enabled - includes chatbot widget on all pages
-    include-after-body: chatbot-widget-simple.html
+     include-after-body: chatbot-widget-simple.html
 
 execute:
   freeze: auto
