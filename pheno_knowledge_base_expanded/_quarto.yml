@@ -22,7 +22,8 @@ website:
         expanded: true
         contents:
           - datasets_description.md
-          - datasets/datasets_availablity.md
+          - text: "Data Availability"
+            href: datasets/datasets_availablity.md
           - section: "Study Core"
             href: category_study_core.qmd
             expanded: true
