@@ -1,0 +1,889 @@
+
+=== HUMAN PHENOTYPE PROJECT DOCUMENTATION ===
+
+## ABOUT THE PROJECT
+---
+title: "About the Human Phenotype Project"
+page-layout: full
+---
+
+## Our Vision
+
+The Human Phenotype Project is a **landmark effort** to empower researchers to make the next breakthroughs in human health. By profiling a diverse participant base of individuals beyond the genome, and incorporating a wealth of now-measurable data layers and environmental influences, 'deep phenotyping' gathers the details of human health and disease. 
+
+This novel approach brings together many pieces of the puzzle and builds a high-resolution view of the key drivers behind health and disease. Following in the wake of the Human Genome Project, The Human Phenotype Project will impact the way we approach and treat a wide range of diseases that plague human health.
+
+## Our Approach
+
+::: {.feature-cards}
+::: {.feature-card}
+<div class="icon">🔍</div>
+### Deep Phenotyping
+We go beyond traditional health data to capture a comprehensive picture of each participant, including molecular, physiological, behavioral, and environmental factors.
+:::
+
+::: {.feature-card}
+<div class="icon">🌐</div>
+### Diverse Population
+Our participants represent diverse backgrounds, ages, and health statuses from across the globe, ensuring research applicability to all populations.
+:::
+
+::: {.feature-card}
+<div class="icon">📈</div>
+### Longitudinal Tracking
+We follow participants over time, capturing how health evolves and responds to various factors and interventions.
+:::
+:::
+
+## Impact on Science & Industry
+
+::: {.info-box .success}
+#### Driving Innovation
+The Human Phenotype Project's proprietary datasets are already yielding insights that are advancing science and driving innovation across the pharmaceutical, healthcare, and life-sciences industries. 
+
+As pharmaceutical R&D becomes increasingly data-driven, a **top pharmaceutical company** is using the project's data to transform its drug development programs. A prominent **US-based life-sciences company** is also using the data to engineer novel products to treat obesity, type 2 diabetes, and other cardiometabolic diseases.
+:::
+
+## Our Mission
+
+To achieve its mission to deeply phenotype participants from across the globe, The Human Phenotype Project is now partnering with leading international research institutions and is currently **open to additional partners** who wish to join this transformative initiative.
+
+## Research Areas
+
+The comprehensive data from the Human Phenotype Project enables breakthrough research in:
+
+- **Cardiovascular Health**: Understanding heart disease, hypertension, and vascular health
+- **Metabolic Disorders**: Investigating diabetes, obesity, and metabolic syndrome
+- **Aging & Longevity**: Uncovering the biological mechanisms of healthy aging
+- **Microbiome & Health**: Exploring the role of gut, oral, and other microbiomes
+- **Precision Medicine**: Developing personalized treatment approaches
+- **Disease Prevention**: Identifying early biomarkers and risk factors
+- **Drug Development**: Accelerating pharmaceutical discovery and validation
+- **Digital Health**: Advancing wearable and remote monitoring technologies
+
+::: {.info-box}
+#### Get Involved
+Interested in collaborating or accessing HPP data? [Contact us](mailto:research@pheno.ai) to learn about partnership opportunities and data access programs.
+:::
+
+---
+
+*Together, we're building the foundation for the next generation of medical breakthroughs.*
+
+
+## PARTICIPANT JOURNEY
+# Get to Know the HPP
+
+The Human Phenotype Project (HPP) is a comprehensive, longitudinal cohort study and biobank involving approximately 28,000 participants, with over 13,000 having completed their initial visit. The project aims to identify novel molecular signatures with diagnostic, prognostic, and therapeutic value, and to develop AI-based predictive models for disease onset and progression.
+
+The HPP provides a diverse range of data types to support advanced research and AI-based predictive modeling. These include:
+
+1. **Tabular Data**: Comprehensive datasets from questionnaires and electronic health records (EHR), covering medical history, demographic information, lifestyle and nutritional habits, family history, blood tests, medications, and diagnoses.
+
+2. **Molecular Data**: Detailed molecular profiling, including metabolomics, genetics, transcriptomics (RNA sequencing), proteomics, and microbiome analyses (oral, vaginal, and gut).
+
+3. **Time-Series Data**: Continuous monitoring data such as glucose levels, sleep patterns, physical activity, diet tracking, and voice recordings, offering dynamic insights over time.
+
+4. **Imaging Data**: High-resolution medical imaging modalities, including dual-energy X-ray absorptiometry (DXA), ultrasounds, electrocardiograms (ECG), and retinal imaging, for structural and functional assessments.
+
+5. **3D Spatial Data and Biobanked Samples**: Physical samples such as blood, serum, peripheral blood mononuclear cells (PBMCs), and swabs, stored for further biological and molecular exploration.
+
+This rich, multimodal dataset enables unprecedented insights into health and disease, supporting the development of personalized medicine and predictive AI models. 
+
+![](./images/participant_journey.png)
+
+
+## FAQ
+# FAQ  
+
+1. **Q: How can I upload my own data, code, or model to use on the platform?**  
+   A: To upload your own files and use them on the platform, go to the console's Studies page, create new study on 'my studies', and click the "Upload Files" button on the right side of study name. You can then upload the files and folders that you need, and they will appear in the shared folder on the platform (`/home/ec2-user/studies/study_name`).
+   <br>&nbsp;
+
+<!-- 
+2. **Q: How do I work on the same code as my group? What is the recommended way of saving code and temporary data??**  
+   A: To work on the same code as your group, make sure you have included and selected a "shared" "Group X" study when creating your workspace. Inside the workspace, the shared folder will be located at `/home/ec2-user/studies/group_x`. In Jupyter's file explorer, this will be under `studies/group_x`. All files and code included in this folder will be shared with your group (and only group members will have access to it). When saving code and temporary data, we recommend saving code in outside of the studies folder, and only move them to the shared folder once you'de like to share amongst your peers.
+   <br>&nbsp; -->
+
+
+2. **Q: Scrolling is too sensitive on my jupyter notebook. How can I fix it??**  
+   A: On Chrome, Go to `chrome://flags` and Enable `Windows Scrolling Personality`.
+   <br>&nbsp;
+
+
+3. **Q: How do I enable copy/paste shortcuts on the platform?**  
+   A: In the top left corner of the screen, there is a setting icon (a cogwheel).
+   Click on the “settings” icon in the top left corner
+   Click on “keyboard settings”
+   Enable the 3rd option in the drop down list
+   <br>&nbsp;
+
+4. **Q: Can I copy text from inside the platform and paste it outside?**  
+   A: No, that option is not available.
+   <br>&nbsp;
+
+
+5. **Q: I have logged in and opened a Jupyter notebook, how do I make the tab full screen?**  
+   A: Double click the top of the Chrome window which will enlarge the size of the window.
+   <br>&nbsp;
+## DATA FORMAT
+## Data format 
+
+### 1 - Definitions  
+_Dataset_: An entitity that defines different _data modalites_ collected. examples: cgm, anthropometry, human genetics.  
+_Field_: the basic unit of data. A dataset is composed of fields.
+_Dictionary_: contains metadata for each field
+_participant_  
+_cohort_  
+_research stage_
+
+
+### 2 - Field types  
+The HPP data contains 5 different types of fields:  
+1. `Tabular data` Saved as parquet files with mandatory and defined indices. Each dataset wil have at least one tabular dataset named `{dataset}.parquet`.  
+2. `Individual time series` Saved as one parquet file per participant. File path is refeenced in a tabular data field.      
+3. `Aggregated time series` Saved as one parquet file per group of participants. File path is referenced in a tabular data field.  
+4. `Individual bulk data` (e.g. images, bulk omics files). Saved as one file per participans. File path is refeenced in a tabular data field.  
+4. `_Group bulk data` (e.g. mappings, group-wise file). File path is refeenced in a tabular data field.  
+
+
+
+### 3 - Mandatory inidices & columns  
+Tabular data contains 4 mandatory indices:  
+
+1. `participant_id` [integer]: A unique participant identifier  
+2. `cohort` [string]: A unique cohort identifier (e.g. 10k)  
+3. `research_stage` [string]: A value chosen from a predefined list.  
+4. `array_index` [integer]: Used whenever several data items are linked to the same data instance, for example in multiple choice questions or multiple measurements on same visit and time (e.g. measure liver ultrasound twice in a row).
+
+Mandatory columns for tabular data include:  
+
+1. `collection_timestamp` [datetime64[ns]]  
+2. `collection_date` [datetime64[ns]]  
+3. `timezone` [string]  
+
+
+## DATASETS DESCRIPTION
+## Datasets Description
+
+* [Population](datasets/000-population.html): Year of birth, month of birth, sex, and study ID.
+* [Events](datasets/001-events.html): Birth month/year, age at research stage, sex, follow‐up details, and visit dates.
+* [Anthropometrics](datasets/002-anthropometrics.html): Individual body measurement records (e.g. height, weight, circumferences).
+* [Fundus](datasets/003-fundus.html): Retinal image files, vessel/artery/vein segmentations, and derived microvasculature features.
+* [Liver Ultrasound](datasets/004-liver_ultrasound.html): Derived liver measures (viscosity, elasticity, attenuation), auxiliary data, and aggregated information.
+* [Diet Logging](datasets/005-diet_logging.html): Detailed food logs per participant including macronutrient information.
+* [Hand Grip](datasets/006-hand_grip.html): Measurements of hand and finger grip strength.
+* [Blood Pressure](datasets/007-blood_pressure.html): Multiple readings capturing systolic and diastolic pressures as well as heart rate.
+* [Serum Lipidomics](datasets/008-serum_lipidomics.html): High‐throughput lipid annotations from blood serum spectral data.
+* [Sleep](datasets/009-sleep.html): Sleep staging, body positioning, respiratory events, heart rate, oxygen saturation, and snoring details.
+* [Vascular Health](datasets/010-peripheral_vascular_health.html): ABI and PWV measurements for assessing vascular stiffness.
+* [Body Composition](datasets/011-body_composition.html): DXA‐based measures of fat and lean mass, including VAT/SAT areas, masses, and volumes.
+* [Carotid Ultrasound](datasets/012-carotid_ultrasound.html): Carotid intima-media thickness measurements from ultrasound imaging.
+* [Gut Microbiome](datasets/013-gut_microbiome.html): Gut metagenomic sequencing with QC statistics and relative abundance profiles.
+* [Human Genetics](datasets/014-human_genetics.html): Genotype data including sample metadata, QC statistics, principal components, and kinship coefficients.
+* [ECG](datasets/015-ecg.html): Raw and processed 12‐lead ECG waveforms and machine‐extracted cardiac features.
+* [Blood Tests](datasets/016-blood_tests.html): Participant‐provided blood (and urine) test results from routine clinical care.
+* [CGM](datasets/017-cgm.html): Continuous glucose monitoring data with temporal readings and computed summary features.
+* [Medications](datasets/018-medications.html): Self‐reported medication usage (mapped to ATC codes) from various collection methods.
+* [Medical Conditions](datasets/021-medical_conditions.html): Self‐reported binary information on diagnosed medical conditions.
+* [Bone Density](datasets/022-bone_density.html): DXA measurements of bone mineral content and density, with age/sex/ethnicity normalized values.
+* [RNA-Seq](datasets/024-rna_seq.html): Bulk gene expression profiles from PBMCs including read counts and QC metrics.
+* [Nightingale Metabolomics](datasets/029-nightingale_metabolomics.html): NMR‐based quantification of blood serum metabolites (lipids, fatty acids, amino acids, etc.).
+* [COVID Questionnaire](datasets/043-covid.html): Survey responses on COVID‐19 vaccination status and diagnosis history.
+* [Sex-specific Factors](datasets/044-sex_specific_factors.html): Data on reproductive health and hormonal variations impacting medical outcomes; collected via surveys adapted from the UKBB questionnaire.
+* [Participant Relation](datasets/045-participant_relation.html): Self‐reported information on familial relationships among study participants.
+* [Medical Symptoms](datasets/049-medical_symptoms.html): Detailed self‐reports of physical and mental symptoms for real‐time health tracking; partially collected via follow‐up surveys modeled on the UKBB questionnaire.
+* [Medical Procedures](datasets/050-medical_procedures.html): Data on self‐reported medical interventions and procedures over time.
+* [Children](datasets/051-children.html): Information on participants’ children including counts, birth weights, and pregnancy durations.
+* [Family History](datasets/052-family_history.html): Self‐reported family medical history detailing hereditary risk factors; collected via surveys including components modeled on the UKBB questionnaire.
+* [Sociodemographics](datasets/053-sociodemographics.html): Demographic and socioeconomic information such as age, education, and income; collected via surveys modeled on the UKBB questionnaire.
+* [Lifestyle and Environment](datasets/055-lifestyle_and_environment.html): Survey data on lifestyle behaviors and environmental exposures; collected via a UKBB‐based lifestyle survey.
+* [Psychological and Social Health](datasets/057-psychological_and_social_health.html): Self‐reported mental health, emotional well‐being, and social factors; collected via a UKBB‐based lifestyle survey.
+* [Health and Medical History](datasets/058-health_and_medical_history.html): Comprehensive data on past and current health conditions, treatments, and surgeries; collected via surveys including elements from the UKBB questionnaire.
+* [Oral Microbiome](datasets/070-oral_microbiome.html): Metagenomic profiles of the oral microbial community derived from buccal swabs.
+
+## PLATFORM TUTORIAL
+﻿# Trusted Research Environment User Guide - Applicable for version 6.2.1
+
+Trusted Research Environment (TRE) is a cloud solution that provides secure access to data, tooling, and compute power that researchers need. Researchers can focus on achieving research missions and completing essential work in minutes in a trusted research environment.
+
+# Getting Started
+
+## Sign Up
+
+Use this section if this is your first time connecting to the system.
+
+1. Open your browser and navigate to TRE URL.
+1. Click on the **Sign up** link.
+
+![](platform_imgs/Aspose.Words.eb2aa5b5-7f63-4203-881b-2ae5083537c6.001.png)
+
+3. Fill out your **Username** (email address), **Name**, **Family name** and pick a **Password.**
+
+![](platform_imgs/Aspose.Words.eb2aa5b5-7f63-4203-881b-2ae5083537c6.002.png)
+
+4. Click the **Sign up** button.
+
+## Login
+
+1. Open your browser and navigate to TRE URL.
+1. Type in your **Username** (the email you used to sign up) and your **Password.**
+1. Click the **Sign In** button.
+
+![](platform_imgs/Aspose.Words.eb2aa5b5-7f63-4203-881b-2ae5083537c6.001.png)
+
+## User Interface
+
+![](platform_imgs/Aspose.Words.eb2aa5b5-7f63-4203-881b-2ae5083537c6.003.png)
+
+**Dashboard** - Displays AWS charges over the past 30 days
+
+**SSH Keys** - SSH Keys for EC2 authorization
+
+
+**Workspaces** - The combination of a study with a compute![](platform_imgs/Aspose.Words.eb2aa5b5-7f63-4203-881b-2ae5083537c6.004.png)
+
+# Studies - Data sets saved in Amazon S3
+
+
+
+## Personal Study
+1. Click on **Create Study**
+![](platform_imgs/personal_study1.png)
+1. Fill up all the fields and press **Create Study** myStudy for personal and Organziation study for Org Studies
+![](platform_imgs/personal_study2.png)
+1. Study Created and ready to use 
+![](platform_imgs/personal_study3.png)
+
+## Organizational Study
+![](platform_imgs/org_study.png)
+
+# Using Trusted Research Environment
+
+## Launching a new Research Environment
+
+A user can select a Study or multiple Studies and launch a Workspace to access and analyze data. To launch a Research Environment, follow these steps:
+
+1. In the portal navigate to the **Studies** page using the menu on the left.
+1. Select the Studies to be attached to the new Workspace.
+1. Once you have selected all the Studies you want, click the **Next** button.
+
+![](platform_imgs/pick_studies.png)
+
+4. Choose the type of Workspace you want and click the **Next** button.
+
+![](platform_imgs/select_compute.png)
+
+5. Fill in the Workspace **Name** field. 
+5. Select your project in the **Project ID** drop down field.
+5. Select the **Configuration** type according to your needs.
+8. Type a description for the Workspace in the **Description** field.
+9. Click the **Create Research Workspace** button.
+
+![](platform_imgs/workspace_form1.png)
+![](platform_imgs/workspace_form2.png)
+
+This will deploy the new Workspace and attach the Studies that were selected. 
+
+You will automatically be redirected to the Workspaces tab on the portal.
+
+Wait for the workspace to be **Available**.
+
+## Connecting to EC2
+
+1. In the portal navigate to the **Workspaces** page using the menu on the left.
+1. Click on the **Connections** button, below the **Workspace** name.
+
+![](platform_imgs/autoconnect.png)
+
+## Connecting to an Existing Research Environment
+
+1. In the portal navigate to the **Workspaces** page using the menu on the left.
+1. Click on the **Connections** button, below the **Workspace** name.
+
+![](platform_imgs/existing_workspace.png)
+
+3. Click on the **Generate URL** button on the right, under HTTP Connections.
+4. Click **Connect.**
+
+![](platform_imgs/Aspose.Words.eb2aa5b5-7f63-4203-881b-2ae5083537c6.010.png)
+
+5. Wait for the system to load.
+
+![](platform_imgs/Aspose.Words.eb2aa5b5-7f63-4203-881b-2ae5083537c6.011.jpeg)
+
+It will now open the browser with the data and the tools to start working.
+It will open in Firefox automatically if the workspace created in a Notebook, or Remmina Client(Remote) in case it created in EC2. 
+So you can do the following:
+
+## Installing Python Packages
+
+1. Connect to the Research Environment and open your Jupyter Notebook (See: Connect to an Existing Research Environment)
+2. Click on Open JupyterLab on the top right.
+
+![](platform_imgs/e4d32db7-372f-488a-9919-9083e15e07c4.png)
+3. Open a new Jupyter notebook.
+
+![](platform_imgs/bbd18cb5-16cc-4c2f-8f0a-15f385e1d472.png)
+
+4. Inside the one of the notebook cells, type `!pip3 install <package name>`.
+
+### For any questions or help please contact: [support@pheno.ai](support@pheno.ai)
+
+## Attach Files to a Research Environment
+
+1. Navigate to the **Studies** page using the menu on the left.
+1. Find the Study you want to attach files to and click **Upload Files** on the right.
+1. You can upload files either by dragging and dropping, or by clicking the **Upload Files** or **Upload Folder** button.
+
+![](platform_imgs/upload_files.png)
+
+## Collaborating and Sharing Data Between Environments
+
+To share code with peers, make sure to include a common organizational **Study** when creating your workspace.
+
+Inside the workspace, the shared folder will be located at `/home/ec2-user/studies/<study name>`.
+
+In Jupyter’s file explorer, this will be under `studies/<study name>`.
+
+Files included in this folder will be shared with researchers in your **Organization**. 
+
+When saving code and temporary data, we recommend saving code in outside of the studies folder, and only move them to the shared folder once you’de like to share amongst your peers. 
+
+## Terminating a Research Environment
+
+When you no longer need a Research Environment you can terminate it. Follow these steps:
+
+1. In the portal navigate to the **Workspaces** page using the menu on the left.
+1. In the list of Workspaces, find the Workspace that you want to terminate.
+1. Click on the **Terminate** button, the Workspace must be in the **Ready** state to terminate it.
+
+![](platform_imgs/existing_workspace.png)
+
+# Tools Installation
+
+## Docker usage
+
+### Docker pull
+docker registry: https://gallery.ecr.aws/ \
+Use the following code  `docker pull \<accountID\>.dkr.ecr.\<aws-region\>.amazonaws.com/ecr-public/\<Change to your library\>`
+![](platform_imgs/docker_pull.png)
+
+### Docker run
+Use the image you have under docker image ls \
+e.g  `docker run -it --rm \<accountID\>.dkr.ecr.\<aws-region\>.amazonaws.com/ecr-public/docker/library/alpine:edge`
+![](platform_imgs/docker_run.png)
+
+## PHENO UTILS
+pheno-utils
+================
+
+A pip-installable python library for Dataloader and analysis tools.
+
+[See full documentation](https://phenoai.github.io/pheno-utils/)
+
+
+## Install
+
+``` sh
+pip install pheno_utils
+```
+
+## Features: Data Loaders
+
+- [PhenoLoader](https://pheno-ai.github.io/pheno-utils/pheno_loader.html)
+    - Full access to data fields in a specific dataset
+    - Access to tabular features
+    - Access to raw data (images, time series, genetic variants)
+    - Access to field metadata
+- [MetaLoader](https://pheno-ai.github.io/pheno-utils/meta_loader.html)
+    - Get an overview of all datasets and search throughout datasets
+    - Load tabular features from multiple datasets
+    - Load paths to raw data from multiple datasets
+
+## How to use
+
+Examples:
+
+``` python
+from pheno_utils import PhenoLoader
+
+dl = PhenoLoader("fundus")
+```
+
+``` python
+from pheno_utils import MetaLoader
+
+ml = MetaLoader()
+```
+
+## DETAILED DATASETS
+
+### Dataset: 000-population.md
+# Population characteristics dataset  
+
+Population characteristics of the Human Phenotype Project study participants including birth month and year, sex and study id.
+
+### Data availability:
+
+- Information about sex, study_id, and month and year of birth per participant: `population.parquet`
+
+
+### Dataset: 001-events.md
+# Events dataset  
+
+Events Informations of the Human Phenotype Project study participants contains information regarding participant visits and calls.
+
+
+### Data availability:
+
+- Information about sex, study_id, month and year of birth per participant, visits types and dates: `events.parquet`
+
+### Dataset: 002-anthropometrics.md
+# Anthropometrics dataset  
+
+Anthropometrics is an important tool in the field of medicine, as it allows for the assessment of a person's health and nutritional status, as well as the identification of potential health risks.
+
+Anthropometric measurements can be used to assess the body composition of adults, which can help to identify potential health risks such as sarcopenia (age-related loss of muscle mass) or obesity. In a clinical setting, anthropometric measurements are typically used in combination with other medical tests and evaluations to provide a more complete picture of a person's health. For example, a doctor may use anthropometric measurements in combination with blood tests and imaging studies to assess a person's nutrition status, or to identify potential health risks such as cardiovascular disease or diabetes. Additionally, these measurements may be used to help monitor the effectiveness of treatment interventions, such as weight loss programs, and to track changes in a person's health over time.
+Measurement protocol
+Our anthropometric measurements include height, weight, waist circumference, hip circumference, and neck circumference. The equipment used in this protocol includes a measuring tape and a scale, specifically a Shekel stadiometer (Shekel Ultrasonic Physician BMI Scale h 120-4).
+
+For measuring height, participants are asked to stand with their face against the scale, legs parallel to each other, toes pointing forward, and soles flat on the floor. Ensure participant's posture is unsupported, to stand as tall as possible, completely standing on the scale with legs straight. The height is recorded in centimeters.
+
+For measuring weight, the participant is asked to remove their shoes and excess clothing, and stand on the stadiometer. The weight is recorded in kilograms. The measurement protocol for the waist, hip, and neck circumference include specific instructions for standing position, and the use of measuring tape. All circumference measurements are recorded in centimeters.
+
+### Data availability:
+The information is stored in 1 parquet file: `anthropometrics.parquet`
+
+
+### Dataset: 003-fundus.md
+# Fundus images dataset  
+
+Fundus imaging allows for the visualization of the interior surface of the eye, known as the fundus; and used to examine structures such as the optic disc, retina, and retinal microvasculature. This procedure is commonly used to diagnose and monitor a variety of eye diseases.
+
+Fundus imaging is a type of medical imaging technique that is used to obtain detailed, high-resolution images of the back of the eye, including the retina, the optic nerve, and the macula, an oval-shaped area in the center of the retina used for central vision. These images can provide important information about the health of the eye and can be used to diagnose and monitor a variety of eye diseases and conditions.
+
+One of the key features that can be seen in fundus images is the retinal microvasculature, which refers to the network of small blood vessels that supply blood to the retina. The appearance and structure of the retinal microvasculature can provide information about the health of the eye and can be used to diagnose and monitor a variety of conditions.
+
+In addition, the information provided by fundus imaging can also be used in research to better understand the underlying mechanisms of various eye conditions and as a non-invasive tool for visualization of the general microvascular circulation health and a direct view to part of the central nervous system. As such, the fundus image can serve as a window to systemic health. 
+
+The Human Phenotype Project (HPP) performs fundus imaging on each participant's eyes to produce image files. To process and enhance the data, an open source software pipeline: AutoMorph: Automated Retinal Vascular Morphology Quantification via a Deep Learning Pipeline (Zhou 2022), that combines several different deep learning models is used. Specifically for the following steps:
+(1) Image pre-processing.
+(2) Image quality grading.
+(3) Anatomical segmentation (binary vessel segmentation, artery/vein segmentation, and optic disc segmentation).
+(4) Various morphological feature measurements such as vessel caliber, tortuosity density, fractal dimension etc. These features were calculated separately for segmented veins and arteries, and also as a combined feature.
+The current pipeline does not include automatic identification or clinical interpretation of eye abnormalities such as age-macular degeneration (AMD) or edema, glaucoma signs, microaneurysms etc’ that can be derived from the fundus image.
+
+### Data availability:
+
+- All tabular information is stored in a main parquet file: `fundus.parquet`
+- Derived microvasculature information is stored in a secondary parquet file: `microvasculature.parquet`
+- Image files including segmentations are stored in subfolders and mapped in the parqet files.
+
+### Dataset: 004-liver_ultrasound.md
+# Liver ultrasound dataset  
+
+Liver ultrasound was performed using the Supersonic Aixplorer MACH 30 (Hologic, USA).  The Supersonic Imagine Aixplorer is an ultrasound device that is able to measure the liver's stiffness, viscosity, attenuation and sound speed to diagnose and monitor liver conditions such as steatosis, fibrosis and inflammation. The device uses several ultrasound-based measures, including Speed of Sound (SSp.PLUS), Attenuation Index (Att.PLUS), Viscosity (Vi.PLUS) and Elasticity (Two-Dimensional ShareWave Elastography (2D-SWE)) to evaluate the liver and improve diagnosis performance. These measurements have been shown to be correlated to different stages of liver conditions.
+
+Ultrasound-based liver measurements were performed using ShearWave Elastography (2D- SWE.PLUS) for elasticity assessment, sound speed Plane-wave ultrasound and attenuation. Plane-wave ultrasound was measured for assessment of liver steatosis (fatness) and viscosity plane-wave ultrasound for assessment of viscosity as a marker of inflammation. Measurements were performed with a C6-1X convex transducer using the UltraFast software available on the Mach 30 ultrasound system. US images of the liver were also saved.
+
+Measurement protocol: All patients were examined in supine position, with the right arm elevated above the head, by an intercostal approach, in the right liver lobe. Acquisitions were performed during neutral respiratory apnea. Initially the Attenuation and Speed of Sound were measured from a homogeneous area of the liver parenchyma free of vessels or other structures. Measurements were performed from 3 different liver regions. 2D-SWE and viscosity were then measured from 3 different locations in an area of relative uniform elasticity, at a depth of 3–5 cm using stability index tool (SI) derived from the spatial and temporal stiffness stability at a stability index >90%. 
+
+### Data availability:
+The information is stored in 2 parquet files: `liver_ultrasound.parquet`and `liver_ultrasound_aggregated.parquet`
+
+### Dataset: 005-diet_logging.md
+# Diet logging dataset  
+
+Diet logging through a smartphone app encompasses the detailed recording of food and beverage intake. This includes specifics such as the varieties of food consumed, portion sizes, nutritional components, and the timing of meals. By tracking these dietary patterns, individuals can monitor their own eating habits, while researchers can use the aggregated data to gain valuable insights into broader dietary trends within a population. Furthermore, this information can be correlated with other time-based measurements and occurrences to yield a more comprehensive understanding of health and nutrition.
+
+### Data availability:
+The information is stored in 3 parquet files: `diet_logging.parquet`, `diet_logging_events.parquet`,  `raw_diet_logging_events.parquet `which contains summary information, processed diet logging data and raw diet logging data respectively.
+
+### Dataset: 006-hand_grip.md
+# Hand grip strength dataset  
+Hand grip strength (HGS) is an effective marker of general health in middle age and older adulthood. Grip strength is measured by squeezing a type of muscle strength testing equipment, known as a dynamometer.
+
+HGS is a measure of the maximum force that an individual can exert with their hand. It is a widely used measure of muscular strength. HGS is an easy and quick measure to obtain.
+
+In a clinical setting, HGS is often used as a measure to assess changes in muscle strength over time. For example, in patients with conditions such as osteoarthritis, rheumatoid arthritis, or sarcopenia, Additionally, HGS can be used to assess the effectiveness of rehabilitation programs, such as those used to recover from a stroke or other neurological condition.
+
+HGS is measured using a Jamar Hydraulic Hand Dynamometer. The measurement is a measure of the static force (without movement) that the hand can exert when squeezing around the dynamometer.
+
+### Data availability:
+The information is stored in 1 parquet file: `hand_grip.parquet`
+
+### Dataset: 007-blood_pressure.md
+# Blood pressure dataset  
+Blood pressure is the measurement of the force exerted against the walls of the arteries as blood flows through them. Blood pressure is recorded as two values: systolic pressure (the pressure when the heart beats) and diastolic pressure (the pressure when the heart is at rest between beats).
+
+Blood pressure measurement can be performed in a variety of settings, including hospitals, clinics, and even at home, using an automated or manual sphygmomanometer. Blood pressure measurement can be used to monitor the effectiveness of treatment interventions, such as lifestyle changes. The goal of treatment is to achieve and maintain target blood pressure levels, which are generally lower for individuals at higher risk for cardiovascular disease. 
+
+Blood pressure is measured using an OMRON Blood Pressure Monitor HEM-RML31 device and an appropriately sized cuff. Multiple blood pressure readings are done during the visit. For each blood pressure reading, three measurements are taken: systolic pressure, diastolic pressure, and average heart rate. The participant is asked to avoid caffeine, exercise and smoking at least 30 minutes before the measurement. The measurement is taken on the left arm if possible.
+
+### Data availability:
+The information is stored in 1 parquet file: `blood_pressure.parquet`
+
+### Dataset: 008-serum_lipidomics.md
+# Serum lipidomics dataset  
+
+High throughput untargeted lipidomics in serum by Ultra-High-Performance Liquid Chromatography Electrospray Ionization High-resolution mass spectrometry (UHPLC-ESI-HRMS).
+
+The serum metabolome is known to represent a variety of environmental, genetic and other endogenous factors (Bar et al. 2020). Lipidomics is a subfield of metabolomics, which is defined as the study of pathways and networks of cellular lipids in biological systems. Lipids perform various functions within the body, from structural components of cell membranes, to energy reserve and regulating hormones. These pivotal functions highlight circulating lipids as playing a key role in a number of age-related diseases such as cardiovascular disease and stroke (Holmes et al. 2018; Michos et al. 2019). 
+
+### Data availability:
+The information is stored in 1 parquet file: `serum_lipidomics.parquet`
+
+### Dataset: 009-sleep.md
+# Sleep monitoring dataset  
+
+Sleep monitoring includes sleep staging, body positioning, respiratory events, heart rate, oxygen saturation and snoring, measured concurrently over three nights.
+
+Obstructive sleep apnea (OSA) is a sleep disorder in which a person’s breathing is interrupted during sleep due to obstruction of the upper airway as a result of relaxation of the throat muscles. This obstruction can lead to pauses in breathing for short periods of time, which can cause loud snoring, reduction in the  blood oxygen levels, stress response, awakening and fragmented sleep.
+
+A home sleep apnea test (HSAT) is a non-invasive test used to diagnose sleep apnea. During an HSAT, a patient wears a portable device overnight to monitor their breathing, heart rate, oxygen levels, snoring, and other sleep patterns. The device records this data and it is then analyzed by clinically-validated algorithms that compute apnea-related indices. The data can also be used to study sleep architecture and other aspects of sleep, such as heart rate variability (HRV) and arrhythmia.
+
+The device used for sleep monitoring in the Human Phenotype Project is the FDA-approved WatchPAT-300 by Itamar Medical. This device contains 5 sensors: An actigraph worn on the wrist; a pulse oximeter and a Peripheral Arterial Tone (PAT) probe worn on the finger; and a microphone and accelerometer worn on the chest for respiratory effort, snoring and body position measurement.
+
+The device's algorithms provide 3 main indices for diagnosis of OSA: Apnea/Hypopnea Index (AHI), Respiratory Disturbance Index (RDI), Oxygen Desaturation Index (ODI). The device's algoithms also provide indices for diagnosis of Atrial Fibrillation (not FDA-approved yet): Premature beats per minute, Atrial fibrillation longest event.
+
+The WatchPAT device is given to participants during the visit to the clinical testing center who then record 3 nights of sleep at home during the following two weeks (Figure 4). The recorded tested nights should reflect the usual sleeping regimen / typical bedtime (for example, not after exceeding alcohol consumption).
+
+### Data availability:
+The information is stored in 2 main statistics parquet files: `sleep.parquet`, `hrv.parquet`; In multiple events parquets and in multiple time series parquets / EDF files containing sensor channels for each night of logging.
+
+### Dataset: 010-peripheral_vascular_health.md
+# Peripheral vascular health dataset  
+
+ABI and PWV are measured in the Human Phenotype Project to assess vascular health. ABI is a ratio of the systolic blood pressure in the ankle to the systolic blood pressure in the arm. PWV is the speed at which the pulse wave of the blood pressure travels along the wall of an artery or a combined length of arteries.
+
+### ABI
+Ankle-Brachial Index (ABI) measurements were conducted using the Falcon (Viasonix, Israel) device while subjects were in supine position. During the ABI test, primary systolic pressures are measured in each of the right and left brachial arteries, and right and left ankles. ABI is determined as the ratio between the brachial systolic pressure and the ankle pressure on each side providing ABI values per each side. The systolic pressures were based on a combination of blood pressure cuffs and blood flow reading with photoplethysmograph (PPG) sensors placed on the measured limb fingers.  Under normal circumstances, the blood pressure in the ankle will be very similar or identical to that measured in the arm, so the measured ABI value will be close to 1. In the case of peripheral arterial disease, there will be a discrepancy - the blood pressure at the ankle will be lower than the blood pressure in the arms. This will indicate insufficiency in the arteries that carry blood to the legs. In the general population, PAD affects about 10% of people over the age of 55.
+
+### PWV
+Pulse wave velocity (PWV) is considered a surrogate marker for arterial stiffness/elasticity, which is correlated with vascular disease (REF). Vascular elasticity is important for the normal vascular function for attenuation and smoothing of the pulsation intensity and blood flow. With age, and in combination with atherosclerosis processes, blood vessels may lose their elasticity and become stiff. Increased arterial stiffness can predict future vascular system problems.The contractions of the heart generate arterial blood pressure pulse waves which propagate through the arterial walls. PWV is defined as the velocity at which these arterial blood pressure pulses propagate. PWV is a quantitative parameter reflecting arterial stiffness. Higher PWV values reflect greater than normal arterial stiffness. 
+While there is no one set standard of how or where to measure PWV, some of the more common PWV measurements include the baPWV, which reflects the pulse wave propagation between the brachial and ankle, cfPWV reflecting propagation between the carotid and femoral, and faPWV also know as leg PWV reflecting the PWV along the leg between the femoral and ankle.
+In the HPP we measure leg PWV (faPWV). PWV is highly dependent on the method of measurement, as well as on the measurement sites. Therefore, typical values for baPWV differ from faPWV and cfPWV.
+Based on literature reports, normal PWV values can range between around 6 m/s to 14 m/s, depending on the method of measurement, location and the patient’s age. For example, according to Laurent et al.  the PWV increases from 4–5 m/s in the ascending aorta to 5–6 m/s in the abdominal aorta then 8–9 m/s in the iliac and femoral arteries (Laurent et al. European Heart Journal (2006) 27, 2588–2605)
+
+PWV has been recognized as an indicator of organ damage and a useful additional test in the investigation of high blood pressure, it is also a useful method for prediction of cardiovascular events and mortality. Studies have also shown that ABI is a reliable predictor of cardiovascular disease and mortality in patients with peripheral artery disease.
+
+### Data availability:
+The information is stored in 1 parquet file: `vascular_health.parquet`
+
+### Dataset: 011-body_composition.md
+# Body composition (DXA) dataset  
+
+Body composition was profiled based on DXA (dual-energy x-ray absorptiometry) imaging, and includes measurements of fat and lean mass for the legs, arms, trunk, gynoid, and android, as well as measurements of total scan visceral adipose tissue (VAT) and subcutaneous adipose tissue (SAT) area, mass and volume are included.
+
+DXA (dual-energy x-ray absorptiometry) is a medical imaging technique that is used to measure body composition, specifically the amounts of bone, fat, and lean muscle tissue in the body. A DXA scan uses a low dose of ionizing radiation to produce a detailed image of the body, which is then analyzed by a software to determine the body composition. This method is considered to be one of the most accurate methods for measuring body composition, as it is able to distinguish between different types of tissue and provide detailed information about the distribution of fat and muscle in the body. DXA imaging is commonly used for assessing bone density and for monitoring changes in body composition over time, such as during weight loss, muscle building programs or for assessment of sarcopenia.
+
+### Data availability:
+The information is stored in 1 parquet file: `body_composition.parquet`
+
+### Dataset: 012-carotid_ultrasound.md
+# Carotid ultrasound dataset  
+
+Carotid intima-media thickness (CIMT) measurement is an ultrasound-based technique used to assess the thickness of the innermost two layers of the carotid artery, known as the intima and media. These layers can become thickened due to atherosclerotic processes or due to age. The thickening of the intima-media layer can be throughout the length of the artery (increased IMT) or as local accumulation of fatty deposits that penetrate into the vessel interior known  as plaques. Advanced plaques can cause stenosis of the artery. Carotid IMT is increasingly used as an indicator of early atherosclerosis and a predictor for cardiovascular events and can be used for identifying asymptomatic patients at high risk who might be candidates for more intensive medical interventions. Measurement of CIMT with B-mode ultrasound is a noninvasive, sensitive, and reproducible technique for identifying and quantifying subclinical vascular disease and for evaluating CVD risk.
+
+The ultrasound probe is placed on the skin over the carotid artery and high-frequency sound waves are used to produce images of the artery. These images are then analyzed using an automatic detection algorithm to measure the thickness of the intima and media layers. 
+
+Measurement protocol: Carotid US was performed using the Supersonic Aixplorer MACH 30 (Hologic, USA). Carotid Intima Media (CIMT) was measured using the L10-2 transducer from both carotid arteries while the subject in supine position with head rotated to the opposite side of the measured artery. Evaluation was performed using an automatic computerized system (Aixplorer Mach 30). The intima and media are automatically traced within the box of interest. Mean CIMT was recorded over a length of 1 cm at the far wall of each carotid artery. One measurement was obtained from each carotid artery. Only parts of the carotid artery without plaques were included in the IMT analysis.
+
+### Data availability:
+The information is stored in 1 parquet file: `carotid_ultrasound.parquet`
+
+### Dataset: 013-gut_microbiome.md
+# Gut microbiome dataset  
+
+Metagenomics is the study of genetic material from environmental samples, including microbial communities. It involves sequencing the DNA of all microorganisms in the sample, rather than isolating individual organisms. Metagenomics enables the identification and functional analysis of microorganisms in diverse environments, including soil, water, and the human body.
+
+This dataset maps out the human gut microbiota per participant via shotgun metagenomic sequencing given stool samples. It is then compared to known references of gut flora to measure prevalence of specific microbes.
+
+Gut microbiome metagenomics can be used to identify potential biomarkers of disease, develop personalized treatment strategies, and better understand the complex relationship between the gut microbiota and human physiology. It has already been providing insights into the role of gut microbes in various diseases such as obesity, diabetes and IBD.
+
+To measure the genetic makeup of the human gut flora given stool samples via metagenomics, the following steps done:
+
+1. Collection of stool sample: For each visit, a stool sample is collected from the individual and stored appropriately to preserve the microbial community.
+2. DNA extraction: DNA is extracted from the stool sample using specialized techniques to isolate the microbial DNA from other materials present in the sample.
+3. DNA fragmentation and sequencing: The extracted DNA is then fragmented into small pieces and sequenced using high-throughput sequencing technologies.
+4. Quality control: The resulting raw sequencing data is then pre-processed, removing low-quality reads and artifacts of the sequencing methodology.
+5. Taxonomic classification: The processed sequencing data is then compared to databases of known microbial sequences to identify and classify the microbial species presence and their respective abundances in the sample.
+
+### Data availability:
+The information is stored in multiple parquet files:
+
+- `gut_microbiome.parquet`: Sequencing and QC statistics.
+- `urs`: Segal Lab relative abundance.
+- `metaphlan_*`: 8 tables with MetaPhlAn 4 relative abundances, separated by taxonomic levels.
+
+
+### Dataset: 014-human_genetics.md
+# Human genetics (Gencove) 
+
+The Human Phenotype Project collects genomic variation data on all its participants. The genomic data together with the Human Phenotype Project  deep-phenotypes allows to investigate the progression of disease, and to explore personalized treatments. We genotype millions of positions by low-pass sequencing combined with imputation using gencove platform technologies. Genotype imputation is a process of statistically inferring unobserved genotypes using known haplotypes in a population. The performance of Gencove genotype imputation is very high ( accuracy > 98% ) (Wasik et al. 2021). 
+
+### Data availability:
+The information is stored in a number of statistics parquet files:<br>
+- `human_genetics.parquet`: sample metadata, including QC statistics, paths to PLINK variant files (raw and post-QC), and principal components (PCs).<br>
+- `variants_qc.parquet`: variant QC statistics.<br>
+- `relationship/relationship_ibs.txt`: IBS calculated by PLINK for pairs of participants.<br>
+- `relationship/relationship_king.tsv`: King kinship coefficients for pairs of participants.<br>
+- `pca/pca.parquet`: a PLINK file containing  principal components.<br>
+- `pca/pca_loadings.tsv`: a PLINK file containing principal component loadings calculated.<br>
+
+### Dataset: 015-ecg.md
+# ECG dataset  
+An electrocardiogram (ECG) is a simple test that can be used to check your heart's rhythm and electrical activity. Sensors attached to the skin are used to detect the electrical signals produced by the heart each time it beats.
+
+A resting 12-lead ECG is recorded at each visit for participants. The record length is 10 seconds and the sample rate is 1000Hz. We collect both the raw waveform ECG signal from all leads and tabular data. The tabular data are features which have been extracted automatically by the machine from the raw data such as the P wave duration.
+
+### Data availability:
+The information is stored in 2 tabular parquet files: `ecg.parquet`, `ecg_qc.parquet`, which contain tabular features and QC checks on the raw ECG waveform data. Mutiple time series parquet files contain the raw and processed ECG waveform data
+
+### Dataset: 016-blood_tests.md
+# Blood tests dataset
+
+The lab tests in this data set of the Human Phenotype Project are based on tests performed to participants in the community as part of their regular medical care at their HMO (Health Maintenance Organization). Participants are asked to upload their blood/urine tests done at their HMOs from previous years. These tests range from the very common CBC and chemistry tests, Vitamins levels to the standard PCRs for infectious diseases all the way to rare tests requiring the user to measure urine for 24h.
+
+### Data availability:
+The information is stored in 1 parquet file `blood_tests.parquet`.
+
+
+### Dataset: 017-cgm.md
+# CGM dataset  
+
+Continuous Glucose Monitoring (CGM) measures glucose levels in a continuous manner.  <br>
+This measure provides information on blood glucose control and glucose variability and could be used to monitor patients with diabetes.
+
+Each 14-day continuous measure is termed a single CGM-connection.
+
+Using the glucose measured in the CGM connection, we can calculate summary features (which was done using the iglu package) summarizing information on glucose control and variability. <br>
+These were calculated for the entire CGM connection as well as for daily segments of the data.
+
+The actual glucose measures are stored in multiple parquet files, each file holds the glucose measures for a single CGM connection. <br>
+
+### Data availability:
+The metadata and summary features are stored in 3 main statistics parquet files: `cgm.parquet`, `iglu.parquet`, `iglu_daily.parquet`.
+
+### Dataset: 018-medications.md
+# Medications
+
+The collection of medication information in the Human Phenotype Project study relies on self-reporting of medication usage via online and smartphone applications, as well as collection by staff members through telephone or face-to-face interviews during follow-up.
+
+Self-reporting occurs when participants disclose their medication use to researchers. Having accurate and complete data on medication usage is essential for understanding the true impact of these medications on individuals' health. 
+
+### Data availability:
+
+- During registration (sign-up) for the study, participants are asked to report their regular medications online, with an autofill feature, selecting from a predefined drop-down list.
+- During follow-up calls or visits, participants update their medication intake.
+- App medication logging.
+
+All three sources of data are stored in 1 parquet file: `medications.parquet`
+
+
+### Dataset: 021-medical_conditions.md
+# Medical conditions dataset  
+
+The Human Phenotype Project study medical conditions diagnosis data is based on self reported, participant provided information. Self-reported medical diagnosis are coded according to the WHO International Classification of Diseases 11th Revision (ICD-11) codes.
+
+The medical conditions diagnosis information collection in the Human Phenotype Project is based on self reporting of conditions either through direct questions on specific conditions in self filled online questionnaires or through recall of conditions diagnosis in an interview with a research staff member.  
+
+During the registration phase of the study, participants are required to provide details about their medical conditions in the Initial Medical Survey. Further data is then gathered during an interview at the baseline visit and using the Follow-up Medical Survey when participants return for subsequent visits. The data source columns indicate where information was collected.
+
+### Data availability:
+The information is stored in 1 parquet file: `medical_conditions.parquet` 
+
+
+### Dataset: 022-bone_density.md
+# Bone size, mineral and density (DXA) dataset  
+
+Bone density was profiled based on DXA imaging, and includes measurements of mineral content in different parts of a variety of skeletal components.
+
+DXA (dual-energy x-ray absorptiometry) imaging is a method used to measure bone density and mineral content. A DXA scan uses a low dose of ionizing radiation to produce a detailed image of the body, specifically the bones. The scan is then analyzed by a software to determine the bone mineral density (BMD) and bone mineral content (BMC) in different parts of the body. This method is considered to be one of the most accurate methods for measuring bone density, as it is able to provide detailed information about the distribution of bone mineral content in different bony structures of the body skeleton. The spine and hip are most commonly measured because that is where most osteoporotic fractures occur. DXA imaging is commonly used for assessing the risk of osteoporosis, a condition characterized by low bone density and increased risk of fractures, and for monitoring the effects of treatments for the condition.
+
+### Data availability:
+The information is stored in 1 parquet file: `bone_density.parquet`
+
+### Dataset: 024-rna_seq.md
+# RNA-Seq dataset
+
+The RNA-Seq dataset includes bulk gene expression profiles measured in human peripheral blood mononuclear cells (PBMC) cells, sampled at each visit to the clinical testing center.
+
+RNA sequencing (RNA-Seq) is a powerful high-throughput technique used to analyze the transcriptome, providing a snapshot of RNA presence and quantity in a biological sample at a given moment. Our bulk approach sequences RNA from a mixed population of cells, giving a cumulative overview of gene expression across the sample. It's widely used for understanding complex biological processes and disease mechanisms.
+
+This RNA-Seq dataset focuses on gene expression profiles in human peripheral blood mononuclear cells (PBMC), collected during patient visits to a clinical testing center. The aim is to uncover the gene expression dynamics in PBMCs under various clinical conditions. PBMCs, which include lymphocytes and monocytes, play a key role in the immune response. The gene expression patterns in these cells can provide valuable insights into immune system activities and pathophysiological states.
+
+The dataset was generated using 3’-tagged bulk RNA sequencing technology, capturing a broad spectrum of gene expression in PBMCs from diverse clinical samples. The protocol was adapted from mcSCRB-seq The library preparation for our RNA-Seq dataset is based on a 3'-tagged bulk RNA-Sequencing protocol, adapted from mcSCRB-seq (Bagnoli et al.). This method incorporates unique molecular identifiers (UMIs), pool barcodes, and sample barcodes. UMIs are crucial for accurately quantifying transcript abundance, as they enable the differentiation of PCR duplicates from unique mRNA molecules. Pool barcodes facilitate multiplexing of several samples in a single sequencing run, enhancing throughput efficiency. Sample barcodes are used to track individual samples, ensuring precise sample identification and data integrity.
+
+### Data availability:
+
+- All tabular information is stored in a main parquet file: `rna_seq.parquet`
+- Read counts are stored in long-format parquet files per batch
+- Each sequencing batch includes metadata parquet, JSON and HTML files
+
+
+### Dataset: 029-nightingale_metabolomics.md
+# Nightingale Metabolomics
+
+The dataset, derived from Nightingale Health's metabolic profiling of blood serum samples, presents an extensive array of metabolites, encapsulating lipids, fatty acids, amino acids, and various low-molecular-weight metabolites. Utilizing innovative Nuclear Magnetic Resonance (NMR) technology, the dataset unveils a spectrum of 250 biomarkers, 39 of which are clinically validated, offering a profound insight into the metabolic mechanisms underlying health and disease.
+
+### Data availability:
+
+The information is stored in 2 parquet file:
+1. Results - nightingale_metabolomics.parquet - quantification of metabolites in blood sample.
+2. Tags per Biomarker - tags_per_biomarker.parquet - categorical tags per metabolite per sample
+
+As of 2024-02-01, the dataset contains 1700 participants who were analyzed.
+
+### Dataset: 043-covid.md
+ # COVID-19 data
+ Information about Covid is collected in a standalone Covid survey and in the Follow-up Medical Survey in the Human Phenotype Project study.
+
+ This Covid survey presents the participants with questions regarding their Covid-19 vaccinations and diagnosis status. It is asked in-person, in every visit to the clinical testing center. Questions asked are related to the participant’s vaccination status, number of vaccine doses and boosters, were participants diagnosed with Covid-19 in the past and were they hospitalized following diagnosis. 
+ 
+ ### Data availability:
+The information is stored in 1 parquet file: `covid.parquet`. The 'data source' column indicates which survey the infromation comes from either the initial Covid survey or the Follow-up Medical Survey.
+
+
+### Dataset: 044-sex_specific_factors.md
+# Sex-specifc factors
+The Human Phenotype Project conducts comprehensive data collection through online surveys, where participants voluntarily provide information on various aspects influencing their health. This includes sex-specifc factors, captured through mutiple surveys.
+
+The lifestyle surveys (ukbb and follow-up ukbb) are modeled after the UK Biobank's touch screen questionnaire. Participants receive the full version via email to complete on the Zoho platform, either before or after their baseline visit. A shorter, follow-up version of the questionnaire is then filled out by participants during subsequent visits. 
+
+### Data availability:
+The information is stored in 5 parquet files: `menstrual_cycle`, `initial_medical.parquet`, `follow_up_medical.parquet`, `ukbb.parquet` and `follow_up_ukbb.parquet` which indicate the different sources where information is collected from.
+
+### Dataset: 045-participant_relation.md
+# Participant relation
+The Human Phenotype Project conducts comprehensive data collection through online surveys, where participants voluntarily provide information on various aspects influencing their health. This includes information about other participant's they are related to.
+
+A short online survey is used to track participants in the study who are related in some way.
+
+### Data availability:
+The information is stored in 1 parquet files: `participant_relation.parquet`.
+
+### Dataset: 049-medical_symptoms.md
+# Medical symptoms
+The Human Phenotype Project study collects medical data through online surveys, where participants self-report their experiences with various medical symptoms. This method depends on individuals accurately conveying their own health experiences. Obtaining detailed and thorough information about the symptoms people experience is essential to understand their actual impact on individual health.
+
+In the initial phase of the study, during registration, participants are asked to provide information about any medical symptoms they have experienced in the Initial Medical Survey. Additional data is then collected in the Follow-up UKBB Survey during subsequent visits, allowing for ongoing tracking of these symptoms
+
+An additional survey is asked to participants focusing on Irritable Bowel Syndrome (IBS) and digestive health. This IBS survey is an adaptation of the UK Biobank online gastro-intestinal health self-assessment questionnaire. Many of the questions in the UK Biobank gut health (IBS) questionnaire were adopted from the World Gastroenterology Association questionnaire (2009).
+Questions asked are related to the participant’s bowel habits, characterization of abdominal pain patterns, accompanying symptoms, and history of IBS in the family.
+
+### Data availability:
+The information is stored in 3 parquest files: `initial_medical.parquet`, `follow_up_ukbb.parquet` and `digestve_health.parquet` 
+
+### Dataset: 050-medical_procedures.md
+# Medical procedures
+
+The Human Phenotype Project study gathers medical data through online surveys where participants self-report their use of medical procedures. This approach relies on individuals to communicate their experiences with medical interventions. Accurate and comprehensive information about the utilization of these procedures is crucial for grasping their actual effects on personal health.
+
+### Data availability:
+
+During the registration phase of the study, participants are required to provide details about their medical procedures in the Initial Medical Survey. Further data is then gathered in the Follow-up Medical Survey when participants return for subsequent visits.
+
+The information is stored in 2 parquets file: `initial_medical.parquet`, `follow_up_medical.parquet`
+
+
+### Dataset: 051-children.md
+# Children
+
+The Human Phenotype Project, with a special focus on information about a participants children, collects vital data through online surveys, where participants self-report details specifically related to children's birth weights, pregnancy durations, and the number of children in their families.
+
+### Data availability:
+
+During the registration phase of the study, participants are required to provide details about their children and pregnancies in the Initial Medical Survey. 
+
+The information is stored in 1 parquets file: `children.parquet`
+
+
+### Dataset: 052-family_history.md
+# Family history
+The Human Phenotype Project conducts comprehensive data collection through online surveys, where participants voluntarily provide information on various aspects influencing their health. This includes information about a participant's family history, captured through two lifestyle surveys and the Initial Medical Survey.
+
+These lifestyle surveys are modeled after the UK Biobank's touch screen questionnaire. Participants receive the full version via email to complete on the Zoho platform, either before or after their baseline visit. A shorter, follow-up version of the questionnaire is then filled out by participants during subsequent visits. 
+
+### Data availability:
+The information is stored in 2 parquet files:  `initial_medical.parquet` and `ukbb.parquet`. The ukbb.parquet contains questions asked in our lifestyle surveys at the baseline and follow up stages.
+
+### Dataset: 053-sociodemographics.md
+# Sociodemographics
+The Human Phenotype Project conducts comprehensive data collection through online surveys, where participants voluntarily provide information on various aspects influencing their health. This includes sociodemographic data, captured through two lifestyle surveys (Inital UKBB and Follow-up UKBB survey) and the Initial Medical Survey.
+
+These lifestyle surveys are modeled after the UK Biobank's touch screen questionnaire. Participants receive the full version via email to complete on the Zoho platform, either before or after their baseline visit. A shorter, follow-up version of the questionnaire is then filled out by participants during subsequent visits. 
+
+### Data availability:
+The information is stored in 2 parquet files: `initial_medical.parquet`  and `ukbb.parquet` which contain the different data sources respectively the Initial Medical Survey and the  two lifestyle surveys (Inital UKBB and Follow-up UKBB survey).
+
+### Dataset: 055-lifestyle_and_environment.md
+# Lifestyle and the environment
+The Human Phenotype Project conducts comprehensive data collection through online surveys, where participants voluntarily provide information on various aspects influencing their health. This includes lifestyle and enviroment data, captured through two lifestyle surveys.
+
+These lifestyle surveys are modeled after the UK Biobank's touch screen questionnaire. Participants receive the full version via email to complete on the Zoho platform, either before or after their baseline visit. A shorter, follow-up version of the questionnaire is then filled out by participants during subsequent visits. 
+
+### Data availability:
+The information is stored in 1 parquet file: `'lifestyle_and_environment.parquet'.
+
+### Dataset: 057-psychological_and_social_health.md
+# Psychological and social health
+The Human Phenotype Project conducts comprehensive data collection through online surveys, where participants voluntarily provide information on various aspects influencing their health. This includes information about psychological and social health factors, captured through two lifestyle surveys.
+
+These lifestyle surveys are modeled after the UK Biobank's touch screen questionnaire. Participants receive the full version via email to complete on the Zoho platform, either before or after their baseline visit. A shorter, follow-up version of the questionnaire is then filled out by participants during subsequent visits. 
+
+### Data availability:
+The information is stored in 1 parquet file: `psychological_and_social_health`
+
+### Dataset: 058-health_and_medical_history.md
+# Health and medical history
+The Human Phenotype Project conducts comprehensive data collection through online surveys, where participants voluntarily provide information on various aspects influencing their health. This includes information about a participant's health and medical history, captured through two lifestyle surveys.
+
+These lifestyle surveys are modeled after the UK Biobank's touch screen questionnaire. Participants receive the full version via email to complete on the Zoho platform, either before or after their baseline visit. A shorter, follow-up version of the questionnaire is then filled out by participants during subsequent visits. 
+
+### Data availability:
+The information is stored in 2 parquet files: `ukbb.parquet` and `initial_medical.parquet`
+
+### Dataset: 070-oral_microbiome.md
+# Oral microbiome dataset  
+
+The primary intent behind collecting buccal swabs was to explore human genetics. Concurrently, it yielded metagenomic data, unveiling the microbial community within the oral cavity. 
+
+This data illuminates the diversity and interactions of microorganisms, specifically in the buccal mucosa. Delving into the oral microbiome presents an opportunity to understand its linkage to health conditions. For instance, an imbalanced oral microbiome can lead to periodontal disease, associated with an increased risk of cardiovascular diseases. Moreover, alterations in the oral microbiome have been observed in oral cancers, hinting at its potential role in their onset and progression​ [The oral microbiome: diversity, biogeography and human health](https://www.nature.com/articles/s41579-023-00963-6)​. 
+
+Through this data, the exploration into possible connections between oral microbial composition and various health conditions is facilitated, marking a step towards understanding the broader health implications.
+
+
+
+### Data availability:
+The information is stored in multiple parquet files:
+
+- `oral_microbiome.parquet`: Sequencing and QC statistics.
+- `metaphlan_*`: 8 tables with MetaPhlAn 4 vJan21 relative abundances, separated by taxonomic levels.
+- `humann_aggregated_*`: arrow files of either gene level abundances or pathway level abundances+coverage from HumanN 3.6 given MetaPhlAn 4 vJan21 outputs
+
+### Dataset: 100-curated_phenotypes.md
+# Curated Phenotypes
+
+
+### Data availability:
+* Abdominal Adiposity: Increased abdominal obesity is a hallmark of fat or adiposity-related metabolic dysfunction.
+* ADHD: Attention deficit hyperactivity disorder (ADHD), one of the most common neuropsychiatric disorders of childhood and adolescence, often persists into adulthood.
+* Anxiety: People with anxiety disorders frequently have intense, excessive and persistent worry and fear about everyday situations.
+* BMI and Obesity: Overweight and obesity are associated with morbidity and mortality can lead to significant social and psychological challenges for individuals, including stigma, discrimination, and increased risk of mental health issues such as depression and low self-esteem.
+* CKD: Chronic Kidney Disease includes a range of pathophysiologic processes associated with abnormal kidney function and a progressive decline in glomerular filtration rate (GFR).
+* Depression: Depression is a constellation of symptoms and signs that may include depressed mood.
+* Diabetes: Type 2 Diabetes (T2D) is a health condition characterized by blood sugar levels that are higher than normal, whereas in prediabetes blood sugar levels are not high enough yet to be classified as T2D.
+* Endometriosis:  Endometriosis is a gynecological disease defined as endometrial glands and stroma that occur outside the uterine cavity.
+* Hyperlipidemia: Lipoproteins are complexes of lipids and proteins that are essential for transport of cholesterol, triglycerides (TGs), and fat-soluble vitamins in the blood. Disorders of lipoprotein metabolism include primary and secondary conditions that substantially increase or decrease specific circulating lipids (e.g., cholesterol or TGs) or lipoproteins (e.g., low density or high density lipoproteins).
+* Hypertension: Hypertension is the most common reason for office visits and for the use of chronic prescription medications. Roughly one-half of hypertensive individuals do not have adequate blood pressure control.
+* Ischemic Heart Disease: Ischemic heart disease (IHD), also referred to as coronary heart disease (CHD), is the term associated with an inadequate supply of blood to the myocardium due to obstruction of the epicardial coronary arteries, usually from atherosclerosis.
+* MAFLD: Metabolic (dysfunction) Associated Fatty Liver Disease / Non-alcoholic Fatty Liver Disease (NAFLD) was described as an excessive fat infiltration of the liver in the absence of significant alcohol consumption or other causes of liver disease.
+* Menopause: Natural menopause is defined as the permanent cessation of menstrual periods, determined retrospectively after a woman has experienced 12 months of amenorrhea without any other obvious pathologic or physiologic cause.
+* Migraine: Migraine is an episodic disorder that manifests in a severe headache generally associated with nausea and/or light and sound sensitivity.
+* NMSC: Nonmelanoma Skin Cancers are a group of cancers that arise from the skin but do not include melanoma. The most common types of nonmelanoma skin cancer are basal cell carcinoma (BCC) and squamous cell carcinoma (SCC).
+* OSA: Obstructive Sleep Apnea is a disorder that is characterized by obstructive apneas, hypopneas, and/or respiratory effort-related arousals caused by repetitive collapse of the upper airway during sleep.
+* Osteoporosis: Osteoporosis is characterized by low bone mass, microarchitectural disruption, and skeletal fragility, resulting in decreased bone strength and an increased risk of fracture.
+* Sarcopenia: Sarcopenia is a syndrome characterized by the loss of muscle mass, strength, and performance.
+* Sleep Quality: Sleep is considered a restorative process that allows for energy renewal and also for cellular. Low sleep quality may lead to accelerated aging by triggering DNA damage and chronic inflammation to influence the compensatory/resiliency systems of the human body.
