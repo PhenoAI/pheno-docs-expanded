@@ -18,9 +18,6 @@ __pycache__/
 venv/
 env/
 
-# Generated knowledge base
-pheno_knowledge_base_expanded/knowledge-base-context.txt
-
 # OS files
 .DS_Store
 Thumbs.db

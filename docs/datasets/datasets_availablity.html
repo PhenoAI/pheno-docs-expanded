@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Pheno.AI - Medications</title>
+<title>Pheno.AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,44 +20,10 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -102,9 +68,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -151,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../datasets_description.html">Datasets</a></li><li class="breadcrumb-item"><a href="../category_medical_records_surveys.html">Medical Records and Surveys</a></li><li class="breadcrumb-item"><a href="../datasets/018-medications.html">Medications</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../datasets_description.html">Datasets</a></li><li class="breadcrumb-item"><a href="../datasets/datasets_availablity.html">HPP Data Availability</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -188,7 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../datasets/datasets_availablity.html" class="sidebar-item-text sidebar-link">
+  <a href="../datasets/datasets_availablity.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">HPP Data Availability</span></a>
   </div>
 </li>
@@ -432,7 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../datasets/018-medications.html" class="sidebar-item-text sidebar-link active">
+  <a href="../datasets/018-medications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Medications</span></a>
   </div>
 </li>
@@ -539,482 +502,390 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description">Description</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#measurement-protocol" id="toc-measurement-protocol" class="nav-link" data-scroll-target="#measurement-protocol">Measurement protocol</a></li>
-  <li><a href="#data-availability" id="toc-data-availability" class="nav-link" data-scroll-target="#data-availability">Data availability</a></li>
-  <li><a href="#summary-of-available-data" id="toc-summary-of-available-data" class="nav-link" data-scroll-target="#summary-of-available-data">Summary of available data</a></li>
-  <li><a href="#relevant-links" id="toc-relevant-links" class="nav-link" data-scroll-target="#relevant-links">Relevant links</a></li>
-  <li><a href="#data-dictionary" id="toc-data-dictionary" class="nav-link" data-scroll-target="#data-dictionary">Data dictionary</a></li>
+  <li><a href="#hpp-data-availability" id="toc-hpp-data-availability" class="nav-link active" data-scroll-target="#hpp-data-availability">HPP Data Availability</a>
+  <ul class="collapse">
+  <li><a href="#participant-flow-engagement" id="toc-participant-flow-engagement" class="nav-link" data-scroll-target="#participant-flow-engagement">Participant Flow &amp; Engagement</a>
+  <ul class="collapse">
+  <li><a href="#visits" id="toc-visits" class="nav-link" data-scroll-target="#visits">Visits</a></li>
+  <li><a href="#calls" id="toc-calls" class="nav-link" data-scroll-target="#calls">Calls</a></li>
+  </ul></li>
+  <li><a href="#data-modalities-coverage" id="toc-data-modalities-coverage" class="nav-link" data-scroll-target="#data-modalities-coverage">Data Modalities Coverage</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../datasets_description.html">Datasets</a></li><li class="breadcrumb-item"><a href="../category_medical_records_surveys.html">Medical Records and Surveys</a></li><li class="breadcrumb-item"><a href="../datasets/018-medications.html">Medications</a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title">Medications</h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="description" class="level3">
-<h3 class="anchored" data-anchor-id="description">Description</h3>
-<p>The Human Phenotype Project medications dataset is based on self-reported, participant-provided information. Self-reported medications are coded to Anatomical Therapeutic Chemical (ATC) codes from the WHO Collaborating Centre for Drug Statistics Methodology. The ATC classification system is the gold standard for international drug utilization monitoring and research.</p>
-</section>
-<section id="introduction" class="level3">
-<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
-<p>Medication usage reporting in medical research and longitudinal cohort studies is essential for understanding drug effectiveness, safety, and biological interactions. Medication usage data helps researchers understand how different medications affect diverse populations and organ systems based on genetics, environment, lifestyle, and medical history. For example, an individual’s microbiome composition can influence drug metabolism and absorption, while the drugs themselves can alter microbiome populations. Drug-drug interactions represent another critical factor that can affect treatment efficacy.</p>
-<p>Multiple methods exist for collecting medication usage data in research studies, including self-report, medical records, pill counts, and electronic monitoring. Self-report involves participants directly reporting their medication use to researchers. Accurate and complete medication data is essential for understanding the true impact of pharmaceuticals on individual health.</p>
-<p>The Human Phenotype Project collects medication information through self-reporting via online and smartphone applications, as well as through staff-administered questionnaires during telephone or in-person follow-up visits.</p>
-</section>
-<section id="measurement-protocol" class="level3">
-<h3 class="anchored" data-anchor-id="measurement-protocol">Measurement protocol</h3>
-<!-- long measurment protocol for the data browser -->
-<p>Medication data is collected from multiple sources throughout the study:</p>
-<ol type="1">
-<li><p><strong>Registration:</strong> During study enrollment, participants report their regular medications online by selecting from a predefined drop-down list with autofill functionality. Medications that meet exclusion criteria trigger automatic questionnaire termination with an appropriate message.</p></li>
-<li><p><strong>Mobile application logging:</strong> Participants can log medications and consumption times using a dedicated mobile application. Participants are requested to log medications during the two-week periods following each visit.</p></li>
-<li><p><strong>Follow-up visits and calls:</strong> During follow-up interactions at the clinical testing center or via telephone, participants report any new medications started or stopped, including the month and year of each change. Study staff members record this information using a predefined drop-down list. If a specific medication cannot be found in the list, staff can either log it through the mobile application or use a free-text entry option.</p></li>
-</ol>
-</section>
-<section id="data-availability" class="level3">
-<h3 class="anchored" data-anchor-id="data-availability">Data availability</h3>
-<!-- for the example notebooks -->
-<p>Medication data is collected from three sources: - Registration medications: Reported during study sign-up via online questionnaire with autofill functionality - Follow-up medications: Updates provided during follow-up calls or visits to the clinical testing center - Application logging: Real-time medication logging through the mobile application</p>
-<p>All medication data from these sources is stored in 1 parquet file: <code>medications.parquet</code></p>
-</section>
-<section id="summary-of-available-data" class="level3">
-<h3 class="anchored" data-anchor-id="summary-of-available-data">Summary of available data</h3>
-<!-- for the data browser -->
-<p>The medications dataset includes comprehensive information about participants’ medication usage from multiple sources:</p>
-<ol type="1">
-<li><strong>Medications at baseline:</strong> Medications that participants were taking at the time of enrollment or baseline visit</li>
-<li><strong>Medication changes during follow-up:</strong> New medications started or stopped during longitudinal follow-up</li>
-<li><strong>App-logged medications:</strong> Real-time medication logging through the mobile application during the two-week periods following visits</li>
-<li><strong>ATC coding:</strong> Many medications are coded using the Anatomical Therapeutic Chemical (ATC) classification system for standardized analysis</li>
-</ol>
-<p>The data includes medication names, start and stop dates (month and year), and the source of information (registration, follow-up visit/call, or app logging). This comprehensive medication tracking enables research into drug-disease associations, polypharmacy patterns, and medication adherence over time.</p>
-</section>
-<section id="relevant-links" class="level3">
-<h3 class="anchored" data-anchor-id="relevant-links">Relevant links</h3>
-<ul>
-<li><a href="https://pheno-demo-app.vercel.app/folder/18">Pheno Data Browser</a></li>
-</ul>
-<div id="586a66dd" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-02T12:00:09.222385Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-02T12:00:09.222170Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-02T12:00:10.461582Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-02T12:00:10.461106Z&quot;}" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pheno_utils <span class="im">import</span> PhenoLoader</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="59b9c9d3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-02T12:00:10.464386Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-02T12:00:10.463819Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-02T12:00:11.501986Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-02T12:00:11.501380Z&quot;}" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pl <span class="op">=</span> PhenoLoader(<span class="st">'medications'</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>PhenoLoader for medications with
-16 fields
-2 tables: ['medications', 'age_sex']</code></pre>
-</div>
-</div>
-</section>
-<section id="data-dictionary" class="level1">
-<h1>Data dictionary</h1>
-<div id="2c7c9152" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-04-02T12:00:11.503815Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-04-02T12:00:11.503669Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-04-02T12:00:11.517029Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-04-02T12:00:11.516450Z&quot;}" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pl.<span class="bu">dict</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<section id="hpp-data-availability" class="level1">
+<h1>HPP Data Availability</h1>
+<section id="participant-flow-engagement" class="level2">
+<h2 class="anchored" data-anchor-id="participant-flow-engagement">Participant Flow &amp; Engagement</h2>
+<p>These numbers represent current participant progress through the HPP study. Eventually, all participants should progress through all different stages and visits. For more information about the participant journey, please visit: <a href="https://pheno-docs-expanded/participant_journey.html">https://pheno-docs-expanded/participant_journey.html</a></p>
+<section id="visits" class="level3">
+<h3 class="anchored" data-anchor-id="visits">Visits</h3>
+<table class="caption-top table">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">folder_id</th>
-<th data-quarto-table-cell-role="th">feature_set</th>
-<th data-quarto-table-cell-role="th">field_string</th>
-<th data-quarto-table-cell-role="th">relative_location</th>
-<th data-quarto-table-cell-role="th">description_string</th>
-<th data-quarto-table-cell-role="th">bulk_dictionary</th>
-<th data-quarto-table-cell-role="th">data_coding</th>
-<th data-quarto-table-cell-role="th">stability</th>
-<th data-quarto-table-cell-role="th">field_type</th>
-<th data-quarto-table-cell-role="th">units</th>
-<th data-quarto-table-cell-role="th">sampling_rate</th>
-<th data-quarto-table-cell-role="th">strata</th>
-<th data-quarto-table-cell-role="th">sexed</th>
-<th data-quarto-table-cell-role="th">array</th>
-<th data-quarto-table-cell-role="th">list_of_tags</th>
-<th data-quarto-table-cell-role="th">debut</th>
-<th data-quarto-table-cell-role="th">transformation</th>
-<th data-quarto-table-cell-role="th">pandas_dtype</th>
-<th data-quarto-table-cell-role="th">completed</th>
-<th data-quarto-table-cell-role="th">bulk_file_extension</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">tabular_field_name</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
+<th>Visit Type</th>
+<th style="text-align: right;">Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">collection_timestamp</td>
-<td>18</td>
-<td>medications</td>
-<td>Collection time</td>
-<td>medications/medications.parquet</td>
-<td>Collection time</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Datetime</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Collection time</td>
-<td>Both sexes</td>
-<td>Single</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>datetime64[ns, Asia/Jerusalem]</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>Baseline</td>
+<td style="text-align: right;">13,522</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">collection_date</td>
-<td>18</td>
-<td>medications</td>
-<td>Collection date</td>
-<td>medications/medications.parquet</td>
-<td>Collection date</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Date</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Primary</td>
-<td>Both sexes</td>
-<td>Single</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>datetime64[ns]</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>2-Year Visit</td>
+<td style="text-align: right;">7,311</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">timezone</td>
-<td>18</td>
-<td>medications</td>
-<td>Timezone</td>
-<td>medications/medications.parquet</td>
-<td>Timezone</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Categorical (single)</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Collection time</td>
-<td>Both sexes</td>
-<td>Single</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>category</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>4-Year Visit</td>
+<td style="text-align: right;">3,705</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">medication</td>
-<td>18</td>
-<td>medications</td>
-<td>Medication name</td>
-<td>medications/medications.parquet</td>
-<td>Medication name</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Categorical (single)</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Primary</td>
-<td>Both sexes</td>
-<td>Single</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>category</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">api</td>
-<td>18</td>
-<td>medications</td>
-<td>Active Pharmaceutical Ingredient</td>
-<td>medications/medications.parquet</td>
-<td>Active Pharmaceutical Ingredient</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Categorical (multiple)</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Primary</td>
-<td>Both sexes</td>
-<td>Multiple</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>object</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">atc3</td>
-<td>18</td>
-<td>medications</td>
-<td>List of atc codes level 3</td>
-<td>medications/medications.parquet</td>
-<td>List of atc codes level 3</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Categorical (multiple)</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Primary</td>
-<td>Both sexes</td>
-<td>Multiple</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>object</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">atc4</td>
-<td>18</td>
-<td>medications</td>
-<td>List of atc codes level 4</td>
-<td>medications/medications.parquet</td>
-<td>List of atc codes level 4</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Categorical (multiple)</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Primary</td>
-<td>Both sexes</td>
-<td>Multiple</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>object</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">atc5</td>
-<td>18</td>
-<td>medications</td>
-<td>List of atc codes level 5</td>
-<td>medications/medications.parquet</td>
-<td>List of atc codes level 5</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Categorical (multiple)</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Primary</td>
-<td>Both sexes</td>
-<td>Multiple</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>object</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">start_month</td>
-<td>18</td>
-<td>medications</td>
-<td>Start month</td>
-<td>medications/medications.parquet</td>
-<td>Start month of medication taking</td>
-<td>NaN</td>
-<td>042_03</td>
-<td>NaN</td>
-<td>Categorical (single)</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Primary</td>
-<td>Both sexes</td>
-<td>Single</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Int64</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">start_year</td>
-<td>18</td>
-<td>medications</td>
-<td>Start year</td>
-<td>medications/medications.parquet</td>
-<td>Start year of medication taking</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Integer</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Primary</td>
-<td>Both sexes</td>
-<td>Single</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Int64</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">start_date</td>
-<td>18</td>
-<td>medications</td>
-<td>Start date combined month + year</td>
-<td>medications/medications.parquet</td>
-<td>Start date combined month + year</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Date</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Primary</td>
-<td>Both sexes</td>
-<td>Single</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>datetime64[ns]</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">supplements</td>
-<td>18</td>
-<td>medications</td>
-<td>Is supplements</td>
-<td>medications/medications.parquet</td>
-<td>Is it supplements</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Categorical (single)</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Primary</td>
-<td>Both sexes</td>
-<td>Single</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>bool</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">source</td>
-<td>18</td>
-<td>medications</td>
-<td>Data Source</td>
-<td>medications/medications.parquet</td>
-<td>data source</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Categorical (single)</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Primary</td>
-<td>Both sexes</td>
-<td>Single</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>category</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">medication_mapping</td>
-<td>18</td>
-<td>medications_auxiliary</td>
-<td>Medication mapping</td>
-<td>medications/medications.parquet</td>
-<td>Mapping to ATC codes</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Mapping table (group)</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Auxiliary</td>
-<td>Both sexes</td>
-<td>Single</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>category</td>
-<td>NaN</td>
-<td>csv</td>
+<td>6-Year Visit</td>
+<td style="text-align: right;">807</td>
 </tr>
 </tbody>
 </table>
+<hr>
+</section>
+<section id="calls" class="level3">
+<h3 class="anchored" data-anchor-id="calls">Calls</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Call Stage</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Call 1</td>
+<td style="text-align: right;">11,184</td>
+</tr>
+<tr class="even">
+<td>Call 3</td>
+<td style="text-align: right;">8,287</td>
+</tr>
+<tr class="odd">
+<td>Call 5</td>
+<td style="text-align: right;">3,423</td>
+</tr>
+<tr class="even">
+<td>Call 7</td>
+<td style="text-align: right;">4</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="data-modalities-coverage" class="level2">
+<h2 class="anchored" data-anchor-id="data-modalities-coverage">Data Modalities Coverage</h2>
+<p>The table below summarizes participant coverage across clinical, omics, imaging, time-series, and multimedia data types.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 20%">
+<col style="width: 17%">
+<col style="width: 24%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Subcategory</th>
+<th>Modality</th>
+<th style="text-align: right;">Participants</th>
+<th style="text-align: right;">Measurements</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Medical Records and Surveys</td>
+<td>Diagnosis</td>
+<td>Diagnosis</td>
+<td style="text-align: right;">12,676</td>
+<td style="text-align: right;">27,016</td>
+</tr>
+<tr class="even">
+<td>Medical Records and Surveys</td>
+<td>Procedures</td>
+<td>Medical Procedures</td>
+<td style="text-align: right;">12,242</td>
+<td style="text-align: right;">27,080</td>
+</tr>
+<tr class="odd">
+<td>Medical Records and Surveys</td>
+<td>Medications</td>
+<td>Reported Medications</td>
+<td style="text-align: right;">9,293</td>
+<td style="text-align: right;">24,809</td>
+</tr>
+<tr class="even">
+<td>Medical Records and Surveys</td>
+<td>Mental</td>
+<td>Mental Questionnaire</td>
+<td style="text-align: right;">12,088</td>
+<td style="text-align: right;">32,809</td>
+</tr>
+<tr class="odd">
+<td>Medical Records and Surveys</td>
+<td>Hormonal</td>
+<td>Hormonal Questionnaire</td>
+<td style="text-align: right;">13,384</td>
+<td style="text-align: right;">29,531</td>
+</tr>
+<tr class="even">
+<td>Medical Records and Surveys</td>
+<td>Lifestyle</td>
+<td>Lifestyle Questionnaire</td>
+<td style="text-align: right;">12,151</td>
+<td style="text-align: right;">32,907</td>
+</tr>
+<tr class="odd">
+<td>Clinical Assessments</td>
+<td>CBC</td>
+<td>Complete Lab Count</td>
+<td style="text-align: right;">10,662</td>
+<td style="text-align: right;">15,622</td>
+</tr>
+<tr class="even">
+<td>Clinical Assessments</td>
+<td>Blood Tests</td>
+<td>HCP Blood Tests</td>
+<td style="text-align: right;">12,315</td>
+<td style="text-align: right;">31,433</td>
+</tr>
+<tr class="odd">
+<td>Medical Imaging</td>
+<td>Ultrasound</td>
+<td>Carotid</td>
+<td style="text-align: right;">12,325</td>
+<td style="text-align: right;">21,260</td>
+</tr>
+<tr class="even">
+<td>Medical Imaging</td>
+<td>Ultrasound</td>
+<td>Liver</td>
+<td style="text-align: right;">12,325</td>
+<td style="text-align: right;">21,260</td>
+</tr>
+<tr class="odd">
+<td>Medical Imaging</td>
+<td>DEXA</td>
+<td>Body Composition</td>
+<td style="text-align: right;">12,049</td>
+<td style="text-align: right;">20,529</td>
+</tr>
+<tr class="even">
+<td>Medical Imaging</td>
+<td>DEXA</td>
+<td>Bone Density</td>
+<td style="text-align: right;">12,049</td>
+<td style="text-align: right;">20,529</td>
+</tr>
+<tr class="odd">
+<td>Medical Imaging</td>
+<td>Fundus</td>
+<td>Fundus Imaging</td>
+<td style="text-align: right;">11,412</td>
+<td style="text-align: right;">16,859</td>
+</tr>
+<tr class="even">
+<td>Multi-Omics</td>
+<td>Genetics</td>
+<td>Human Genetics</td>
+<td style="text-align: right;">8,958</td>
+<td style="text-align: right;">8,958</td>
+</tr>
+<tr class="odd">
+<td>Multi-Omics</td>
+<td>Serum</td>
+<td>N-Glycome</td>
+<td style="text-align: right;">5,400</td>
+<td style="text-align: right;">7,680</td>
+</tr>
+<tr class="even">
+<td>Multi-Omics</td>
+<td>Serum</td>
+<td>IgG Glycome</td>
+<td style="text-align: right;">217</td>
+<td style="text-align: right;">434</td>
+</tr>
+<tr class="odd">
+<td>Multi-Omics</td>
+<td>Microbiome</td>
+<td>Gut Microbiome</td>
+<td style="text-align: right;">12,674</td>
+<td style="text-align: right;">22,530</td>
+</tr>
+<tr class="even">
+<td>Multi-Omics</td>
+<td>Microbiome</td>
+<td>Oral Microbiome</td>
+<td style="text-align: right;">8,138</td>
+<td style="text-align: right;">8,138</td>
+</tr>
+<tr class="odd">
+<td>Multi-Omics</td>
+<td>Microbiome</td>
+<td>Vaginal Microbiome</td>
+<td style="text-align: right;">1,311</td>
+<td style="text-align: right;">1,311</td>
+</tr>
+<tr class="even">
+<td>Multi-Omics</td>
+<td>Serum</td>
+<td>NMR Metabolomics</td>
+<td style="text-align: right;">10,576</td>
+<td style="text-align: right;">15,168</td>
+</tr>
+<tr class="odd">
+<td>Multi-Omics</td>
+<td>Serum</td>
+<td>Untargeted Metabolomics</td>
+<td style="text-align: right;">9,341</td>
+<td style="text-align: right;">13,494</td>
+</tr>
+<tr class="even">
+<td>Multi-Omics</td>
+<td>Serum</td>
+<td>Lipidomics</td>
+<td style="text-align: right;">6,292</td>
+<td style="text-align: right;">6,292</td>
+</tr>
+<tr class="odd">
+<td>Multi-Omics</td>
+<td>Serum</td>
+<td>Olink Proteomics</td>
+<td style="text-align: right;">5,063</td>
+<td style="text-align: right;">6,135</td>
+</tr>
+<tr class="even">
+<td>Multi-Omics</td>
+<td>PBMC</td>
+<td>Transcriptomics</td>
+<td style="text-align: right;">7,877</td>
+<td style="text-align: right;">8,812</td>
+</tr>
+<tr class="odd">
+<td>Sensors and App Logging</td>
+<td>Sleep</td>
+<td>Itamar Device</td>
+<td style="text-align: right;">11,909</td>
+<td style="text-align: right;">20,300</td>
+</tr>
+<tr class="even">
+<td>Sensors and App Logging</td>
+<td>ECG</td>
+<td>ECG</td>
+<td style="text-align: right;">13,284</td>
+<td style="text-align: right;">24,281</td>
+</tr>
+<tr class="odd">
+<td>Sensors and App Logging</td>
+<td>CGM</td>
+<td>CGM</td>
+<td style="text-align: right;">11,038</td>
+<td style="text-align: right;">11,375</td>
+</tr>
+<tr class="even">
+<td>Sensors and App Logging</td>
+<td>App</td>
+<td>Diet</td>
+<td style="text-align: right;">13,109</td>
+<td style="text-align: right;">31,304</td>
+</tr>
+<tr class="odd">
+<td>Sensors and App Logging</td>
+<td>App</td>
+<td>Medication Intake</td>
+<td style="text-align: right;">9,317</td>
+<td style="text-align: right;">18,183</td>
+</tr>
+<tr class="even">
+<td>Sensors and App Logging</td>
+<td>App</td>
+<td>Exercise</td>
+<td style="text-align: right;">10,995</td>
+<td style="text-align: right;">22,083</td>
+</tr>
+<tr class="odd">
+<td>Sensors and App Logging</td>
+<td>App</td>
+<td>Sleep Logs</td>
+<td style="text-align: right;">12,352</td>
+<td style="text-align: right;">25,845</td>
+</tr>
+<tr class="even">
+<td>Clinical Assessments</td>
+<td>Gait</td>
+<td>Gait &amp; Balance</td>
+<td style="text-align: right;">3,414</td>
+<td style="text-align: right;">3,514</td>
+</tr>
+<tr class="odd">
+<td>Clinical Assessments</td>
+<td>Voice</td>
+<td>Voice Recording</td>
+<td style="text-align: right;">9,800</td>
+<td style="text-align: right;">11,744</td>
+</tr>
+<tr class="even">
+<td>Clinical Assessments</td>
+<td>Anthropometric</td>
+<td>Anthropometric</td>
+<td style="text-align: right;">13,533</td>
+<td style="text-align: right;">25,611</td>
+</tr>
+<tr class="odd">
+<td>Clinical Assessments</td>
+<td>Vitals</td>
+<td>BP &amp; Heart Rate</td>
+<td style="text-align: right;">13,502</td>
+<td style="text-align: right;">25,538</td>
+</tr>
+<tr class="even">
+<td>Clinical Assessments</td>
+<td>Orthostatic</td>
+<td>Orthostatic Hypotension</td>
+<td style="text-align: right;">11,873</td>
+<td style="text-align: right;">15,862</td>
+</tr>
+<tr class="odd">
+<td>Clinical Assessments</td>
+<td>Falcon</td>
+<td>ABI</td>
+<td style="text-align: right;">13,057</td>
+<td style="text-align: right;">23,407</td>
+</tr>
+<tr class="even">
+<td>Clinical Assessments</td>
+<td>Falcon</td>
+<td>PWV</td>
+<td style="text-align: right;">13,057</td>
+<td style="text-align: right;">23,407</td>
+</tr>
+<tr class="odd">
+<td>Clinical Assessments</td>
+<td>Strength</td>
+<td>Hand Grip Test</td>
+<td style="text-align: right;">13,476</td>
+<td style="text-align: right;">25,392</td>
+</tr>
+</tbody>
+</table>
+<hr>
 
-</div>
-</div>
-</div>
 
-
+</section>
 </section>
 
 </main> <!-- /main -->
