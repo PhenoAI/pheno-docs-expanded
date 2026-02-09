@@ -21,6 +21,9 @@ env/
 # Generated knowledge base
 pheno_knowledge_base_expanded/knowledge-base-context.txt
 
+# Lambda deployment package (build artifact)
+lambda/lambda-deployment.zip
+
 # OS files
 .DS_Store
 Thumbs.db
