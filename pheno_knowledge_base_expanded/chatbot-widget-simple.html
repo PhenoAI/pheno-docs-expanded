@@ -150,38 +150,44 @@
         background: white;
         border-radius: 16px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        width: 60px;
+        color: #666;
+        font-style: italic;
     }
 
     .pheno-typing.active {
         display: block;
     }
 
-    .pheno-typing span {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        background: #667eea;
-        border-radius: 50%;
-        margin: 0 2px;
-        animation: typing 1.4s infinite;
+    .pheno-message-content a {
+        color: #667eea;
+        text-decoration: underline;
     }
 
-    .pheno-typing span:nth-child(2) {
-        animation-delay: 0.2s;
+    .pheno-message-content a:hover {
+        color: #764ba2;
     }
 
-    .pheno-typing span:nth-child(3) {
-        animation-delay: 0.4s;
+    .pheno-message-content p {
+        margin: 0.5em 0;
+        line-height: 1.5;
     }
 
-    @keyframes typing {
-        0%, 60%, 100% {
-            transform: translateY(0);
-        }
-        30% {
-            transform: translateY(-8px);
-        }
+    .pheno-message-content p:first-child {
+        margin-top: 0;
+    }
+
+    .pheno-message-content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .pheno-message-content ul {
+        margin: 0.5em 0;
+        padding-left: 1.5em;
+        line-height: 1.6;
+    }
+
+    .pheno-message-content li {
+        margin: 0.3em 0;
     }
 
     .pheno-chat-input-container {
@@ -303,16 +309,14 @@
 
     // Configuration
     const CONFIG = {
-        OPENROUTER_API_KEY: '__OPENROUTER_API_KEY__',
-        OPENROUTER_MODEL: 'anthropic/claude-3.5-sonnet',
-        API_URL: 'https://openrouter.ai/api/v1/chat/completions'
+        BACKEND_URL: '__BACKEND_URL__'  // Will be injected during build
     };
 
     // State
     let conversationHistory = [];
     let isProcessing = false;
-    let websiteContent = '';
-    let contentLoaded = false;
+    const STORAGE_KEY = 'pheno_chatbot_history';
+    const MAX_STORED_MESSAGES = 20;
 
     // DOM Elements
     const chatButton = document.getElementById('phenoChatButton');
@@ -322,24 +326,8 @@
     const chatInput = document.getElementById('phenoChatInput');
     const sendButton = document.getElementById('phenoSendButton');
 
-    // Load website content
-    async function loadWebsiteContent() {
-        try {
-            // Use absolute path from site root
-            const response = await fetch('/knowledge-base-context.txt');
-            websiteContent = await response.text();
-            contentLoaded = true;
-            console.log('✅ Website content loaded:', websiteContent.length, 'characters');
-        } catch (error) {
-            console.error('❌ Failed to load website content:', error);
-            console.error('Error details:', error);
-            contentLoaded = false;
-        }
-    }
-
     // Initialize
     function init() {
-        loadWebsiteContent();
         chatButton.addEventListener('click', toggleChat);
         chatClose.addEventListener('click', toggleChat);
         sendButton.addEventListener('click', handleSend);
@@ -349,6 +337,9 @@
                 handleSend();
             }
         });
+        
+        // Load conversation history from localStorage
+        loadConversationHistory();
     }
 
     // Toggle chat window
@@ -398,6 +389,50 @@
         }
     }
 
+    // Convert markdown and format text to HTML
+    function renderMarkdown(content) {
+        let html = content;
+        
+        // First, convert markdown links [text](url) to HTML <a> tags
+        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+        
+        // Convert double line breaks to paragraphs
+        // Split by double newlines first
+        const paragraphs = html.split(/\n\n+/);
+        
+        // Process each paragraph
+        html = paragraphs.map(para => {
+            para = para.trim();
+            if (!para) return '';
+            
+            // Check if it's a list (starts with - or • or numbered)
+            const lines = para.split('\n');
+            const isList = lines.some(line => /^[\s]*[-•]\s/.test(line.trim()) || /^[\s]*\d+\.\s/.test(line.trim()));
+            
+            if (isList) {
+                // Format as list
+                const listItems = lines
+                    .map(line => line.trim())
+                    .filter(line => line.length > 0)
+                    .map(line => {
+                        // Remove list markers and wrap in <li>
+                        line = line.replace(/^[\s]*[-•]\s+/, '');
+                        line = line.replace(/^[\s]*\d+\.\s+/, '');
+                        return `<li>${line}</li>`;
+                    })
+                    .join('');
+                return `<ul>${listItems}</ul>`;
+            } else {
+                // Regular paragraph
+                // Replace single newlines with <br> for line breaks within paragraph
+                para = para.replace(/\n/g, '<br>');
+                return `<p>${para}</p>`;
+            }
+        }).filter(p => p.length > 0).join('');
+        
+        return html;
+    }
+
     // Add message to chat
     function addMessage(role, content) {
         const messageDiv = document.createElement('div');
@@ -405,7 +440,9 @@
         
         const contentDiv = document.createElement('div');
         contentDiv.className = 'pheno-message-content';
-        contentDiv.textContent = content;
+        
+        // Render markdown links as HTML
+        contentDiv.innerHTML = renderMarkdown(content);
         
         messageDiv.appendChild(contentDiv);
         chatMessages.appendChild(messageDiv);
@@ -415,6 +452,9 @@
         
         // Add to conversation history
         conversationHistory.push({ role, content });
+        
+        // Save to localStorage
+        saveConversationHistory();
     }
 
     // Add typing indicator
@@ -424,7 +464,7 @@
         
         const indicator = document.createElement('div');
         indicator.className = 'pheno-typing active';
-        indicator.innerHTML = '<span></span><span></span><span></span>';
+        indicator.textContent = 'Thinking...';
         
         messageDiv.appendChild(indicator);
         chatMessages.appendChild(messageDiv);
@@ -433,55 +473,76 @@
         return messageDiv;
     }
 
-    // Get AI response from OpenRouter
+    // Save conversation history to localStorage
+    function saveConversationHistory() {
+        try {
+            // Keep only last MAX_STORED_MESSAGES messages
+            const historyToSave = conversationHistory.slice(-MAX_STORED_MESSAGES);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(historyToSave));
+        } catch (e) {
+            console.warn('Failed to save conversation history:', e);
+        }
+    }
+
+    // Load conversation history from localStorage
+    function loadConversationHistory() {
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const history = JSON.parse(saved);
+                conversationHistory = history;
+                
+                // Restore messages to UI (skip the initial greeting)
+                const initialGreeting = chatMessages.querySelector('.pheno-message.assistant');
+                if (initialGreeting) {
+                    chatMessages.innerHTML = '';
+                    chatMessages.appendChild(initialGreeting);
+                }
+                
+                // Add restored messages
+                history.forEach(msg => {
+                    if (msg.role !== 'system') {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = `pheno-message ${msg.role}`;
+                        
+                        const contentDiv = document.createElement('div');
+                        contentDiv.className = 'pheno-message-content';
+                        contentDiv.innerHTML = renderMarkdown(msg.content);
+                        
+                        messageDiv.appendChild(contentDiv);
+                        chatMessages.appendChild(messageDiv);
+                    }
+                });
+                
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        } catch (e) {
+            console.warn('Failed to load conversation history:', e);
+        }
+    }
+
+    // Get AI response from backend
     async function getAIResponse(userMessage) {
-        const systemPrompt = contentLoaded 
-            ? `You are a helpful AI assistant for the Human Phenotype Project website.
-
-CRITICAL RULES:
-1. Answer ONLY based on the website content provided below
-2. If the answer is not in the content, say: "I don't find that information in the current documentation. Please check the website directly."
-3. NEVER make up or invent information
-4. Be concise and accurate
-5. If asked about something not related to this project, politely decline
-
-WEBSITE CONTENT:
-${websiteContent}
-
-Answer ONLY from the content above. Do not use external knowledge.`
-            : `You are a helpful AI assistant for the Human Phenotype Project. I'm still loading the website content. Please ask your question and I'll answer based on the documentation.`;
-
-        const messages = [
-            { role: 'system', content: systemPrompt },
-            ...conversationHistory.slice(-6),
-            { role: 'user', content: userMessage }
-        ];
-
-        const response = await fetch(CONFIG.API_URL, {
+        const response = await fetch(CONFIG.BACKEND_URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${CONFIG.OPENROUTER_API_KEY}`,
-                'HTTP-Referer': window.location.href,
-                'X-Title': 'Pheno.AI Chatbot'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: CONFIG.OPENROUTER_MODEL,
-                messages: messages,
-                temperature: 0.3,
-                max_tokens: 1000
+                question: userMessage,
+                conversation_history: conversationHistory.slice(-6)
             })
         });
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            const errorMsg = errorData.error?.message || `API request failed with status ${response.status}`;
-            console.error('API Error:', errorMsg, errorData);
-            throw new Error(errorMsg);
+            const errorMsg = errorData.error || `Backend request failed with status ${response.status}`;
+            console.error('Backend Error:', errorMsg);
+            throw new Error(typeof errorMsg === 'string' ? errorMsg : 'Failed to get response from server');
         }
 
         const data = await response.json();
-        return data.choices[0].message.content;
+        return data.answer;
     }
 
     // Start the app

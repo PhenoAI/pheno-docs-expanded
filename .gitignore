@@ -18,6 +18,10 @@ __pycache__/
 venv/
 env/
 
+
+# Lambda deployment package (build artifact)
+lambda/lambda-deployment.zip
+
 # OS files
 .DS_Store
 Thumbs.db
