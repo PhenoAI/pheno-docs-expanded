@@ -41,8 +41,8 @@ echo ""
 CONTEXT_FILE="pheno_knowledge_base_expanded/knowledge-base-context.txt"
 if [ ! -f "$CONTEXT_FILE" ]; then
     echo "📚 Step 2: Creating knowledge base context (file doesn't exist)..."
-    ./create-knowledge-base.sh
-    echo ""
+./create-knowledge-base.sh
+echo ""
 else
     echo "📚 Step 2: Using existing knowledge base context (skipping regeneration)"
     echo "   File: $CONTEXT_FILE"

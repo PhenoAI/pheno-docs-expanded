@@ -118,7 +118,7 @@ python3 -m http.server 8000
 2. **Update `.env` for local testing:**
    ```
    BACKEND_URL="http://localhost:5000/api/chat"
-   ```
+     ```
 
 3. **Build and preview:**
    ```bash
