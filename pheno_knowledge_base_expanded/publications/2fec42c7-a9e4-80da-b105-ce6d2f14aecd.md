@@ -1,7 +1,7 @@
 ---
 title: "NutriMatch: harmonizing food composition databases with large language models for enhanced nutritional prediction"
 date: "2026-01-21"
-link: https://www.nature.com/articles/s44482-025-00001-7
+link: https://doi.org/10.1038/s44482-025-00001-7
 image: 21dab351_image.png
 categories:
   - "Diel logging"
@@ -12,7 +12,7 @@ categories:
   - "2026"
 ---
 
-Jankelow A, Godneva A, Rein M, Samocha-Bonet D, Weissglas-Volkov D, Zohar S, Shor T, Segal E, [*npj | digital public health*](https://www.nature.com/articles/s44482-025-00001-7)
+Jankelow A, Godneva A, Rein M, Samocha-Bonet D, Weissglas-Volkov D, Zohar S, Shor T, Segal E, [*npj | digital public health*](https://doi.org/10.1038/s44482-025-00001-7)
 
 
 

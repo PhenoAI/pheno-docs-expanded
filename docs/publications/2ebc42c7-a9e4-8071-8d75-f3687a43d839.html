@@ -545,7 +545,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Lutsker G, Sapir G, Shilo S, Merino J, Godneva A, Greenfield J, Samocha-Bonet D, Dhir R, Gude F, Mannor S, Meirom E, Xing E, Chechik G, Rossman H, Segal E, <a href="https://www.nature.com/articles/s41586-025-09925-9"><em>Nature</em></a></p>
+<p>Lutsker G, Sapir G, Shilo S, Merino J, Godneva A, Greenfield J, Samocha-Bonet D, Dhir R, Gude F, Mannor S, Meirom E, Xing E, Chechik G, Rossman H, Segal E, <a href="https://doi.org/10.1038/s41586-025-09925-9"><em>Nature</em></a></p>
 <section id="paper-summary" class="level2">
 <h2 class="anchored" data-anchor-id="paper-summary">Paper summary</h2>
 <p>Continuous glucose monitoring (CGM) provides high-resolution measurements of glucose dynamics, yet clinical assessment of glycaemic status still relies heavily on laboratory biomarkers such as HbA1c and on a limited set of handcrafted CGM-derived summary metrics. In this study, we introduce <strong>GluFormer</strong>, a transformer-based foundation model trained using self-supervised learning on more than 10 million CGM measurements from 10,812 adults in the Human Phenotype Project (HPP), the majority of whom did not have diabetes. By learning to autoregressively predict future glucose values from discretized CGM time series, the model captures latent representations of glycaemic physiology directly from raw CGM data.</p>
@@ -874,7 +874,7 @@ ul.task-list li input[type="checkbox"] {
 
     // Configuration
     const CONFIG = {
-        BACKEND_URL: 'https://y365pk3iuvzvmudftiamclgqiu0oofmj.lambda-url.eu-west-1.on.aws/api/chat'  // Will be injected during build
+        BACKEND_URL: '__BACKEND_URL__'  // Will be injected during build
     };
 
     // State
