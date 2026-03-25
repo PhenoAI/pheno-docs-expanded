@@ -178,14 +178,17 @@ def process_publication(row: pd.Series, notion_token: str=None):
     if 'arxiv.org' not in weblink:
         weblink = row['DOI'] if row['DOI'] else weblink
     authors, pub_date, abstract = get_publication_details(weblink)
+    if not authors and row.get('Author'):
+        raw_authors = re.split(r'[,\n]+', row['Author'])
+        authors = [re.sub(r'[^a-zA-Z\s]', '', a).strip() for a in raw_authors if re.sub(r'[^a-zA-Z\s]', '', a).strip()]
     abstract = '## Paper summary\n\n' + abstract if abstract else ''
-    year = pub_date.split('-')[0] if pub_date else row['Year']
+    year = pub_date.split('-')[0] if pub_date else str(int(row['Year']))
 
     # Create frontmatter
     categories = list(row['Tags']) + list(row['Groups involved']) + [journal_name] + [year]
     frontmatter = f"""---
 title: "{row['Title']}"
-date: "{pub_date if pub_date else row['Year']}"
+date: "{pub_date if pub_date else year}"
 link: {weblink}
 {image_path}
 categories:
