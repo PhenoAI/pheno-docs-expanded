@@ -102,8 +102,8 @@ format:
       dark: darkly
     css: styles.css
     toc: true
-    # Chatbot enabled - includes chatbot widget on all pages
-    include-after-body: chatbot-widget-simple.html
+    # Chatbot disabled - uncomment to re-enable
+    # include-after-body: chatbot-widget-simple.html
 
 execute:
   freeze: auto
