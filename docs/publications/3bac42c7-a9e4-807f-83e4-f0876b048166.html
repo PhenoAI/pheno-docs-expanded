@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-08-20">
+<meta name="dcterms.date" content="2026-08-03">
 
-<title>From Glucose Patterns to Health Outcomes: A Generalizable Foundation Model for Continuous Glucose Monitor Data Analysis – Pheno.AI</title>
+<title>Self-supervised DXA representations encode multi-system disease risk, biological aging and heritability – Pheno.AI</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -283,7 +283,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">From Glucose Patterns to Health Outcomes: A Generalizable Foundation Model for Continuous Glucose Monitor Data Analysis</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Self-supervised DXA representations encode multi-system disease risk, biological aging and heritability</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -681,16 +681,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">From Glucose Patterns to Health Outcomes: A Generalizable Foundation Model for Continuous Glucose Monitor Data Analysis</h1>
+<h1 class="title">Self-supervised DXA representations encode multi-system disease risk, biological aging and heritability</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">CGM</div>
+    <div class="quarto-category">Genomics</div>
     <div class="quarto-category">SSL</div>
-    <div class="quarto-category">Diabetes</div>
-    <div class="quarto-category">Nutrition</div>
+    <div class="quarto-category">Anthropometrics</div>
+    <div class="quarto-category">Cardiovascular</div>
+    <div class="quarto-category">Aging</div>
+    <div class="quarto-category">obesity</div>
+    <div class="quarto-category">Sleep</div>
+    <div class="quarto-category">MBZUAI</div>
     <div class="quarto-category">Segal lab</div>
-    <div class="quarto-category">Pheno.AI</div>
-    <div class="quarto-category">arxiv</div>
-    <div class="quarto-category">2024</div>
+    <div class="quarto-category">arXiv</div>
+    <div class="quarto-category">2026</div>
   </div>
   </div>
 
@@ -702,7 +705,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 20, 2024</p>
+      <p class="date">August 3, 2026</p>
     </div>
   </div>
   
@@ -714,24 +717,15 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Lutsker G, Sapir G, Shilo S, Merino J, Godneva A, Greenfield J, Samocha-Bonet D, Dhir R, Gude F, Mannor S, Meirom E, Chechik G, Rossman H, Segal E, <a href="https://arxiv.org/abs/2408.11876"><em>arxiv</em></a></p>
+<p>Sasson G, Levine Z, Shilo S, Kohn S, Lutsker G, Godneva A, Gabet A, Krongauz D, Weinberger A, LeCun Y, Balestriero R, Segal E, <a href="https://arxiv.org/abs/2608.02208"><em>arXiv</em></a></p>
+<p><br></p>
 <section id="paper-summary" class="level2">
 <h2 class="anchored" data-anchor-id="paper-summary">Paper summary</h2>
-<p>The <a href="http://arxiv.org/abs/2408.11876">paper</a> describes the GluFormer model that was developed based on CGM data from 10,812 non-diabetic individuals from the HPP dataset. The AI model is from the class of transformer-based generative models, similar to ChatGPT (GPT = Generative, Pretrained, Transformer). For each glucose measurement, it provides a prediction for the next point in time. The model offers insights into metabolic health, predicting health outcomes 4 years in advance, outperforming state-of-the-art CGM analysis tools. It can be used for different downstream tasks, for example to forecast outcomes of clinical trials or to simulate glucose response to diet. Most important numbers:</p>
-<ul>
-<li><p>In a longitudinal study of 580 adults with CGM data and 12-year follow-up, GluFormer identifies individuals at elevated risk of developing diabetes more effectively than blood HbA1C%, capturing 66% of all new-onset diabetes diagnoses in the top quartile versus 7% in the bottom quartile.</p></li>
-<li><p>Similarly, 69% of cardiovascular-death events occurred in the top quartile with none in the bottom quartile, demonstrating powerful risk stratification beyond traditional glycemic metrics.</p></li>
-</ul>
+<p>Whole-body dual-energy X-ray absorptiometry (DXA) scans are routinely acquired to measure bone density and regional body composition, leaving their spatial structure largely unused. Here, we show that self-supervised learning (SSL) can convert raw DXA images into representations of systemic health. We introduce LeDXA, a vision model based on a joint-embedding predictive architecture (JEPA) that learns by predicting latent representations rather than reconstructing pixels. Trained from scratch on 11,540 unlabeled Human Phenotype Project scans, LeDXA was evaluated internally and on 47,400 external UK Biobank (UKBB) scans. It improved cross-cohort prediction of prevalent diseases and biomarkers beyond scanner-derived DXA measurements and DINOv3, a state-of-the-art general-purpose model, despite approximately 150,000-fold fewer training images and nearly 40-fold fewer parameters. Over a median 4.3-year UKBB follow-up, LeDXA improved incident disease prediction over tabular DXA measures, with the largest gains for hip and knee arthrosis and type 2 diabetes. For hip arthrosis, 66% of incident cases occurred in the highest-risk quartile versus 41% for tabular measures. Its representations predicted chronological age externally (r = 0.88; mean absolute error = 2.90 years), and the biological-age gap tracked broader disease burden and a 45% higher mortality hazard in the oldest-appearing quartile. The gap also decreased in women after starting hormone-replacement therapy, suggesting it may be modifiable. Genome-wide associations recovered mostly known body-composition and bone-density loci, and LeDXA embeddings were more heritable than DINOv3’s. These findings reveal prognostic information in DXA images that conventional readouts discard, learnable with relatively little data and modest compute.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="6b4c6bdc_image.png" class="img-fluid figure-img"></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="71ad6e99_image.png" class="img-fluid figure-img"></p>
-<figcaption>image</figcaption>
+<p><img src="d42bf010_Screenshot_2026-08-12_at_14.58.44.png" class="img-fluid figure-img"></p>
+<figcaption>Screenshot_2026-08-12_at_14.58.44</figcaption>
 </figure>
 </div>
 
