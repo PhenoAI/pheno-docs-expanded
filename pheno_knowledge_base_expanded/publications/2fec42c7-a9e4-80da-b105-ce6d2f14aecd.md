@@ -4,7 +4,7 @@ date: "2026-01-21"
 link: https://doi.org/10.1038/s44482-025-00001-7
 image: 21dab351_image.png
 categories:
-  - "Diel logging"
+  - "Diet logging"
   - "Nutrition"
   - "Segal lab"
   - "Pheno.AI"

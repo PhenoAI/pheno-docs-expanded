@@ -170,6 +170,10 @@ def process_publication(row: pd.Series, notion_token: str=None):
     # Extract first image if present
     image_match = re.search(r'!\[.*?\]\((.*?)\)', content)
     image_path = f'image: {image_match.group(1)}' if image_match else ''
+
+    # notion2md uses the image filename as the caption and quarto emits no alt attribute,
+    # so drop the caption and give each figure alt text based on the publication title
+    content = add_figure_alt_text(content, row['Title'])
     
     # Clean journal name by removing trailing periods
     journal_name = row['Journal'].rstrip('.') if isinstance(row['Journal'], str) else ''
@@ -204,6 +208,14 @@ categories:
     # Write new content with frontmatter
     with open(md_file, 'w') as f:
         f.write(frontmatter + content)
+
+
+def add_figure_alt_text(content: str, title: str) -> str:
+    """
+    Replace markdown image captions with a quarto fig-alt attribute describing the figure.
+    """
+    alt = f'Figure from the publication: {title}'.replace('"', "'")
+    return re.sub(r'!\[[^\]]*\]\(([^)]+)\)(?!\{)', lambda m: f'![]({m.group(1)}){{fig-alt="{alt}"}}', content)
 
 
 def get_publication_details(weblink: str) -> tuple[list[str], str, str]:
