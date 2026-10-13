@@ -170,13 +170,17 @@ def process_publication(row: pd.Series, notion_token: str=None):
     # Extract first image if present
     image_match = re.search(r'!\[.*?\]\((.*?)\)', content)
     image_path = f'image: {image_match.group(1)}' if image_match else ''
+
+    # notion2md uses the image filename as the caption and quarto emits no alt attribute,
+    # so drop the caption and give each figure alt text based on the publication title
+    content = add_figure_alt_text(content, row['Title'])
     
     # Clean journal name by removing trailing periods
     journal_name = row['Journal'].rstrip('.') if isinstance(row['Journal'], str) else ''
 
-    weblink = row['weblink'] if row['weblink'] else ''
+    weblink = row['weblink'].strip() if row['weblink'] else ''
     if 'arxiv.org' not in weblink:
-        weblink = row['DOI'] if row['DOI'] else weblink
+        weblink = row['DOI'].strip() if row['DOI'] else weblink
     authors, pub_date, abstract = get_publication_details(weblink)
     if not authors and row.get('Author'):
         raw_authors = re.split(r'[,\n]+', row['Author'])
@@ -204,6 +208,14 @@ categories:
     # Write new content with frontmatter
     with open(md_file, 'w') as f:
         f.write(frontmatter + content)
+
+
+def add_figure_alt_text(content: str, title: str) -> str:
+    """
+    Replace markdown image captions with a quarto fig-alt attribute describing the figure.
+    """
+    alt = f'Figure from the publication: {title}'.replace('"', "'")
+    return re.sub(r'!\[[^\]]*\]\(([^)]+)\)(?!\{)', lambda m: f'![]({m.group(1)}){{fig-alt="{alt}"}}', content)
 
 
 def get_publication_details(weblink: str) -> tuple[list[str], str, str]:
