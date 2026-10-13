@@ -174,9 +174,9 @@ def process_publication(row: pd.Series, notion_token: str=None):
     # Clean journal name by removing trailing periods
     journal_name = row['Journal'].rstrip('.') if isinstance(row['Journal'], str) else ''
 
-    weblink = row['weblink'] if row['weblink'] else ''
+    weblink = row['weblink'].strip() if row['weblink'] else ''
     if 'arxiv.org' not in weblink:
-        weblink = row['DOI'] if row['DOI'] else weblink
+        weblink = row['DOI'].strip() if row['DOI'] else weblink
     authors, pub_date, abstract = get_publication_details(weblink)
     if not authors and row.get('Author'):
         raw_authors = re.split(r'[,\n]+', row['Author'])
