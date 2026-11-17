@@ -21,6 +21,8 @@ from pathlib import Path
 
 import pandas as pd
 
+# Make the repo's src/ importable without PYTHONPATH (scripts -> skill -> skills -> .claude -> repo)
+sys.path.insert(0, str(Path(__file__).resolve().parents[4] / 'src'))
 from publications import fetch_database, get_notion_token_from_aws_secret_manager
 
 DATABASE_ID = '851933e545a843799ac66da227acc50a'
