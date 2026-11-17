@@ -39,14 +39,20 @@ It prints counts, then one line per candidate:
 |---|---|
 | `NEW` | Relevant in Notion, no `.md` on the site |
 | `NEW-SKIPPED` | No `Year` in Notion — `process_publication` silently skips these; ask the user to fill it |
-| `EDITED` | Notion "Last edited time" is after the last commit touching the `.md` |
+| `EDITED` | Notion "Last edited time" is after the version recorded in `.notion_sync.json` |
+| `EDITED (no sync entry; vs commit time)` | Paper predates the sync file; compared with the last commit touching the `.md` instead (less reliable) |
 | `REMOVED` | `.md` exists but the row is un-ticked or deleted in Notion |
+| `TITLE-CLEARED` | Published paper still ticked, but its Notion title was emptied — ask the user; not a removal |
 | `DUPLICATE-TITLE` | Two relevant rows share a title — usually a stub; ask which is real |
 
 Unfilled template rows (title `{Publication Title}`) are ignored and listed on one line.
 
 `EDITED` is only a candidate: merely opening or touching a Notion page bumps its edit
 time. Step 4 decides whether anything really changed.
+
+`pheno_knowledge_base_expanded/publications/.notion_sync.json` maps each page_id to the
+Notion "Last edited time" of the version on the site. Step 6 keeps it current; it's how the
+next run knows what's already synced.
 
 If the user referred to one paper ("another paper was updated") but several rows match,
 propose the most recently edited one and ask, rather than processing them all.
@@ -65,8 +71,12 @@ Run in a fresh scratchpad directory, never in the repo — `process_publication`
 from publications import fetch_database, get_notion_token_from_aws_secret_manager, process_publication
 tok = get_notion_token_from_aws_secret_manager()
 pubs = fetch_database(tok, '851933e545a843799ac66da227acc50a')
-for pid in [...selected page_ids...]:
+ids = [...selected page_ids...]
+for pid in ids:
     process_publication(pubs.loc[pubs.page_id == pid].iloc[0], notion_token=tok)
+# Edit times as of this export - recorded into the sync file in step 6
+sel = pubs.set_index('page_id').loc[ids, 'last_edited_time']
+open('exported.json', 'w').write(sel.to_json(indent=2))
 ```
 
 (`PYTHONPATH=<repo>/src`.) Each row yields `<page_id>.md` plus downloaded figures. Only the
@@ -90,8 +100,9 @@ each paper into one of:
 - *Real content change* → apply it.
 
 Manual fixes live only in the committed file (e.g. a hand-set `date:`), so keep them by
-default: apply the Notion changes on top of the existing file, and only drop a manual fix
-if the user approves. Figures that are byte-identical (`cmp`) don't need copying.
+default: write the merged result (Notion changes applied on top of the existing file)
+straight to `pheno_knowledge_base_expanded/publications/<id>.md`, and only drop a manual
+fix if the user approves. Figures that are byte-identical (`cmp`) don't need copying.
 
 **Removed papers** — before proposing deletion, check `git log --oneline -- <the .md>`.
 If history shows it was deliberately added back (e.g. a "restore" commit), the Notion
@@ -106,17 +117,18 @@ standalone page next to the source instead of into `docs/` (this happens e.g. in
 under a hidden directory such as `.claude/worktrees/`):
 
 ```bash
-cd pheno_knowledge_base_expanded
-quarto inspect . | python -c "import json,sys; print(len(json.load(sys.stdin)['files']['input']))"   # must be > 0
+# subshell, so the shell stays at the repo root
+( cd pheno_knowledge_base_expanded && quarto inspect . | python -c "import json,sys; print(len(json.load(sys.stdin)['files']['input']))" )   # must be > 0
 ```
 
-Then:
+Then, from the repo root. Copy only **new** papers' `.md` and new/changed figures — edited
+papers' `.md` were already merged in place in step 4, and copying the raw scratch export
+over them would discard the manual fixes you just preserved:
 
 ```bash
-cp <scratch>/publications/<files> pheno_knowledge_base_expanded/publications/
-cd pheno_knowledge_base_expanded
-quarto render publications/<page_id>.md     # once per changed paper
-quarto render publications.md               # rebuilds the listing
+cp <scratch>/publications/<new_page_id>.md <scratch>/publications/<new or changed figures> pheno_knowledge_base_expanded/publications/
+( cd pheno_knowledge_base_expanded && quarto render publications/<page_id>.md )   # once per changed paper
+( cd pheno_knowledge_base_expanded && quarto render publications.md )             # rebuilds the listing
 ```
 
 Every `Output created:` line must point under `../docs/`. If one doesn't, stop and report.
@@ -124,10 +136,24 @@ Render paper pages before the listing: the listing reads each item's author/desc
 line from the already-rendered pages in `docs/`. For removals, re-render
 `publications.md` after deleting.
 
-### 6. Verify
+### 6. Update the sync file
+
+Record every row you handled — applied, or reviewed and deliberately skipped (e.g. "no diff")
+— so the next run doesn't flag it again. This uses the export-time edit times from step 3,
+so a Notion edit made after the export still shows up next run:
+
+```bash
+python .claude/skills/update-publications/scripts/find_publication_changes.py --record <scratch>/exported.json [page_id ...]
+```
+
+For papers removed in step 4, drop them: `... --forget <page_id> ...`. Don't record rows the
+user hasn't decided on.
+
+### 7. Verify
 
 - `git status --short` — expect only the paper `.md`/figures, their `docs/` HTML/figures,
-  and `docs/publications.html`, `docs/listings.json`, `docs/search.json`. No `??` `.html`
+  `docs/publications.html`, `docs/listings.json`, `docs/search.json`, and
+  `pheno_knowledge_base_expanded/publications/.notion_sync.json`. No `??` `.html`
   or `_files/` under `pheno_knowledge_base_expanded/`.
 - Re-rendering the listing rewrites `data-listing-file-modified-sort` on every item and may
   reorder same-date items in `listings.json`. That's expected (file mtimes), not a problem;
@@ -138,7 +164,7 @@ line from the already-rendered pages in `docs/`. For removals, re-render
 - Offer a local preview: `python -m http.server 8765 --bind 127.0.0.1` from `docs/` (run in
   background), then the user forwards the port. Stop it when they're done.
 
-### 7. Commit / push / PR — each only after the user's OK
+### 8. Commit / push / PR — each only after the user's OK
 
 Stage named files only (never `git add .`). Commit message style:
 
